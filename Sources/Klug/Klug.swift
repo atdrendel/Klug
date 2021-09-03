@@ -1,6 +1,6 @@
-public struct Klug {
-    public private(set) var text = "Hello, World!"
+import SwiftUI
 
-    public init() {
-    }
+
+public struct Klug {
+    typealias SocialButton = ModifiedContent<HStack<TupleView<(Image, Text)>>, _BackgroundStyleModifier<Color>>
 }
