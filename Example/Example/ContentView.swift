@@ -6,16 +6,27 @@
 //
 
 import SwiftUI
+import Klug
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Button(social: .apple, title: .apple) {
+                
+            }
+            .buttonStyle(.social(.apple))
+            
+            Button(social: .google, title: .google) {
+                
+            }
+            .buttonStyle(.social(.google))
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+          
     }
 }
