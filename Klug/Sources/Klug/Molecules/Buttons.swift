@@ -13,7 +13,7 @@ import SwiftUI
 public extension Klug {
     
     typealias SocialButtonStyle = Klug.Social.Style
-    typealias SocialButton = HStack<TupleView<(Image, Text)>>
+    typealias IconButton = HStack<TupleView<(Image, Text)>>
 
      struct Social {
         
@@ -28,6 +28,7 @@ public extension Klug {
             public func makeBody(configuration: Configuration) -> some View {
                 return configuration.label
                     .frame(width: 200, height: 40)
+                    .accentColor(.green)
                     .padding()
                     .background(type == .google ? Color(UIColor.valencia) : Color(UIColor.vulcan))
                     .foregroundColor(.white)
@@ -42,11 +43,11 @@ extension PrimitiveButtonStyle where Self == Klug.SocialButtonStyle {
     }
 }
 
-public extension Button where Label == Klug.SocialButton {
-    init(social: Klug.Social.`Type` = .google, title: String, action: @escaping () -> Void) {
+public extension Button where Label == Klug.IconButton {
+    init(icon: Image, title: String, action: @escaping () -> Void) {
         self.init(action: action) {
             HStack(spacing: 10) {
-                social == .google ? Image.google : Image.apple
+                icon
                 Text(title)
             }
         }
@@ -59,13 +60,16 @@ struct Buttons_Preview: PreviewProvider {
     static var previews: some View {
         Group {
             
-            Button(social: .google, title: .google) {
-                print("chicken")
+            Button(icon: .google, title: .google) {
+                
             }
+            .buttonStyle(.social(.google))
             
-            Button(social: .apple, title: .apple) {
+            Button(icon: .apple, title: .apple) {
                 print("chicken")
+                
             }
+            .buttonStyle(.social(.apple))
             
         }
         .previewLayout(.fixed(width: 400, height: 400))

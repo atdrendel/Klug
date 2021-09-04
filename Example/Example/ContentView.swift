@@ -11,15 +11,17 @@ import Klug
 struct ContentView: View {
     var body: some View {
         VStack {
-            Button(social: .apple, title: .apple) {
+            Button(icon: .google, title: .google) {
+                
+            }
+            .buttonStyle(.social(.google))
+            
+            Button(icon: .apple, title: .apple) {
+                print("chicken")
                 
             }
             .buttonStyle(.social(.apple))
             
-            Button(social: .google, title: .google) {
-                
-            }
-            .buttonStyle(.social(.google))
         }
     }
 }
