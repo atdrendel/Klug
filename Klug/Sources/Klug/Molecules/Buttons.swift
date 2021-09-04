@@ -14,15 +14,22 @@ public extension Klug {
     
     typealias SocialButtonStyle = Klug.Social.Style
     typealias SocialButton = HStack<TupleView<(Image, Text)>>
-    
-    struct Social {
+
+     struct Social {
+        
+         public enum `Type` {
+             case apple
+             case google
+         }
+         
         public struct Style: PrimitiveButtonStyle {
             
+            let type: `Type`
             public func makeBody(configuration: Configuration) -> some View {
-                configuration.label
-                    .frame(width: 200, height: 50)
+                return configuration.label
+                    .frame(width: 200, height: 40)
                     .padding()
-                    .background(.red)
+                    .background(type == .google ? Color(UIColor.valencia) : Color(UIColor.vulcan))
                     .foregroundColor(.white)
             }
         }
@@ -30,19 +37,18 @@ public extension Klug {
 }
 
 extension PrimitiveButtonStyle where Self == Klug.SocialButtonStyle {
-    internal static var social: Klug.SocialButtonStyle { Klug.SocialButtonStyle() }
+    public static func social(_ type: Klug.Social.`Type`) -> Klug.SocialButtonStyle {
+        Klug.SocialButtonStyle(type: type)
+    }
 }
 
 public extension Button where Label == Klug.SocialButton {
-    init(_ social: Social = .google, title: String = "Sign in", action: @escaping () -> Void) {
-        var opt: (text: String, color: Color) = (text: .apple, color: .black)
-        if social == .google {  opt = (text: .google, color: .red) }
+    init(social: Klug.Social.`Type` = .google, title: String, action: @escaping () -> Void) {
         self.init(action: action) {
             HStack(spacing: 10) {
                 social == .google ? Image.google : Image.apple
                 Text(title)
             }
-           //.buttonStyle(.social) as! Klug.SocialButton
         }
     }
 }
@@ -53,11 +59,11 @@ struct Buttons_Preview: PreviewProvider {
     static var previews: some View {
         Group {
             
-            Button(.google, title: "chicken") {
+            Button(social: .google, title: .google) {
                 print("chicken")
             }
             
-            Button(.apple) {
+            Button(social: .apple, title: .apple) {
                 print("chicken")
             }
             
