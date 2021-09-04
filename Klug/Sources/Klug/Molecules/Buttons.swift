@@ -8,30 +8,33 @@
 import UIKit
 import SwiftUI
 
-public typealias SocialButtonStyle = Klug.Social.Style
-public typealias SocialButton = HStack<TupleView<(Image, Text)>>
+
 
 public extension Klug {
+    
+    typealias SocialButtonStyle = Klug.Social.Style
+    typealias SocialButton = HStack<TupleView<(Image, Text)>>
     
     struct Social {
         public struct Style: PrimitiveButtonStyle {
             
             public func makeBody(configuration: Configuration) -> some View {
                 configuration.label
+                    .frame(width: 200, height: 50)
                     .padding()
-                    .background(Color(red: 0, green: 0, blue: 0.5))
+                    .background(.red)
                     .foregroundColor(.white)
             }
         }
     }
 }
 
-extension PrimitiveButtonStyle where Self == SocialButtonStyle {
-    internal static var social: SocialButtonStyle { SocialButtonStyle() }
+extension PrimitiveButtonStyle where Self == Klug.SocialButtonStyle {
+    internal static var social: Klug.SocialButtonStyle { Klug.SocialButtonStyle() }
 }
 
-public extension Button where Label == SocialButton {
-    init(_ social: Social, title: String = "Sign in", action: @escaping () -> Void) {
+public extension Button where Label == Klug.SocialButton {
+    init(_ social: Social = .google, title: String = "Sign in", action: @escaping () -> Void) {
         var opt: (text: String, color: Color) = (text: .apple, color: .black)
         if social == .google {  opt = (text: .google, color: .red) }
         self.init(action: action) {
@@ -39,16 +42,18 @@ public extension Button where Label == SocialButton {
                 social == .google ? Image.google : Image.apple
                 Text(title)
             }
-           // .buttonStyle(.social) as! SocialButton
+           //.buttonStyle(.social) as! Klug.SocialButton
         }
     }
 }
+
+
 
 struct Buttons_Preview: PreviewProvider {
     static var previews: some View {
         Group {
             
-            Button(.google) {
+            Button(.google, title: "chicken") {
                 print("chicken")
             }
             
@@ -58,8 +63,11 @@ struct Buttons_Preview: PreviewProvider {
             
         }
         .previewLayout(.fixed(width: 400, height: 400))
+        .preferredColorScheme(.dark)
     }
 }
+
+
 
 //public extension UIButton {
 //    convenience init(_ social: Social, title: String = "Sign in") {
