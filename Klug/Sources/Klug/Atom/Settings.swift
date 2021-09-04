@@ -12,11 +12,6 @@ public enum NettView {
     case button(top: UIView, constant: CGFloat = 32)
 }
 
-public enum Social {
-    case apple
-    case google
-}
-
 public extension Image {
     static let apple = Image("Social/apple",bundle: .module)
     static let google = Image("Social/google",bundle: .module)
