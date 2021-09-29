@@ -1,3 +1,3 @@
 # Klug
 
-A description of this package.
+SwiftUI design system exploration
