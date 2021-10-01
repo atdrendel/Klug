@@ -23,15 +23,5 @@ public extension String {
     static let signin = "Sign in"
     static let apple = "Apple"
     static let google = "Google"
-    
-    enum Agreement: String {
-        case agree = "I agree to the "
-        case terms = "Terms of Conditions"
-        case privacy = "Privacy Policy"
-    }
-    
-    enum Account: String {
-        case existingAccount = "Already have an account?"
-        case resendCode = "Resend verification code"
-    }
+
 }

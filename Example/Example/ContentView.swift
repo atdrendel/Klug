@@ -8,20 +8,34 @@
 import SwiftUI
 import Klug
 
+extension String {
+     enum Account: String {
+         case email = "bell.fill"
+         case password = "key.fill"
+     }
+     init(_ account: Account) {
+         self.init(account.rawValue)
+     }
+ }
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Button(icon: .google, title: .google) {
+        ScrollView {
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .fill(.gray)
+                        .overlay(Image(systemName: "airtag.fill")
+                                    .foregroundColor(.gray)
+                                    .opacity(0.4))
+                        .opacity(0.4)
+                    .frame(width: 100, height: 100)
+                    
+                    
+//                        .resizable()
+                }
                 
             }
-            .buttonStyle(.social(.google))
-            
-            Button(icon: .apple, title: .apple) {
-                print("chicken")
-                
-            }
-            .buttonStyle(.social(.apple))
-            
         }
     }
 }
