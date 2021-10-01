@@ -21,20 +21,21 @@ extension String {
 struct ContentView: View {
     var body: some View {
         ScrollView {
-            VStack {
-                ZStack {
+            VStack(alignment: .center) {
+            
+                GeometryReader {
                     Rectangle()
-                        .fill(.gray)
-                        .overlay(Image(systemName: "airtag.fill")
-                                    .foregroundColor(.gray)
-                                    .opacity(0.4))
-                        .opacity(0.4)
-                    .frame(width: 100, height: 100)
-                    
-                    
-//                        .resizable()
+                            .fill(.gray)
+                            .overlay(
+                                Image(systemName: "airtag.fill")
+                                    .resizable()
+                                        .foregroundColor(.gray)
+                                        .opacity(0.4)
+                            )
+                            .opacity(0.4)
+                            .frame(width: $0.size.width * 0.8, height: 300, alignment: .center)
                 }
-                
+            
             }
         }
     }
