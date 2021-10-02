@@ -41,7 +41,7 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                Text("Hello World")
+                TextField("Number", text: .constant(""))
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
 
             

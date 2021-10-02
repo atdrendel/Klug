@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F39A5CF26E2F784009253CB /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39A5CE26E2F784009253CB /* ExampleApp.swift */; };
+		9F39A5CF26E2F784009253CB /* KlugExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39A5CE26E2F784009253CB /* KlugExampleApp.swift */; };
 		9F39A5D126E2F784009253CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F39A5D026E2F784009253CB /* ContentView.swift */; };
 		9F39A5D326E2F786009253CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F39A5D226E2F786009253CB /* Assets.xcassets */; };
 		9F39A5D626E2F786009253CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F39A5D526E2F786009253CB /* Preview Assets.xcassets */; };
@@ -15,8 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9F39A5CB26E2F784009253CB /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F39A5CE26E2F784009253CB /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		9F39A5CB26E2F784009253CB /* KlugExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlugExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F39A5CE26E2F784009253CB /* KlugExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlugExampleApp.swift; sourceTree = "<group>"; };
 		9F39A5D026E2F784009253CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9F39A5D226E2F786009253CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F39A5D526E2F786009253CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		9F39A5C226E2F784009253CB = {
 			isa = PBXGroup;
 			children = (
-				9F39A5CD26E2F784009253CB /* Example */,
+				9F39A5CD26E2F784009253CB /* KlugExample */,
 				9F39A5CC26E2F784009253CB /* Products */,
 				9F39A5DC26E2F8D6009253CB /* Frameworks */,
 			);
@@ -46,20 +46,20 @@
 		9F39A5CC26E2F784009253CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F39A5CB26E2F784009253CB /* Example.app */,
+				9F39A5CB26E2F784009253CB /* KlugExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9F39A5CD26E2F784009253CB /* Example */ = {
+		9F39A5CD26E2F784009253CB /* KlugExample */ = {
 			isa = PBXGroup;
 			children = (
-				9F39A5CE26E2F784009253CB /* ExampleApp.swift */,
+				9F39A5CE26E2F784009253CB /* KlugExampleApp.swift */,
 				9F39A5D026E2F784009253CB /* ContentView.swift */,
 				9F39A5D226E2F786009253CB /* Assets.xcassets */,
 				9F39A5D426E2F786009253CB /* Preview Content */,
 			);
-			path = Example;
+			path = KlugExample;
 			sourceTree = "<group>";
 		};
 		9F39A5D426E2F786009253CB /* Preview Content */ = {
@@ -80,9 +80,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9F39A5CA26E2F784009253CB /* Example */ = {
+		9F39A5CA26E2F784009253CB /* KlugExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F39A5D926E2F786009253CB /* Build configuration list for PBXNativeTarget "Example" */;
+			buildConfigurationList = 9F39A5D926E2F786009253CB /* Build configuration list for PBXNativeTarget "KlugExample" */;
 			buildPhases = (
 				9F39A5C726E2F784009253CB /* Sources */,
 				9F39A5C826E2F784009253CB /* Frameworks */,
@@ -92,12 +92,12 @@
 			);
 			dependencies = (
 			);
-			name = Example;
+			name = KlugExample;
 			packageProductDependencies = (
 				9F39A5DD26E2F8D6009253CB /* Klug */,
 			);
 			productName = Example;
-			productReference = 9F39A5CB26E2F784009253CB /* Example.app */;
+			productReference = 9F39A5CB26E2F784009253CB /* KlugExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -115,7 +115,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F39A5C626E2F784009253CB /* Build configuration list for PBXProject "Example" */;
+			buildConfigurationList = 9F39A5C626E2F784009253CB /* Build configuration list for PBXProject "KlugExample" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -128,7 +128,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9F39A5CA26E2F784009253CB /* Example */,
+				9F39A5CA26E2F784009253CB /* KlugExample */,
 			);
 		};
 /* End PBXProject section */
@@ -151,7 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F39A5D126E2F784009253CB /* ContentView.swift in Sources */,
-				9F39A5CF26E2F784009253CB /* ExampleApp.swift in Sources */,
+				9F39A5CF26E2F784009253CB /* KlugExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +281,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"KlugExample/Preview Content\"";
 				DEVELOPMENT_TEAM = CLCZFAVBGV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -297,7 +297,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.justpixel.Example;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KlugExample;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -311,7 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"KlugExample/Preview Content\"";
 				DEVELOPMENT_TEAM = CLCZFAVBGV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -327,7 +327,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.justpixel.Example;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KlugExample;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -337,7 +337,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F39A5C626E2F784009253CB /* Build configuration list for PBXProject "Example" */ = {
+		9F39A5C626E2F784009253CB /* Build configuration list for PBXProject "KlugExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F39A5D726E2F786009253CB /* Debug */,
@@ -346,7 +346,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F39A5D926E2F786009253CB /* Build configuration list for PBXNativeTarget "Example" */ = {
+		9F39A5D926E2F786009253CB /* Build configuration list for PBXNativeTarget "KlugExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F39A5DA26E2F786009253CB /* Debug */,
