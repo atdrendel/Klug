@@ -32,3 +32,10 @@ import SwiftUI
 //        }
 //    }
 //}
+
+
+extension View {
+    public func border<C>(_ edges: Edge.Set, length: CGFloat? = nil, _ content: C, width: CGFloat = 1, cornerRadius: CGFloat = 10) -> some View where C : ShapeStyle {
+        padding(edges, length).overlay(RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(content, lineWidth: width))
+    }
+}
