@@ -1,5 +1,5 @@
 import SwiftUI
-
+import Relative
 
 public extension Klug {
     
@@ -17,22 +17,28 @@ public extension Klug {
     
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
-        case custom(_ view: AnyView)
+        case custom
         case none
         
         public var body: some View {
             switch self {
             case .password(_):
-                return Image(systemName: "eye.slash")
-            case .custom(_):
-                <#code#>
+                CustomView {
+                    Image(systemName: "eye.slash")
+                }
+            case .custom:
+                CustomView {
+                    Text("")
+                }
             case .none:
-                return EmptyView
+                CustomView {
+                    Text("")
+                }
             }
         }
     }
     
-    typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
+    typealias IconView = TupleView<(Image, TextField<Text>, CustomView)>
     
     enum ViewType {
         case stack
