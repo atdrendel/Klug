@@ -23,7 +23,7 @@ struct ContentView: View {
         ScrollView {
             VStack(alignment: .center) {
             
-                GeometryReader {
+
                     Rectangle()
                             .fill(.gray)
                             .overlay(
@@ -33,8 +33,14 @@ struct ContentView: View {
                                         .opacity(0.4)
                             )
                             .opacity(0.4)
-                            .frame(width: $0.size.width * 0.8, height: 300, alignment: .center)
-                }
+                            .frame(width:300, height: 300, alignment: .center)
+                
+                Text("Login")
+                    .font(.largeTitle)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 40)
+                    .padding(.top, 16)
+
             
             }
         }
