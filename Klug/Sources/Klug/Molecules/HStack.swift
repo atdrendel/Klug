@@ -1,6 +1,9 @@
 import SwiftUI
 import Relative
 
+
+
+
 public extension Klug {
     
     struct CustomView<Content: View>: View {
@@ -32,11 +35,12 @@ public extension Klug {
                 }
             case .none:
                 CustomView {
-                    Text("")
+                    EmptyView()
                 }
             }
         }
     }
+    
     
     typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
     

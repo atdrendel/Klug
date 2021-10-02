@@ -39,3 +39,7 @@ extension View {
         padding(edges, length).overlay(RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(content, lineWidth: width))
     }
 }
+
+public extension View {
+    func accessoryView(_ content: Klug.AccessoryViewType = .none) -> Klug.AccessoryViewType  { content }
+}
