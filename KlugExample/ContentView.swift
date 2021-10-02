@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Klug
+import Relative
 
 extension String {
      enum Account: String {
@@ -41,11 +42,18 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                TextField("Number", text: .constant(""))
+                HStack(type: .stack) {
+                    Image(systemName: "lock")
+                    TextField("", text: .constant("typed text"))
+                    
+                    accessoryView()
+                }
+                .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
 
             
             }
+            .padding()
         }
     }
 }
@@ -56,3 +64,5 @@ struct ContentView_Previews: PreviewProvider {
           
     }
 }
+
+
