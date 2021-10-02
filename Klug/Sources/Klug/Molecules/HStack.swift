@@ -38,7 +38,7 @@ public extension Klug {
         }
     }
     
-    typealias IconView = TupleView<(Image, TextField<Text>, CustomView)>
+    typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
     
     enum ViewType {
         case stack
