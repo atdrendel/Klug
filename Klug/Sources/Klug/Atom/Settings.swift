@@ -1,9 +1,3 @@
-//
-//  File.swift
-//  File
-//
-//  Created by Evans Domina Attafuah on 01/09/2021.
-//
 import UIKit
 import SwiftUI
 
@@ -23,5 +17,29 @@ public extension String {
     static let signin = "Sign in"
     static let apple = "Apple"
     static let google = "Google"
-
 }
+
+struct MeasureBehavior<Content: View>: View {
+    @State private var width: CGFloat = 100
+    @State private var height: CGFloat = 100
+    var content: Content
+    var body: some View {
+        VStack {
+            content
+                .border(Color.gray)
+                .frame(width: width, height: height)
+                .border(Color.black)
+            Slider(value: $width, in: 0...500)
+            Slider(value: $height, in: 0...200)
+        }
+    }
+}
+
+public extension View {
+     func debug() -> Self {
+        print(Mirror(reflecting: self).subjectType)
+        return self
+    }
+}
+
+
