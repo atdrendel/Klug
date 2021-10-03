@@ -39,5 +39,5 @@ extension View {
 }
 
 public extension View {
-    func accessoryView(_ content: Klug.AccessoryViewType = .none) -> Klug.AccessoryViewType  { content }
+    func accessoryView(_ content: Klug.AccessoryViewType<AnyView> = .none) -> Klug.AccessoryViewType<AnyView>  { content }
 }
