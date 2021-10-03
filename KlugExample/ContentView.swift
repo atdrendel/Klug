@@ -44,19 +44,8 @@ struct ContentView: View {
                 
                 HStack(.init(systemName: "lock"),
                        .init("some text", text: .constant(.empty)),
-                       .password({ print($0)
-                }))
-                
-                HStack {
-                    Image(systemName: "lock")
-                    TextField("", text: .constant("typed text"))
-                    
-                    accessoryView(.custom(AnyView(Circle())))
-                    
-//                    accessoryView(.password({
-//                        print($0)
-//                    }))
-                }
+                       .custom(AnyView(Text("t")))
+                )
                 .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                     

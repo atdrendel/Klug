@@ -11,7 +11,6 @@ public extension HStack where Content == Klug.AccessoryView {
             image
             textfield
             accessoryView
-          
         }
     }
 }

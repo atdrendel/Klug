@@ -33,11 +33,7 @@ public extension Klug {
 public extension Klug {
     
     typealias AccessoryView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
-    
-    enum ViewType {
-        case stack
-    }
-    
+  
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
         case custom( _ view: AnyView)
