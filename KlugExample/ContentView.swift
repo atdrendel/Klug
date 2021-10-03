@@ -44,11 +44,25 @@ struct ContentView: View {
                 
                 HStack(.init(systemName: "lock"),
                        .init("some text", text: .constant(.empty)),
-                       .custom(AnyView(Text("t")))
+                       .custom(AnyView(Rectangle().foregroundColor(.red)))
                 )
                 .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
+                
+                HStack {
+                    Image(systemName: "lock")
+                       .resizable()
+                       .aspectRatio(contentMode:.fit)
+                       .frame(width: 20, height: 20, alignment: .center)
                     
+                    
+                    TextField("some text", text: .constant(.empty))
+                    
+                    AnyView(Circle()
+                        .frame(width: 20))
+                }
+                .debug()
+                .border(.all,.gray)
 
             
             }
