@@ -13,14 +13,6 @@ public extension Klug {
             content
         }
     }
-    
-    struct CustomAccessoryView: View {
-        
-        public var body: some View {
-            SingleView
-        }
-  
-    }
 
     private struct PasswordView: View {
         var action: (Bool) -> ()
@@ -49,7 +41,7 @@ public extension Klug {
     
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
-        case custom(_ view: CustomAccessoryView)
+        case custom( _ view: AnyView)
         case none
         public var body: some View {
             switch self {
