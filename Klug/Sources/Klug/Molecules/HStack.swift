@@ -37,21 +37,16 @@ public extension Klug {
         case password(_ action: (Bool) -> ())
         case custom
         case none
-        
+      //  @State private password = false
         public var body: some View {
             switch self {
-            case .password(_):
-                CustomView {
-                    Image(systemName: "eye.slash")
-                }
+            case let .password(action):
+                PasswordView(action: action)
             case .custom:
                 CustomView {
                     Text("")
                 }
-            case .none:
-                CustomView {
-                    EmptyView()
-                }
+            case .none: EmptyView()
             }
         }
     }
