@@ -18,6 +18,21 @@ public extension Klug {
         }
     }
     
+    private struct PasswordView: View {
+        var action: (Bool) -> ()
+        @State private var isPasswordShowing = false
+        
+        public var body: some View {
+            Group {
+                isPasswordShowing ? Image(systemName: "eye.slash") : Image(systemName: "eye")
+            }
+            .onTapGesture {
+                isPasswordShowing.toggle()
+                action(isPasswordShowing)
+            }
+        }
+    }
+    
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
         case custom
