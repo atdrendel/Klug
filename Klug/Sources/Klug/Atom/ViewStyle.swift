@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 //extension View {
 //    // If condition is met, apply modifier, otherwise, leave the view untouched
 //    public func conditionalModifier<T>(_ condition: Bool, _ modifier: T) -> some View where T: ViewModifier {
