@@ -46,14 +46,15 @@ struct ContentView: View {
                     Image(systemName: "lock")
                     TextField("", text: .constant("typed text"))
                     
-                   // accessoryView(.custom(Text("d")))
+                    accessoryView(.custom(AnyView(Circle())))
                     
-                    accessoryView(.password({
-                        print($0)
-                    }))
+//                    accessoryView(.password({
+//                        print($0)
+//                    }))
                 }
                 .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
+                    
 
             
             }

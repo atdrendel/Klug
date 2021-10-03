@@ -45,9 +45,8 @@ public extension Klug {
         case none
         public var body: some View {
             switch self {
-            case let .password(action):
-                PasswordView(action: action)
-            case let .custom(view): view
+            case let .password(action): PasswordView(action: action)
+            case let .custom(view) : view
             case .none: EmptyView()
             }
         }
