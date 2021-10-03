@@ -1,11 +1,17 @@
 import SwiftUI
 
 
-public extension HStack where Content == Klug.IconView {
+public extension HStack where Content == Klug.AccessoryView {
      init(
-        type: Klug.ViewType,
-        @ViewBuilder content: () -> Content
+        image: Image,
+        textfield: TextField<Text>,
+        accessoryView: Klug.AccessoryViewType
     ) {
-        self.init(alignment: .center, spacing: 10, content: content)
+        self.init(alignment: .center, spacing: 10) {
+            image
+            textfield
+            accessoryView
+          
+        }
     }
 }
