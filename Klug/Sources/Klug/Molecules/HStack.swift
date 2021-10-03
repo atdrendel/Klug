@@ -2,7 +2,7 @@ import SwiftUI
 import Relative
 
 
-public extension HStack where Content == Klug.IconView<AnyView> {
+public extension HStack where Content == Klug.IconView {
      init(
         type: Klug.ViewType,
         @ViewBuilder content: () -> Content

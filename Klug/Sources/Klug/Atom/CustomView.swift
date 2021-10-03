@@ -13,6 +13,14 @@ public extension Klug {
             content
         }
     }
+    
+    struct CustomAccessoryView: View {
+        
+        public var body: some View {
+            SingleView
+        }
+  
+    }
 
     private struct PasswordView: View {
         var action: (Bool) -> ()
@@ -31,16 +39,17 @@ public extension Klug {
 }
 
 public extension Klug {
-
-    typealias IconView<Accessory: View> = TupleView<(Image, TextField<Text>, AccessoryViewType<Accessory>)>
+    
+    typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
+    typealias SingleView<SomeView:View> = TupleView<(SomeView)>
     
     enum ViewType {
         case stack
     }
     
-    enum AccessoryViewType<Accessory: View>: View {
+    enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
-        case custom(_ view: Accessory )
+        case custom(_ view: CustomAccessoryView)
         case none
         public var body: some View {
             switch self {
@@ -51,5 +60,5 @@ public extension Klug {
             }
         }
     }
-
+    
 }
