@@ -42,10 +42,9 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                HStack(image: .init(systemName: "lock"),
-                       textfield: .init("some text", text: .constant(.empty)),
-                       accessoryView: .password({ <#Bool#> in
-                    <#code#>
+                HStack(.init(systemName: "lock"),
+                       .init("some text", text: .constant(.empty)),
+                       .password({ print($0)
                 }))
                 
                 HStack {

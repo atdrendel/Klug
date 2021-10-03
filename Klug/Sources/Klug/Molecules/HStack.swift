@@ -3,9 +3,9 @@ import SwiftUI
 
 public extension HStack where Content == Klug.AccessoryView {
      init(
-        image: Image,
-        textfield: TextField<Text>,
-        accessoryView: Klug.AccessoryViewType
+        _ image: Image,
+        _ textfield: TextField<Text>,
+        _ accessoryView: Klug.AccessoryViewType = .none
     ) {
         self.init(alignment: .center, spacing: 10) {
             image
