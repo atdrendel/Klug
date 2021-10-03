@@ -2,10 +2,8 @@ import SwiftUI
 import Relative
 
 
-
-
 public extension Klug {
-    
+    Pas
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
         case custom
@@ -22,7 +20,6 @@ public extension Klug {
             }
         }
     }
-    
     
     typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
     
