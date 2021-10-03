@@ -32,7 +32,7 @@ public extension Klug {
 
 public extension Klug {
     
-    typealias IconView = TupleView<(Image, TextField<Text>, AccessoryViewType)>
+    typealias AccessoryView<Accessory: View> = TupleView<(Image, Accessory, AccessoryViewType)>
     typealias SingleView<SomeView:View> = TupleView<(SomeView)>
     
     enum ViewType {

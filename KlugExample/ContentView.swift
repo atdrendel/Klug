@@ -42,16 +42,16 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                HStack(type: .stack) {
-                    Image(systemName: "lock")
-                    TextField("", text: .constant("typed text"))
-                    
-                    accessoryView(.custom(AnyView(Circle())))
-                    
+                
+//                Image(systemName: "lock")
+//                TextField("", text: .constant("typed text"))
+//
+//                accessoryView(.custom(AnyView(Circle())))
+                
 //                    accessoryView(.password({
 //                        print($0)
 //                    }))
-                }
+                HStack(icon: Image(systemName: "lock"), mainView:  TextField("", text: .constant("typed text")), acccessoryView: .custom(AnyView(Circle())))
                 .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                     

@@ -1,10 +1,10 @@
 import SwiftUI
 
-public extension HStack where Content == Klug.IconView {
-    init(icon: Image, mainView: TextField<Text>, acccessoryView: Klug.AccessoryViewType) {
+public extension HStack where Content == Klug.AccessoryView {
+    init<MainView: View>(icon: Image, mainView: MainView, acccessoryView: Klug.AccessoryViewType) {
         self.init(alignment: .center, spacing: 10) {
             icon
-            mainView
+            mainView.font(.largeTitle)
             acccessoryView
         }
     }
