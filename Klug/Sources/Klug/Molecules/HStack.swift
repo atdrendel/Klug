@@ -1,13 +1,11 @@
 import SwiftUI
-import Relative
 
-public extension HStack where Content == Klug.AccessoryView {
-    init<MainView: View>(icon: Image, mainView: MainView, acccessoryView: Klug.AccessoryViewType) {
-        self.init(alignment: .center, spacing: 10) {
-            icon
-            mainView.font(.largeTitle)
-            acccessoryView
-        }
+
+public extension HStack where Content == Klug.IconView {
+     init(
+        type: Klug.ViewType,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.init(alignment: .center, spacing: 10, content: content)
     }
 }
-

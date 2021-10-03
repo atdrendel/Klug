@@ -42,29 +42,16 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-<<<<<<< HEAD
-                
-//                Image(systemName: "lock")
-//                TextField("", text: .constant("typed text"))
-//
-//                accessoryView(.custom(AnyView(Circle())))
-                
-//                    accessoryView(.password({
-//                        print($0)
-//                    }))
-                HStack(icon: Image(systemName: "lock"), mainView:  TextField("", text: .constant("typed text")), acccessoryView: .custom(AnyView(Circle())))
-=======
                 HStack(type: .stack) {
                     Image(systemName: "lock")
                     TextField("", text: .constant("typed text"))
                     
-                    accessoryView(.custom(Text("d")))
+                    accessoryView(.custom(AnyView(Circle())))
                     
 //                    accessoryView(.password({
 //                        print($0)
 //                    }))
                 }
->>>>>>> parent of 3833b19 (still experimenting with Single custom view)
                 .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                     
@@ -82,5 +69,4 @@ struct ContentView_Previews: PreviewProvider {
           
     }
 }
-
 
