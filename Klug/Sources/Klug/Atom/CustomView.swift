@@ -41,6 +41,7 @@ public extension Klug {
         case password(_ action: (Bool) -> ())
         case custom( _ view: AnyView)
         case none
+        
         public var body: some View {
             switch self {
             case let .password(action): PasswordView(action: action)
@@ -48,6 +49,7 @@ public extension Klug {
             case .none: EmptyView()
             }
         }
+        
     }
     
 }
