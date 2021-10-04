@@ -1,8 +1,11 @@
 import SwiftUI
 
+public extension Klug.CustomView where Content == Rectangle {}
+public extension Klug.CustomView where Content == Circle {}
+public extension Klug.CustomView where Content == Image {}
 public extension Klug {
     
-    struct CustomView<Content: View>: View {
+    struct CustomView<Content> : View where Content : View {
         let content: Content
 
         init(@ViewBuilder content: () -> Content) {
