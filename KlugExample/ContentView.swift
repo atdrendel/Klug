@@ -44,11 +44,9 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                HStack(.init(systemName: "lock"), isSecureText, (titleKey: "some text", text: .constant(.empty), prompt: nil), .password({isSecureText = $0}))
+                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(.empty), prompt: nil), .password({isSecureText = $0} ))
                 //   .debug()
                    .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
-                
-             
                 
                 HStack {
                     Image(systemName: "lock")
