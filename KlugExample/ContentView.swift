@@ -54,10 +54,6 @@ struct ContentView: View {
                 )
                     .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
-                
-            
-                
-                
             }
             .padding()
         }
