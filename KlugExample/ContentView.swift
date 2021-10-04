@@ -9,6 +9,13 @@ import SwiftUI
 import Klug
 import Relative
 
+enum CustomViewSelect {
+    case rectangle
+    case circle
+    case image
+    case text
+}
+
 extension String {
     enum Account: String {
         case email = "bell.fill"
@@ -22,6 +29,7 @@ extension String {
 struct ContentView: View {
     
     @State private var isSecureText = false
+    var customViewSelect: CustomViewSelect
     
     var body: some View {
         ScrollView {
@@ -61,6 +69,21 @@ struct ContentView: View {
                     SecureField("some text", text: .constant(.empty))
                             }
                     }
+                    
+                    Group {
+                        switch customViewSelect {
+                        case .rectangle :
+                            Rectangle()
+                        case .circle :
+                            Circle()
+                        case .image :
+                            Image(systemName: "lock")
+                        case .text :
+                            Text("*")
+                            
+                        }
+                    }
+                    .debug()
                         
                     
                     AnyView(Circle()
