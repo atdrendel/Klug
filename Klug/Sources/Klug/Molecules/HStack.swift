@@ -12,14 +12,9 @@ public extension HStack where Content == Klug.AccessoryView {
                 let textField = TextField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
                 let secureTextField = SecureField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
                 
-                let trueContent: _conditionalText =
-                ViewBuilder.buildEither(first: secureTextField)
-                
-                let falseContent: _conditionalText =
+                return isSecureText.wrappedValue ?
+                ViewBuilder.buildEither(first: secureTextField) :
                 ViewBuilder.buildEither(second: textField)
-                let _text: _conditionalText =
-                isSecureText.wrappedValue ? trueContent : falseContent
-                return _text
             }
         self.init(alignment: .center, spacing: 10) {
             image
