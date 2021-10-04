@@ -10,31 +10,31 @@ import Klug
 import Relative
 
 extension String {
-     enum Account: String {
-         case email = "bell.fill"
-         case password = "key.fill"
-     }
-     init(_ account: Account) {
-         self.init(account.rawValue)
-     }
- }
+    enum Account: String {
+        case email = "bell.fill"
+        case password = "key.fill"
+    }
+    init(_ account: Account) {
+        self.init(account.rawValue)
+    }
+}
 
 struct ContentView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .center) {
-            
-
-                    Rectangle()
-                            .fill(.gray)
-                            .overlay(
-                                Image(systemName: "airtag.fill")
-                                    .resizable()
-                                        .foregroundColor(.gray)
-                                        .opacity(0.4)
-                            )
+                
+                
+                Rectangle()
+                    .fill(.gray)
+                    .overlay(
+                        Image(systemName: "airtag.fill")
+                            .resizable()
+                            .foregroundColor(.gray)
                             .opacity(0.4)
-                            .frame(width:300, height: 300, alignment: .center)
+                    )
+                    .opacity(0.4)
+                    .frame(width:300, height: 300, alignment: .center)
                 
                 Text("Login")
                     .font(.largeTitle)
@@ -44,27 +44,20 @@ struct ContentView: View {
                 
                 HStack(.init(systemName: "lock"),
                        .init("some text", text: .constant(.empty)),
-                       .custom(AnyView(Rectangle().foregroundColor(.red)))
+                       .custom(AnyView(
+                        Circle()
+                            .fill(
+                                .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom)
+                            )
+                       )
+                              )
                 )
-                .debug()
+                    .debug()
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                 
-                HStack {
-                    Image(systemName: "lock")
-                       .resizable()
-                       .aspectRatio(contentMode:.fit)
-                       .frame(width: 20, height: 20, alignment: .center)
-                    
-                    
-                    TextField("some text", text: .constant(.empty))
-                    
-                    AnyView(Circle()
-                        .frame(width: 20))
-                }
-                .debug()
-                .border(.all,.gray)
-
             
+                
+                
             }
             .padding()
         }
@@ -74,7 +67,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-          
+        
     }
 }
 
