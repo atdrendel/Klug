@@ -35,7 +35,15 @@ public extension Klug {
 
 public extension Klug {
     
-    typealias AccessoryView = TupleView<(Image, _ConditionalContent<SecureField<Text>, TextField<Text>>, AccessoryViewType)>
+    struct TextFieldImageModifier: ViewModifier {
+        public func body(content: Content) -> some View {
+            content
+                .opacity(0.8)
+                .foregroundColor(.gray.opacity(0.3))
+        }
+    }
+    
+    typealias AccessoryView = TupleView<(ModifiedContent<Image, TextFieldImageModifier>, _ConditionalContent<SecureField<Text>, TextField<Text>>, AccessoryViewType)>
     typealias CustomAccessoryView = _ConditionalContent<_ConditionalContent<Rectangle, Circle>, _ConditionalContent<Image, Text>>
     
     enum CustomAccessoryViewType: View {
@@ -47,10 +55,10 @@ public extension Klug {
         public var body: some View {
             Group {
                 switch self {
-                case let .rectangle(rectangle): rectangle
-                case let .circle(circle): circle
-                case let .image(image): image
-                case let .text(text): text
+                case let .rectangle(rectangle): rectangle.frame(width: 20)
+                case let .circle(circle): circle.frame(width: 20)
+                case let .image(image): image.frame(width: 20)
+                case let .text(text): text.frame(width: 20)
                 }
             }
         }
@@ -58,7 +66,7 @@ public extension Klug {
   
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
-        case custom( _ view: CustomAccessoryViewType)
+        case custom( _ view: AnyView)
         case none
         
         public var body: some View {
