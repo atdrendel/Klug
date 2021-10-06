@@ -7,12 +7,16 @@
 
 import SwiftUI
 
-class AppViewModel: ObservableObject {
-  @Published var selectedTab: Int
+enum Tab {
+  case one, two, three
+}
 
-  init(selectedTab: Int = 1) {
-    self.selectedTab = selectedTab
-  }
+class AppViewModel: ObservableObject {
+    @Published var selectedTab: Tab
+
+    init(selectedTab: Tab = .one) {
+      self.selectedTab = selectedTab
+    }
 }
 
 struct ContentView: View {
@@ -24,18 +28,18 @@ struct ContentView: View {
                 
                 VStack {
                   Text("One")
-                  Button("Go to 2nd tab") { self.viewModel.selectedTab = 2 }
+                  Button("Go to 2nd tab") { self.viewModel.selectedTab = .two }
                 }
                 .tabItem { Text("One") }
-                .tag(1)
+                .tag(Tab.one)
                 
                 Text("Two")
                     .tabItem { Text("Two") }
-                    .tag(2)
+                    .tag(Tab.two)
                 
                 Text("Three")
                     .tabItem { Text("Three") }
-                    .tag(3)
+                    .tag(Tab.three)
             }
         }
     }
@@ -43,6 +47,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(selection: .init())
+        ContentView(selection: .init(selectedTab: .two))
     }
 }
