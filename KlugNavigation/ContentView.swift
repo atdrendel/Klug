@@ -16,14 +16,18 @@ class AppViewModel: ObservableObject {
 }
 
 struct ContentView: View {
-    @State var selection = 1
+    @ObservedObject var viewModel: AppViewModel
     
     var body: some View {
         var body: some View {
-            TabView(selection: self.$selection) {
-                Text("One")
-                    .tabItem { Text("One") }
-                    .tag(1)
+            TabView(selection: $viewModel.selectedTab) {
+                
+                VStack {
+                  Text("One")
+                  Button("Go to 2nd tab") { self.viewModel.selectedTab = 2 }
+                }
+                .tabItem { Text("One") }
+                .tag(1)
                 
                 Text("Two")
                     .tabItem { Text("Two") }
@@ -39,6 +43,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(selection: .init())
     }
 }
