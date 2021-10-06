@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selection = 1
+    
     var body: some View {
         var body: some View {
-            TabView {
-              Text("One")
-                .tabItem { Text("One") }
-
-              Text("Two")
-                .tabItem { Text("Two") }
-
-              Text("Three")
-                .tabItem { Text("Three") }
+            TabView(selection: self.$selection) {
+                Text("One")
+                    .tabItem { Text("One") }
+                    .tag(1)
+                
+                Text("Two")
+                    .tabItem { Text("Two") }
+                    .tag(2)
+                
+                Text("Three")
+                    .tabItem { Text("Three") }
+                    .tag(3)
             }
-          }
-      }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
