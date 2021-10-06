@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+class AppViewModel: ObservableObject {
+  @Published var selectedTab: Int
+
+  init(selectedTab: Int = 1) {
+    self.selectedTab = selectedTab
+  }
+}
+
 struct ContentView: View {
     @State var selection = 1
     
