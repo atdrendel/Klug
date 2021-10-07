@@ -11,7 +11,7 @@ import SwiftUI
 struct KlugNavigationApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: .init(selectedTab: .inventory))
         }
     }
 }
