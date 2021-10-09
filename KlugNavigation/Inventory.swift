@@ -54,11 +54,14 @@ struct Item: Equatable, Identifiable {
 }
 
 
+//view models always holds states and actions
 class InventoryViewModel: ObservableObject {
     @Published var inventory: IdentifiedArrayOf<Item>
+    @Published var itemToDelete: Item?
     
-    init(inventory: IdentifiedArrayOf<Item> = []) {
+    init(inventory: IdentifiedArrayOf<Item> = [], itemToDelete: Item? = nil) {
         self.inventory = inventory
+        self.itemToDelete = itemToDelete
     }
     
     func delete(item: Item) {
@@ -66,11 +69,14 @@ class InventoryViewModel: ObservableObject {
             _ = self.inventory.remove(id: item.id)
         }
     }
+    
+    func deleteButtonTapped(item: Item) {
+        itemToDelete = item
+    }
 }
 
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
-    @State var itemToDelete: Item?
     
     var body: some View {
         List {
@@ -96,16 +102,17 @@ struct InventoryView: View {
                             .border(Color.black, width: 1)
                     }
                     
-                    Button(action: { self.itemToDelete = item }) {
+                    Button { viewModel.deleteButtonTapped(item: item) } label: {
                         Image(systemName: "trash.fill")
                     }
                     .padding(.leading)
+                    
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(item.status.isInStock ? nil : Color.gray)
             }
         }
-        .alert(item: $itemToDelete) { item in
+        .alert(item: $viewModel.itemToDelete) { item in
             //We can use an enum to switch various alerts
             //SwiftUI has a bug which only calls the last alert if you chain multiples
             Alert(
@@ -122,6 +129,8 @@ struct InventoryView: View {
 
 struct InventoryView_Previews: PreviewProvider {
     static var previews: some View {
+        let keyboard = Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100))
+        
         InventoryView(
             viewModel: .init(
                 inventory: [
@@ -129,7 +138,8 @@ struct InventoryView_Previews: PreviewProvider {
                     Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20)),
                     Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
                     Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
-                ]
+                ],
+                itemToDelete: keyboard
             )
         )
     }

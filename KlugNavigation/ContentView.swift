@@ -54,6 +54,21 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: .init(selectedTab: .inventory))
+        let keyboard = Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100))
+        
+        ContentView(
+            viewModel: .init(
+                inventoryViewModel: .init(
+                    inventory: [
+                        keyboard,
+                        Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20)),
+                        Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
+                        Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
+                    ],
+                    itemToDelete: keyboard
+                ),
+                selectedTab: .inventory
+            )
+        )
     }
 }
