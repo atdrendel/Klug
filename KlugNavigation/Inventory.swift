@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IdentifiedCollections
 import Foundation
 
 struct Item: Equatable, Identifiable {
@@ -54,15 +55,15 @@ struct Item: Equatable, Identifiable {
 
 
 class InventoryViewModel: ObservableObject {
-    @Published var inventory: [Item]
+    @Published var inventory: IdentifiedArrayOf<Item>
     
-    init(inventory: [Item] = []) {
+    init(inventory: IdentifiedArrayOf<Item> = []) {
         self.inventory = inventory
     }
     
-    func delete(at index: Int) {
+    func delete(item: Item) {
         withAnimation {
-            self.inventory.remove(at: index)
+            _ = self.inventory.remove(id: item.id)
         }
     }
 }
@@ -73,7 +74,7 @@ struct InventoryView: View {
     
     var body: some View {
         List {
-            ForEach(Array(zip(self.viewModel.inventory.indices, self.viewModel.inventory)), id: \.1.id) {  index, item in
+            ForEach(self.viewModel.inventory) { item in
                 HStack {
                     VStack(alignment: .leading) {
                         Text(item.name)
@@ -95,7 +96,7 @@ struct InventoryView: View {
                             .border(Color.black, width: 1)
                     }
                     
-                    Button(action: { self.itemToDelete = (index, item) }) {
+                    Button(action: { self.itemToDelete = item }) {
                         Image(systemName: "trash.fill")
                     }
                     .padding(.leading)
@@ -104,14 +105,14 @@ struct InventoryView: View {
                 .foregroundColor(item.status.isInStock ? nil : Color.gray)
             }
         }
-        .alert(item: $itemToDelete) { index, item in
+        .alert(item: $itemToDelete) { item in
             //We can use an enum to switch various alerts
             //SwiftUI has a bug which only calls the last alert if you chain multiples
             Alert(
                 title: Text(item.name),
                 message: Text("Are you sure you want to delete this item?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    viewModel.delete(at: index)
+                    viewModel.delete(item: item)
                 },
                 secondaryButton: .cancel()
             )
