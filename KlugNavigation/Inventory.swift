@@ -60,9 +60,9 @@ class InventoryViewModel: ObservableObject {
         self.inventory = inventory
     }
     
-    func delete(item: Item) {
+    func delete(at index: Int) {
         withAnimation {
-            self.inventory.removeAll(where: { $0.id == item.id })
+            self.inventory.remove(at: index)
         }
     }
 }
@@ -73,7 +73,7 @@ struct InventoryView: View {
     
     var body: some View {
         List {
-            ForEach(self.viewModel.inventory) { item in
+            ForEach(Array(zip(self.viewModel.inventory.indices, self.viewModel.inventory)), id: \.1.id) {  index, item in
                 HStack {
                     VStack(alignment: .leading) {
                         Text(item.name)
@@ -95,7 +95,7 @@ struct InventoryView: View {
                             .border(Color.black, width: 1)
                     }
                     
-                    Button(action: { self.itemToDelete = item }) {
+                    Button(action: { self.itemToDelete = (index, item) }) {
                         Image(systemName: "trash.fill")
                     }
                     .padding(.leading)
@@ -104,12 +104,14 @@ struct InventoryView: View {
                 .foregroundColor(item.status.isInStock ? nil : Color.gray)
             }
         }
-        .alert(item: $itemToDelete) { item in
+        .alert(item: $itemToDelete) { index, item in
+            //We can use an enum to switch various alerts
+            //SwiftUI has a bug which only calls the last alert if you chain multiples
             Alert(
                 title: Text(item.name),
                 message: Text("Are you sure you want to delete this item?"),
                 primaryButton: .destructive(Text("Delete")) {
-                    viewModel.delete(item: item)
+                    viewModel.delete(at: index)
                 },
                 secondaryButton: .cancel()
             )
