@@ -9,6 +9,7 @@ import SwiftUI
 import IdentifiedCollections
 import Foundation
 
+
 struct Item: Equatable, Identifiable {
     let id = UUID()
     var name: String
@@ -113,16 +114,8 @@ struct InventoryView: View {
             }
         }
         .alert(
-            Text(viewModel.itemToDelete?.name ?? "Delete"),
-            isPresented: Binding(
-                get: { self.viewModel.itemToDelete != nil },
-                set: { isPresented in
-                    if !isPresented {
-                        self.viewModel.itemToDelete = nil
-                    }
-                }
-            ),
-            presenting: self.viewModel.itemToDelete,
+            title: { Text($0.name) },
+            presenting: self.$viewModel.itemToDelete,
             actions: { item in
                 Button("Delete", role: .destructive) {
                     self.viewModel.delete(item: item)
