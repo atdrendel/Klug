@@ -112,18 +112,38 @@ struct InventoryView: View {
                 .foregroundColor(item.status.isInStock ? nil : Color.gray)
             }
         }
-        .alert(item: $viewModel.itemToDelete) { item in
-            //We can use an enum to switch various alerts
-            //SwiftUI has a bug which only calls the last alert if you chain multiples
-            Alert(
-                title: Text(item.name),
-                message: Text("Are you sure you want to delete this item?"),
-                primaryButton: .destructive(Text("Delete")) {
-                    viewModel.delete(item: item)
-                },
-                secondaryButton: .cancel()
-            )
-        }
+        .alert(
+            Text(viewModel.itemToDelete?.name ?? "Delete"),
+            isPresented: Binding(
+                get: { self.viewModel.itemToDelete != nil },
+                set: { isPresented in
+                    if !isPresented {
+                        self.viewModel.itemToDelete = nil
+                    }
+                }
+            ),
+            presenting: self.viewModel.itemToDelete,
+            actions: { item in
+                Button("Delete", role: .destructive) {
+                    self.viewModel.delete(item: item)
+                }
+            },
+            message: { _ in
+                Text("Are you sure you want to delete this item?")
+            }
+        )
+//        .alert(item: $viewModel.itemToDelete) { item in
+//            //We can use an enum to switch various alerts
+//            //SwiftUI has a bug which only calls the last alert if you chain multiples
+//            Alert(
+//                title: Text(item.name),
+//                message: Text("Are you sure you want to delete this item?"),
+//                primaryButton: .destructive(Text("Delete")) {
+//                    viewModel.delete(item: item)
+//                },
+//                secondaryButton: .cancel()
+//            )
+//        }
     }
 }
 
