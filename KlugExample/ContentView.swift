@@ -46,7 +46,11 @@ struct ContentView: View {
                     .padding(.leading, 40)
                     .padding(.top, 16)
                 
-                HStack(.init(systemName: .init(.email)), .constant(false), (titleKey: "Email ID", text: .constant(.empty), prompt: nil), .custom(.image(named: .init(systemName: "swift"))))
+                HStack(.init(systemName: .init(.email)),
+                       .constant(false),
+                       (titleKey: "Email ID", text: .constant(.empty), prompt: nil),
+                       .custom(.image(named: .init(systemName: "swift")))
+                  )
                    .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                 
                 HStack(.init(systemName: .init(.password)), $isSecureText, (titleKey: "Password", text: .constant(.empty), prompt: nil), .password({isSecureText = $0} ))

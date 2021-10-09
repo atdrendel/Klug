@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 public extension HStack where Content == Klug.AccessoryView {
     init(
         _ image: Image,
