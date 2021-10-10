@@ -23,7 +23,7 @@ struct ItemView: View {
                     
                     Stepper(
                       "Quantity: \(quantity)",
-                      value: Binding(
+                      value: .init(
                         get: { quantity },
                         set: { self.item.status = .inStock(quantity: $0) }
                       )
@@ -36,6 +36,7 @@ struct ItemView: View {
                 
             case let .outOfStock(isOnBackOrder: isOnBackOrder):
                 Section(header: Text("Out of stock")) {
+                    
                 }
             }
         }
