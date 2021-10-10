@@ -8,13 +8,35 @@ struct ItemView: View {
             TextField("Name", text: self.$item.name)
             
             Picker(selection: self.$item.color, label: Text("Color")) {
-              Text("None")
-                .tag(Item.Color?.none)
-
-              ForEach(Item.Color.defaults, id: \.name) { color in
-                Text(color.name)
-                  .tag(Optional(color))
-              }
+                Text("None")
+                    .tag(Item.Color?.none)
+                
+                ForEach(Item.Color.defaults, id: \.name) { color in
+                    Text(color.name)
+                        .tag(Optional(color))
+                }
+            }
+            
+            switch self.item.status {
+            case let .inStock(quantity: quantity):
+                Section(header: Text("In stock")) {
+                    
+                    Stepper(
+                      "Quantity: \(quantity)",
+                      value: Binding(
+                        get: { quantity },
+                        set: { self.item.status = .inStock(quantity: $0) }
+                      )
+                    )
+                    
+                    Button("Mark as sold out") {
+                        self.item.status = .outOfStock(isOnBackOrder: false)
+                    }
+                }
+                
+            case let .outOfStock(isOnBackOrder: isOnBackOrder):
+                Section(header: Text("Out of stock")) {
+                }
             }
         }
     }
@@ -22,6 +44,9 @@ struct ItemView: View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView()
+        NavigationView {
+            ItemView()
+        }
+        
     }
 }
