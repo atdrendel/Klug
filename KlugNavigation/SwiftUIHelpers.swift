@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CasePaths
 
 public extension Binding {
     func isPresent<Wrapped>() -> Binding<Bool> where Value == Wrapped? {
@@ -50,4 +51,34 @@ extension View {
                 message: message)
         }
     
+}
+
+struct IfCaseLet<Enum, Case, Content>: View where Content: View {
+  let binding: Binding<Enum>
+  let casePath: CasePath<Enum, Case>
+  let content: (Binding<Case>) -> Content
+
+  init(
+    _ binding: Binding<Enum>,
+    pattern casePath: CasePath<Enum, Case>,
+    @ViewBuilder content: @escaping (Binding<Case>) -> Content
+  ) {
+    self.binding = binding
+    self.casePath = casePath
+    self.content = content
+      
+      let keyPath = \Item.id
+      let casePath = /Item.Status.inStock
+  }
+    
+    var body: some View {
+        if let `case` = (fatalError() as! Case?) {
+            self.content(
+                Binding(
+                    get: { `case` },
+                    set: { binding.wrappedValue = self.pattern($0) }
+                )
+            )
+        }
+    }
 }

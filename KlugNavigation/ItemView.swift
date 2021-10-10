@@ -17,6 +17,15 @@ struct ItemView: View {
                 }
             }
             
+            IfCaseLet(self.$item.status, pattern: Item.Status.inStock) { (quantity: Binding<Int>) in
+              Section(header: Text("In stock")) {
+                Stepper("Quantity: \(quantity.wrappedValue)", value: quantity)
+                Button("Mark as sold out") {
+                  self.item.status = .outOfStock(isOnBackOrder: false)
+                }
+              }
+            }
+            
             switch self.item.status {
             case let .inStock(quantity: quantity):
                 Section(header: Text("In stock")) {
