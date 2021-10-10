@@ -76,6 +76,20 @@ class InventoryViewModel: ObservableObject {
     }
 }
 
+struct ItemView: View {
+  var body: some View {
+    Form {
+      TextField("Name", text: .constant(""))
+    }
+  }
+}
+
+struct ItemView_Previews: PreviewProvider {
+  static var previews: some View {
+    ItemView()
+  }
+}
+
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
     
@@ -125,6 +139,13 @@ struct InventoryView: View {
                 Text("Are you sure you want to delete this item?")
             }
         )
+        .toolbar {
+          ToolbarItem(placement: .primaryAction) {
+            Button("Add") {
+            }
+          }
+        }
+        .navigationTitle("Inventory")
 //        .alert(item: $viewModel.itemToDelete) { item in
 //            //We can use an enum to switch various alerts
 //            //SwiftUI has a bug which only calls the last alert if you chain multiples
@@ -144,16 +165,18 @@ struct InventoryView_Previews: PreviewProvider {
     static var previews: some View {
         let keyboard = Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100))
         
-        InventoryView(
-            viewModel: .init(
-                inventory: [
-                    Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100)),
-                    Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20)),
-                    Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
-                    Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
-                ],
-                itemToDelete: keyboard
+        NavigationView {
+            InventoryView(
+                viewModel: .init(
+                    inventory: [
+                        Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100)),
+                        Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20)),
+                        Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
+                        Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
+                    ],
+                    itemToDelete: keyboard
+                )
             )
-        )
+        }
     }
 }
