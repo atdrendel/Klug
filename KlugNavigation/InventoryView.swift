@@ -76,22 +76,9 @@ class InventoryViewModel: ObservableObject {
     }
 }
 
-struct ItemView: View {
-  var body: some View {
-    Form {
-      TextField("Name", text: .constant(""))
-    }
-  }
-}
-
-struct ItemView_Previews: PreviewProvider {
-  static var previews: some View {
-    ItemView()
-  }
-}
-
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
+    @State var addItemIsPresented = false
     
     var body: some View {
         List {
@@ -142,10 +129,15 @@ struct InventoryView: View {
         .toolbar {
           ToolbarItem(placement: .primaryAction) {
             Button("Add") {
+                self.addItemIsPresented = true
             }
           }
         }
         .navigationTitle("Inventory")
+        .sheet(isPresented: self.$addItemIsPresented) {
+          Text("Add item")
+        }
+
 //        .alert(item: $viewModel.itemToDelete) { item in
 //            //We can use an enum to switch various alerts
 //            //SwiftUI has a bug which only calls the last alert if you chain multiples
