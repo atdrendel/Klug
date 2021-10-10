@@ -82,3 +82,14 @@ struct IfCaseLet<Enum, Case, Content>: View where Content: View {
       }
     }
 }
+
+//extension Binding {
+//  subscript<Subject>(
+//    dynamicMember keyPath: WritableKeyPath<Value, Subject>
+//  ) -> Binding<Subject> {
+//    Binding<Subject>(
+//      get: { self.wrappedValue[keyPath: keyPath] },
+//      set: { self.wrappedValue[keyPath: keyPath] = $0 }
+//    )
+//  }
+//}

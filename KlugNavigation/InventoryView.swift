@@ -74,7 +74,14 @@ class InventoryViewModel: ObservableObject {
     func deleteButtonTapped(item: Item) {
         itemToDelete = item
     }
+    
+    func add(item: Item) {
+        withAnimation {
+            _ = self.inventory.append(item)
+        }
+    }
 }
+
 
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
@@ -127,29 +134,37 @@ struct InventoryView: View {
             }
         )
         .toolbar {
-          ToolbarItem(placement: .primaryAction) {
-            Button("Add") {
-                self.addItemIsPresented = true
+            ToolbarItem(placement: .primaryAction) {
+                Button("Add") {
+                    self.addItemIsPresented = true
+                }
             }
-          }
         }
         .navigationTitle("Inventory")
         .sheet(isPresented: self.$addItemIsPresented) {
-          Text("Add item")
+            NavigationView {
+                ItemView(
+                    onSave: {
+                        self.viewModel.add(item: $0)
+                        self.addItemIsPresented = false
+                    },
+                    onCancel: { self.addItemIsPresented = false }
+                )
+            }
         }
-
-//        .alert(item: $viewModel.itemToDelete) { item in
-//            //We can use an enum to switch various alerts
-//            //SwiftUI has a bug which only calls the last alert if you chain multiples
-//            Alert(
-//                title: Text(item.name),
-//                message: Text("Are you sure you want to delete this item?"),
-//                primaryButton: .destructive(Text("Delete")) {
-//                    viewModel.delete(item: item)
-//                },
-//                secondaryButton: .cancel()
-//            )
-//        }
+        
+        //        .alert(item: $viewModel.itemToDelete) { item in
+        //            //We can use an enum to switch various alerts
+        //            //SwiftUI has a bug which only calls the last alert if you chain multiples
+        //            Alert(
+        //                title: Text(item.name),
+        //                message: Text("Are you sure you want to delete this item?"),
+        //                primaryButton: .destructive(Text("Delete")) {
+        //                    viewModel.delete(item: item)
+        //                },
+        //                secondaryButton: .cancel()
+        //            )
+        //        }
     }
 }
 

@@ -1,7 +1,11 @@
 import SwiftUI
+import CasePaths
 
 struct ItemView: View {
     @State var item = Item(name: "", color: nil, status: .inStock(quantity: 1))
+    
+    let onSave: (Item) -> Void
+    let onCancel: () -> Void
     
     var body: some View {
         Form {
@@ -17,11 +21,19 @@ struct ItemView: View {
                 }
             }
             
-            IfCaseLet(self.$item.status, pattern: Item.Status.inStock) { (quantity: Binding<Int>) in
+            IfCaseLet(self.$item.status, pattern: /Item.Status.inStock) { $quantity in
               Section(header: Text("In stock")) {
-                Stepper("Quantity: \(quantity.wrappedValue)", value: quantity)
+                Stepper("Quantity: \(quantity)", value: $quantity)
                 Button("Mark as sold out") {
                   self.item.status = .outOfStock(isOnBackOrder: false)
+                }
+              }
+            }
+            IfCaseLet(self.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
+              Section(header: Text("Out of stock")) {
+                Toggle("Is on back order?", isOn: $isOnBackOrder)
+                Button("Is back in stock!") {
+                  self.item.status = .inStock(quantity: 1)
                 }
               }
             }
@@ -57,6 +69,18 @@ struct ItemView: View {
                   }
                 }
             }
+        }
+        .toolbar {
+          ToolbarItem(placement: .cancellationAction) {
+            Button("Cancel") {
+              self.onCancel()
+            }
+          }
+          ToolbarItem(placement: .primaryAction) {
+            Button("Save") {
+              self.onSave(self.item)
+            }
+          }
         }
     }
 }
