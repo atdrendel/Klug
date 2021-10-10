@@ -72,13 +72,13 @@ struct IfCaseLet<Enum, Case, Content>: View where Content: View {
   }
     
     var body: some View {
-        if let `case` = (fatalError() as! Case?) {
-            self.content(
-                Binding(
-                    get: { `case` },
-                    set: { binding.wrappedValue = self.pattern($0) }
-                )
-            )
-        }
+      if let `case` = self.casePath.extract(from: self.binding.wrappedValue) {
+        self.content(
+          Binding(
+            get: { `case` },
+            set: { binding.wrappedValue = self.casePath.embed($0) }
+          )
+        )
+      }
     }
 }
