@@ -36,7 +36,16 @@ struct ItemView: View {
                 
             case let .outOfStock(isOnBackOrder: isOnBackOrder):
                 Section(header: Text("Out of stock")) {
-                    
+                  Toggle(
+                    "Is on back order?",
+                    isOn: .init(
+                      get: { isOnBackOrder },
+                      set: { self.item.status = .outOfStock(isOnBackOrder: $0) }
+                    )
+                  )
+                  Button("Is back in stock!") {
+                    self.item.status = .inStock(quantity: 1)
+                  }
                 }
             }
         }
