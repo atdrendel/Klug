@@ -58,10 +58,15 @@ struct Item: Equatable, Identifiable {
 //view models always holds states and actions
 class InventoryViewModel: ObservableObject {
     @Published var inventory: IdentifiedArrayOf<Item>
+    @Published var itemToAdd: Item?
     @Published var itemToDelete: Item?
     
-    init(inventory: IdentifiedArrayOf<Item> = [], itemToDelete: Item? = nil) {
+    init(inventory: IdentifiedArrayOf<Item> = [],
+         itemToAdd: Item? = nil,
+         itemToDelete: Item? = nil
+    ) {
         self.inventory = inventory
+        self.itemToAdd = itemToAdd
         self.itemToDelete = itemToDelete
     }
     
@@ -76,16 +81,24 @@ class InventoryViewModel: ObservableObject {
     }
     
     func add(item: Item) {
-        withAnimation {
-            _ = self.inventory.append(item)
-        }
+      withAnimation {
+        self.inventory.append(item)
+        self.itemToAdd = nil
+      }
+    }
+
+    func cancelButtonTapped() {
+      self.itemToAdd = nil
+    }
+    
+    func addButtonTapped() {
+      self.itemToAdd = .init(name: "", color: nil, status: .inStock(quantity: 1))
     }
 }
 
 
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
-    @State var addItemIsPresented = false
     
     var body: some View {
         List {
@@ -136,19 +149,16 @@ struct InventoryView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button("Add") {
-                    self.addItemIsPresented = true
+                    self.viewModel.addButtonTapped()
                 }
             }
         }
         .navigationTitle("Inventory")
-        .sheet(isPresented: self.$addItemIsPresented) {
+        .sheet(item: $viewModel.itemToAdd) { itemToAdd in
             NavigationView {
                 ItemView(
-                    onSave: {
-                        self.viewModel.add(item: $0)
-                        self.addItemIsPresented = false
-                    },
-                    onCancel: { self.addItemIsPresented = false }
+                    onSave: { item in self.viewModel.add(item: item) },
+                    onCancel: { self.viewModel.cancelButtonTapped() }
                 )
             }
         }
@@ -181,8 +191,15 @@ struct InventoryView_Previews: PreviewProvider {
                         Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
                         Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
                     ],
-                    itemToDelete: keyboard
+                    itemToAdd: .init(
+                        name: "",
+                        color: nil,
+                        status: .inStock(quantity: 1)
+                    ),
+                    itemToDelete: nil
+                    
                 )
+               // addItemIsPresented: true
             )
         }
     }
