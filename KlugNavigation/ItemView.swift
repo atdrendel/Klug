@@ -70,8 +70,10 @@ struct ItemView: View {
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemView(item: (.init(unwrap: .constant(.init(name: "", color: .red, status: .inStock(quantity: 3)))) ?? nil))
+            ItemView(item: .init(
+                projectedValue: .constant(.init(name: "", color: .red, status: .inStock(quantity: 2)))
+            )
+            )
         }
-        
     }
 }
