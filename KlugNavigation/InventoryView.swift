@@ -65,6 +65,9 @@ class InventoryViewModel: ObservableObject {
     ) {
         self.inventory = inventory
         self.itemToAdd = itemToAdd
+        for itemRowViewModel in inventory {
+            self.bind(itemRowViewModel: itemRowViewModel)
+        }
     }
     
     func delete(item: Item) {
@@ -73,9 +76,22 @@ class InventoryViewModel: ObservableObject {
         }
     }
     
+    private func bind(itemRowViewModel: ItemRowViewModel) {
+        itemRowViewModel.onDelete = { [weak self, id = itemRowViewModel.id] in
+            _ = withAnimation {
+                self?.inventory.remove(id: id)
+            }
+        }
+        self.inventory.append(itemRowViewModel)
+    }
+    
     func add(item: Item) {
         withAnimation {
-            self.inventory.append(.init(item: item))
+            let viewModel = ItemRowViewModel(item: item)
+            viewModel.onDelete = { [weak self] in
+                self?.delete(item: item)
+            }
+            self.inventory.append(viewModel)
             self.itemToAdd = nil
         }
     }
@@ -154,25 +170,17 @@ struct InventoryView: View {
 struct InventoryView_Previews: PreviewProvider {
     static var previews: some View {
         let keyboard = Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100))
-        
         NavigationView {
             InventoryView(
                 viewModel: .init(
                     inventory: [
-                        Item(name: "Keyboard", color: .blue, status: .inStock(quantity: 100)),
-                        Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20)),
-                        Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true)),
-                        Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false)),
+                        .init(item: keyboard),
+                        .init(item: Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20))),
+                        .init(item: Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true))),
+                        .init(item: Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false))),
                     ],
-                    itemToAdd: .init(
-                        name: "",
-                        color: nil,
-                        status: .inStock(quantity: 1)
-                    ),
-                    itemToDelete: nil
-                    
+                    itemToAdd: keyboard
                 )
-                // addItemIsPresented: true
             )
         }
     }
