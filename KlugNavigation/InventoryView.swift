@@ -57,11 +57,11 @@ struct Item: Equatable, Identifiable {
 
 //view models always holds states and actions
 class InventoryViewModel: ObservableObject {
-    @Published var inventory: IdentifiedArrayOf<Item>
+    @Published var inventory: IdentifiedArrayOf<ItemRowViewModel>
     @Published var itemToAdd: Item?
     @Published var itemToDelete: Item?
     
-    init(inventory: IdentifiedArrayOf<Item> = [],
+    init(inventory: IdentifiedArrayOf<ItemRowViewModel> = [],
          itemToAdd: Item? = nil,
          itemToDelete: Item? = nil
     ) {
@@ -82,7 +82,7 @@ class InventoryViewModel: ObservableObject {
     
     func add(item: Item) {
       withAnimation {
-        self.inventory.append(item)
+          self.inventory.append(.init(item: item))
         self.itemToAdd = nil
       }
     }
@@ -103,35 +103,7 @@ struct InventoryView: View {
     var body: some View {
         List {
             ForEach(self.viewModel.inventory) { item in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(item.name)
-                        
-                        switch item.status {
-                        case let .inStock(quantity):
-                            Text("In stock: \(quantity)")
-                        case let .outOfStock(isOnBackOrder):
-                            Text("Out of stock" + (isOnBackOrder ? ": on back order" : ""))
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    if let color = item.color {
-                        Rectangle()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(color.swiftUIColor)
-                            .border(Color.black, width: 1)
-                    }
-                    
-                    Button { viewModel.deleteButtonTapped(item: item) } label: {
-                        Image(systemName: "trash.fill")
-                    }
-                    .padding(.leading)
-                    
-                }
-                .buttonStyle(.plain)
-                .foregroundColor(item.status.isInStock ? nil : Color.gray)
+              
             }
         }
         .alert(

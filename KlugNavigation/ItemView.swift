@@ -1,9 +1,11 @@
 import SwiftUI
 import CasePaths
 
-class ItemRowViewModel: ObservableObject {
+class ItemRowViewModel: Identifiable, ObservableObject {
   @Published var item: Item
 
+    var id: Item.ID { self.item.id }
+    
   init(item: Item) {
     self.item = item
   }
