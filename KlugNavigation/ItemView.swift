@@ -2,10 +2,22 @@ import SwiftUI
 import CasePaths
 
 struct ItemView: View {
-    @State var item = Item(name: "", color: nil, status: .inStock(quantity: 1))
+    //2-way communication
+    @Binding var item: Item
     
     let onSave: (Item) -> Void
     let onCancel: () -> Void
+    
+    //  init(
+    //    item: Item,
+    //    onSave: @escaping (Item) -> Void,
+    //    onCancel: @escaping () -> Void
+    //  ) {
+    //    print("ItemView.init", item.name)
+    //    self._item = .init(wrappedValue: item)
+    //    self.onSave = onSave
+    //    self.onCancel = onCancel
+    //  }
     
     var body: some View {
         Form {
@@ -58,7 +70,10 @@ struct ItemView: View {
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemView(onSave: { _ in }, onCancel: { })
+            ItemView(
+                item: .constant(Item(name: "", color: nil, status: .inStock(quantity: 1))),
+                onSave: { _ in },
+                onCancel: { })
         }
         
     }

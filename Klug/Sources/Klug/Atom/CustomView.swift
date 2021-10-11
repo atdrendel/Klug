@@ -30,6 +30,8 @@ public extension Klug {
     }
 }
 
+protocol V: View {}
+
 public extension Klug {
     
     struct TextFieldImageModifier: ViewModifier {
@@ -57,11 +59,27 @@ public extension Klug {
                 }
             }
         }
+        
+        public func overlay<V>(@ViewBuilder content: () -> V) -> some View where V : View, V: ShapeStyle {
+            content()
+        }
+        
+//        @ViewBuilder
+//        public func view(for: Self) -> some View {
+//            switch self {
+//            case .rectangle(let color):
+//                Rectangle.fill(color)
+//            case .circle(let color):
+//                Circle().fill(color)
+//            case .image(_):
+//                Image(systemName: named)
+//            }
+//        }
     }
   
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
-        case custom( _ view: CustomAccessoryViewType)
+        case custom( _ view: AnyView)
         case none
         
         public var body: some View {

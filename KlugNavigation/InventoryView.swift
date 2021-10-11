@@ -155,11 +155,14 @@ struct InventoryView: View {
         }
         .navigationTitle("Inventory")
         .sheet(item: $viewModel.itemToAdd) { itemToAdd in
-            NavigationView {
-                ItemView(
-                    onSave: { item in self.viewModel.add(item: item) },
-                    onCancel: { self.viewModel.cancelButtonTapped() }
-                )
+            if let $itemToAdd = Binding(self.$viewModel.itemToAdd) {
+                NavigationView {
+                    ItemView(
+                        item: $itemToAdd,
+                        onSave: { item in self.viewModel.add(item: item) },
+                        onCancel: { self.viewModel.cancelButtonTapped() }
+                    )
+                }
             }
         }
         
