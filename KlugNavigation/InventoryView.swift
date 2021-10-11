@@ -146,24 +146,31 @@ struct InventoryView: View {
                 Text("Are you sure you want to delete this item?")
             }
         )
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button("Add") {
-                    self.viewModel.addButtonTapped()
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .primaryAction) {
+//                Button("Add") {
+//                    self.viewModel.addButtonTapped()
+//                }
+//            }
+//        }
         .navigationTitle("Inventory")
-        .sheet(item: $viewModel.itemToAdd) { itemToAdd in
-            if let $itemToAdd = Binding(self.$viewModel.itemToAdd) {
-                NavigationView {
-                    ItemView(
-                        item: $itemToAdd,
-                        onSave: { item in self.viewModel.add(item: item) },
-                        onCancel: { self.viewModel.cancelButtonTapped() }
-                    )
+        .sheet(unwrap: self.$viewModel.itemToAdd) { $item in
+          NavigationView {
+            ItemView(item: $item)
+              .navigationBarTitle("Add")
+              .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                  Button("Cancel") {
+                    self.viewModel.cancelButtonTapped()
+                  }
                 }
-            }
+                ToolbarItem(placement: .primaryAction) {
+                  Button("Add") {
+                    self.viewModel.add(item: item)
+                  }
+                }
+              }
+          }
         }
         
         //        .alert(item: $viewModel.itemToDelete) { item in
@@ -207,3 +214,6 @@ struct InventoryView_Previews: PreviewProvider {
         }
     }
 }
+
+// ForEach.init:   (Binding<C>,  (Binding<C.Element>) -> some View) -> ForEach
+// sheet(unwrap:): (Binding<V?>, (Binding<V>)         -> some View) -> some View

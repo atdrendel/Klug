@@ -1,12 +1,20 @@
 import SwiftUI
 import CasePaths
 
+class ItemRowViewModel: ObservableObject {
+  @Published var item: Item
+
+  init(item: Item) {
+    self.item = item
+  }
+}
+
 struct ItemView: View {
     //2-way communication
     @Binding var item: Item
     
-    let onSave: (Item) -> Void
-    let onCancel: () -> Void
+//    let onSave: (Item) -> Void
+//    let onCancel: () -> Void
     
     //  init(
     //    item: Item,

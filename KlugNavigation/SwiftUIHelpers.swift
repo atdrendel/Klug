@@ -21,6 +21,18 @@ public extension Binding {
     }
 }
 
+extension Binding {
+  init?(unwrap binding: Binding<Value?>) {
+    guard let wrappedValue = binding.wrappedValue
+    else { return nil }
+
+    self.init(
+      get: { wrappedValue },
+      set: { binding.wrappedValue = $0 }
+    )
+  }
+}
+
 extension View {
     
     func alert<A: View, M: View, T>(
@@ -93,3 +105,16 @@ struct IfCaseLet<Enum, Case, Content>: View where Content: View {
 //    )
 //  }
 //}
+
+extension View {
+  func sheet<Value, Content>(
+    unwrap optionalValue: Binding<Value?>,
+    @ViewBuilder content: @escaping (Binding<Value>) -> Content
+  ) -> some View where Value: Identifiable, Content: View {
+    self.sheet(item: optionalValue) { _ in
+      if let value = Binding(unwrap: optionalValue) {
+        content(value)
+      }
+    }
+  }
+}
