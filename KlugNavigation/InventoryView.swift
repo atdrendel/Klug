@@ -59,15 +59,12 @@ struct Item: Equatable, Identifiable {
 class InventoryViewModel: ObservableObject {
     @Published var inventory: IdentifiedArrayOf<ItemRowViewModel>
     @Published var itemToAdd: Item?
-    @Published var itemToDelete: Item?
     
     init(inventory: IdentifiedArrayOf<ItemRowViewModel> = [],
-         itemToAdd: Item? = nil,
-         itemToDelete: Item? = nil
+         itemToAdd: Item? = nil
     ) {
         self.inventory = inventory
         self.itemToAdd = itemToAdd
-        self.itemToDelete = itemToDelete
     }
     
     func delete(item: Item) {
@@ -76,73 +73,67 @@ class InventoryViewModel: ObservableObject {
         }
     }
     
-    func deleteButtonTapped(item: Item) {
-        itemToDelete = item
+    func add(item: Item) {
+        withAnimation {
+            self.inventory.append(.init(item: item))
+            self.itemToAdd = nil
+        }
     }
     
-    func add(item: Item) {
-      withAnimation {
-          self.inventory.append(.init(item: item))
-        self.itemToAdd = nil
-      }
-    }
-
     func cancelButtonTapped() {
-      self.itemToAdd = nil
+        self.itemToAdd = nil
     }
     
     func addButtonTapped() {
-      self.itemToAdd = .init(name: "", color: nil, status: .inStock(quantity: 1))
+        self.itemToAdd = .init(name: "", color: nil, status: .inStock(quantity: 1))
     }
 }
-
 
 struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
     
     var body: some View {
         List {
-            ForEach(self.viewModel.inventory) { item in
-              
-            }
+            //short form with object/item infered $0
+            ForEach(viewModel.inventory, content: ItemRowView.init(viewModel:))
         }
-        .alert(
-            title: { Text($0.name) },
-            presenting: self.$viewModel.itemToDelete,
-            actions: { item in
-                Button("Delete", role: .destructive) {
-                    self.viewModel.delete(item: item)
-                }
-            },
-            message: { _ in
-                Text("Are you sure you want to delete this item?")
-            }
-        )
-//        .toolbar {
-//            ToolbarItem(placement: .primaryAction) {
-//                Button("Add") {
-//                    self.viewModel.addButtonTapped()
-//                }
-//            }
-//        }
+        //        .alert(
+        //            title: { Text($0.name) },
+        //            presenting: self.$viewModel.itemToDelete,
+        //            actions: { item in
+        //                Button("Delete", role: .destructive) {
+        //                    self.viewModel.delete(item: item)
+        //                }
+        //            },
+        //            message: { _ in
+        //                Text("Are you sure you want to delete this item?")
+        //            }
+        //        )
+        //        .toolbar {
+        //            ToolbarItem(placement: .primaryAction) {
+        //                Button("Add") {
+        //                    self.viewModel.addButtonTapped()
+        //                }
+        //            }
+        //        }
         .navigationTitle("Inventory")
         .sheet(unwrap: self.$viewModel.itemToAdd) { $item in
-          NavigationView {
-            ItemView(item: $item)
-              .navigationBarTitle("Add")
-              .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                  Button("Cancel") {
-                    self.viewModel.cancelButtonTapped()
-                  }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                  Button("Add") {
-                    self.viewModel.add(item: item)
-                  }
-                }
-              }
-          }
+            NavigationView {
+                ItemView(item: $item)
+                    .navigationBarTitle("Add")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                self.viewModel.cancelButtonTapped()
+                            }
+                        }
+                        ToolbarItem(placement: .primaryAction) {
+                            Button("Add") {
+                                self.viewModel.add(item: item)
+                            }
+                        }
+                    }
+            }
         }
         
         //        .alert(item: $viewModel.itemToDelete) { item in
@@ -181,7 +172,7 @@ struct InventoryView_Previews: PreviewProvider {
                     itemToDelete: nil
                     
                 )
-               // addItemIsPresented: true
+                // addItemIsPresented: true
             )
         }
     }

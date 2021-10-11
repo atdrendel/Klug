@@ -1,22 +1,14 @@
 import SwiftUI
 import CasePaths
 
-class ItemRowViewModel: Identifiable, ObservableObject {
-  @Published var item: Item
 
-    var id: Item.ID { self.item.id }
-    
-  init(item: Item) {
-    self.item = item
-  }
-}
 
 struct ItemView: View {
     //2-way communication
     @Binding var item: Item
     
-//    let onSave: (Item) -> Void
-//    let onCancel: () -> Void
+    //    let onSave: (Item) -> Void
+    //    let onCancel: () -> Void
     
     //  init(
     //    item: Item,
@@ -44,35 +36,33 @@ struct ItemView: View {
             }
             
             IfCaseLet(self.$item.status, pattern: /Item.Status.inStock) { $quantity in
-              Section(header: Text("In stock")) {
-                Stepper("Quantity: \(quantity)", value: $quantity)
-                Button("Mark as sold out") {
-                  self.item.status = .outOfStock(isOnBackOrder: false)
+                Section(header: Text("In stock")) {
+                    Stepper("Quantity: \(quantity)", value: $quantity)
+                    Button("Mark as sold out") {
+                        self.item.status = .outOfStock(isOnBackOrder: false)
+                    }
                 }
-              }
             }
             IfCaseLet(self.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
-              Section(header: Text("Out of stock")) {
-                Toggle("Is on back order?", isOn: $isOnBackOrder)
-                Button("Is back in stock!") {
-                  self.item.status = .inStock(quantity: 1)
+                Section(header: Text("Out of stock")) {
+                    Toggle("Is on back order?", isOn: $isOnBackOrder)
+                    Button("Is back in stock!") {
+                        self.item.status = .inStock(quantity: 1)
+                    }
                 }
-              }
-            }
-            
-       
+            }   
         }
         .toolbar {
-          ToolbarItem(placement: .cancellationAction) {
-            Button("Cancel") {
-              self.onCancel()
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    // self.onCancel()
+                }
             }
-          }
-          ToolbarItem(placement: .primaryAction) {
-            Button("Save") {
-              self.onSave(self.item)
+            ToolbarItem(placement: .primaryAction) {
+                Button("Save") {
+                    //  self.onSave(self.item)
+                }
             }
-          }
         }
     }
 }
@@ -80,10 +70,7 @@ struct ItemView: View {
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemView(
-                item: .constant(Item(name: "", color: nil, status: .inStock(quantity: 1))),
-                onSave: { _ in },
-                onCancel: { })
+            ItemView(item: (.init(unwrap: .constant(.init(name: "", color: .red, status: .inStock(quantity: 3)))) ?? nil))
         }
         
     }

@@ -22,15 +22,15 @@ public extension Binding {
 }
 
 extension Binding {
-  init?(unwrap binding: Binding<Value?>) {
-    guard let wrappedValue = binding.wrappedValue
-    else { return nil }
-
-    self.init(
-      get: { wrappedValue },
-      set: { binding.wrappedValue = $0 }
-    )
-  }
+    init?(unwrap binding: Binding<Value?>) {
+        guard let wrappedValue = binding.wrappedValue
+        else { return nil }
+        
+        self.init(
+            get: { wrappedValue },
+            set: { binding.wrappedValue = $0 }
+        )
+    }
 }
 
 extension View {
@@ -66,32 +66,32 @@ extension View {
 }
 
 struct IfCaseLet<Enum, Case, Content>: View where Content: View {
-  let binding: Binding<Enum>
-  let casePath: CasePath<Enum, Case>
-  let content: (Binding<Case>) -> Content
-
-  init(
-    _ binding: Binding<Enum>,
-    pattern casePath: CasePath<Enum, Case>,
-    @ViewBuilder content: @escaping (Binding<Case>) -> Content
-  ) {
-    self.binding = binding
-    self.casePath = casePath
-    self.content = content
-      
-      let keyPath = \Item.id
-      let casePath = /Item.Status.inStock
-  }
+    let binding: Binding<Enum>
+    let casePath: CasePath<Enum, Case>
+    let content: (Binding<Case>) -> Content
+    
+    init(
+        _ binding: Binding<Enum>,
+        pattern casePath: CasePath<Enum, Case>,
+        @ViewBuilder content: @escaping (Binding<Case>) -> Content
+    ) {
+        self.binding = binding
+        self.casePath = casePath
+        self.content = content
+        
+        let keyPath = \Item.id
+        let casePath = /Item.Status.inStock
+    }
     
     var body: some View {
-      if let `case` = self.casePath.extract(from: self.binding.wrappedValue) {
-        self.content(
-          Binding(
-            get: { `case` },
-            set: { binding.wrappedValue = self.casePath.embed($0) }
-          )
-        )
-      }
+        if let `case` = self.casePath.extract(from: self.binding.wrappedValue) {
+            self.content(
+                Binding(
+                    get: { `case` },
+                    set: { binding.wrappedValue = self.casePath.embed($0) }
+                )
+            )
+        }
     }
 }
 
@@ -107,14 +107,14 @@ struct IfCaseLet<Enum, Case, Content>: View where Content: View {
 //}
 
 extension View {
-  func sheet<Value, Content>(
-    unwrap optionalValue: Binding<Value?>,
-    @ViewBuilder content: @escaping (Binding<Value>) -> Content
-  ) -> some View where Value: Identifiable, Content: View {
-    self.sheet(item: optionalValue) { _ in
-      if let value = Binding(unwrap: optionalValue) {
-        content(value)
-      }
+    func sheet<Value, Content>(
+        unwrap optionalValue: Binding<Value?>,
+        @ViewBuilder content: @escaping (Binding<Value>) -> Content
+    ) -> some View where Value: Identifiable, Content: View {
+        self.sheet(item: optionalValue) { _ in
+            if let value = Binding(unwrap: optionalValue) {
+                content(value)
+            }
+        }
     }
-  }
 }
