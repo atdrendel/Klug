@@ -1,16 +1,27 @@
 import SwiftUI
 
 class ItemRowViewModel: Identifiable, ObservableObject {
-    @Published var item: Item
-    @Published var itemToDelete: Item?
+    
     var id: Item.ID { self.item.id }
+    @Published var deleteItemAlertIsPresented: Bool
+    @Published var item: Item
+    var onDelete: () -> Void = { }
+
     
     init(
-        item: Item,
-        itemToDelete: Item? = nil
+        deleteItemAlertIsPresented: Bool = false,
+        item: Item
     ) {
+        self.deleteItemAlertIsPresented = deleteItemAlertIsPresented
         self.item = item
-        self.itemToDelete = itemToDelete
+    }
+    
+    func deleteButtonTapped() {
+      self.deleteItemAlertIsPresented = true
+    }
+    
+    func deleteConfirmationButtonTapped() {
+        self.onDelete()
     }
     
 }
@@ -41,8 +52,7 @@ struct ItemRowView: View {
             }
             
             Button {
-                //              viewModel.deleteButtonTapped(item: viewModel.item)
-                
+                viewModel.deleteButtonTapped()
             } label: {
                 Image(systemName: "trash.fill")
             }
@@ -51,5 +61,17 @@ struct ItemRowView: View {
         }
         .buttonStyle(.plain)
         .foregroundColor(viewModel.item.status.isInStock ? nil : Color.gray)
+        .alert(
+          self.viewModel.item.name,
+          isPresented: self.$viewModel.deleteItemAlertIsPresented,
+          actions: {
+            Button("Delete", role: .destructive) {
+              self.viewModel.deleteConfirmationButtonTapped()
+            }
+          },
+          message: {
+            Text("Are you sure you want to delete this item?")
+          }
+        )
     }
 }
