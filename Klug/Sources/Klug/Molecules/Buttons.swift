@@ -65,7 +65,7 @@ struct Buttons_Preview: PreviewProvider {
                 print("chicken")
                 
             }
-            .buttonStyle(.social(.apple))
+            .buttonStyle(.bordered)
             
         }
         .previewLayout(.fixed(width: 400, height: 400))

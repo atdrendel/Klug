@@ -30,8 +30,6 @@ public extension Klug {
     }
 }
 
-protocol V: View {}
-
 public extension Klug {
     
     struct TextFieldImageModifier: ViewModifier {
@@ -60,7 +58,7 @@ public extension Klug {
             }
         }
         
-        public func overlay<V>(@ViewBuilder content: () -> V) -> some View where V : View, V: ShapeStyle {
+        public func overlay<V>(alignment: Alignment = .center, @ViewBuilder content: () -> V) -> some View where V : View {
             content()
         }
         
