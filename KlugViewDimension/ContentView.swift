@@ -44,14 +44,25 @@ struct ContentView: View {
 //
 //            )
             
+//            MeasureBehavior(
+//                HStack(spacing: 0) {
+//                Text("some text some text some text some text some text").truncationMode(.middle).lineLimit(1)
+//                Text("chapter1.md").layoutPriority(1)
+//                }
+//            )
+            
             MeasureBehavior(
                 HStack(spacing: 0) {
-                Text("some text some text some text some text some text").truncationMode(.middle).lineLimit(1)
-                Text("chapter1.md").layoutPriority(1)
-                }
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(minWidth: 50)
+                    Rectangle()
+                        .fill(Color.blue)
+                        .frame(maxWidth: 100)
+                        .layoutPriority(1)
+                }.frame(width: 75)
             )
-            
- 
+
         }
     }
 }
