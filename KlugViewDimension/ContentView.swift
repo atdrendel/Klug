@@ -12,12 +12,32 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
+//            MeasureBehavior(
+//                Rectangle()
+//                    .rotation(.degrees(45))
+//                    .fill(Color.red)
+//                    .clipped()
+//                    .frame(width: 100, height: 100)
+//            )
+//
+//            MeasureBehavior(
+//                Rectangle()
+//                    .rotation(.degrees(45))
+//                    .fill(Color.red)
+//                    .mask(Circle())
+//            )
+//
+//            MeasureBehavior(
+//                Rectangle()
+//                    .fill(Color.red)
+//                    .mask(Capsule())
+//            )
+            
             MeasureBehavior(
-                Rectangle()
-                    .rotation(.degrees(45))
-                    .fill(Color.red)
-                    .clipped()
-                    .frame(width: 100, height: 100)
+                HStack {
+                    Text("Hello, World")
+                    Rectangle().fill(.blue).frame(minWidth: 200)
+                }
             )
  
         }
