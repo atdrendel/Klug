@@ -1,7 +1,7 @@
 import UIKit
 import SwiftUI
 
-public enum NettView {
+public enum KlugView {
     case logo
     case button(top: UIView, constant: CGFloat = 32)
 }
@@ -19,21 +19,26 @@ public extension String {
     static let google = "Google"
 }
 
-struct MeasureBehavior<Content: View>: View {
-    @State private var width: CGFloat = 100
-    @State private var height: CGFloat = 100
-    var content: Content
-    var body: some View {
-        VStack {
-            content
-                .border(Color.gray)
-                .frame(width: width, height: height)
-                .border(Color.black)
-            Slider(value: $width, in: 0...500)
-            Slider(value: $height, in: 0...200)
+//public extension Klug {
+    public struct MeasureBehavior<Content: View>: View {
+        @State private var width: CGFloat = 100
+        @State private var height: CGFloat = 100
+        var content: Content
+        public init(_ content: Content) {
+            self.content = content
+        }
+        public var body: some View {
+            VStack {
+                content
+                    .border(Color.gray)
+                    .frame(width: width, height: height)
+                    .border(Color.black)
+                Slider(value: $width, in: 0...500)
+                Slider(value: $height, in: 0...200)
+            }
         }
     }
-}
+//}
 
 public extension View {
      func debug() -> Self {
