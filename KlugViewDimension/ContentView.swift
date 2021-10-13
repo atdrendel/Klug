@@ -35,10 +35,16 @@ struct ContentView: View {
             
             MeasureBehavior(
                 HStack {
-                    Text("Hello, World")
-                    Rectangle().fill(.blue).frame(minWidth: 200)
+                    Text("Hello, World, World")
+                        .layoutPriority(1)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    Rectangle().fill(.blue).frame(minWidth: 50)
                 }
+                    
             )
+            
+            
  
         }
     }
