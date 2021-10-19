@@ -3,8 +3,11 @@ import SwiftUI
 class ItemRowViewModel: Identifiable, ObservableObject {
     
     var id: Item.ID { self.item.id }
-    @Published var deleteItemAlertIsPresented: Bool
+//    @Published var deleteItemAlertIsPresented: Bool
     @Published var item: Item
+//    @Published var itemToEdit: Item?
+//    @Published var itemToDuplicate: Item?
+    
     var onDelete: () -> Void = { }
 
     
