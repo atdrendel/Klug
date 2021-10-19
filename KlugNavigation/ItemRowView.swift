@@ -20,15 +20,15 @@ class ItemRowViewModel: Identifiable, ObservableObject {
 
     
     init(
-        deleteItemAlertIsPresented: Bool = false,
-        item: Item
+      item: Item,
+      route: Route? = nil
     ) {
-        self.deleteItemAlertIsPresented = deleteItemAlertIsPresented
-        self.item = item
+      self.item = item
+      self.route = route
     }
     
     func deleteButtonTapped() {
-      self.deleteItemAlertIsPresented = true
+      self.route = .deleteAlert
     }
     
     func deleteConfirmationButtonTapped() {
@@ -74,7 +74,20 @@ struct ItemRowView: View {
         .foregroundColor(viewModel.item.status.isInStock ? nil : Color.gray)
         .alert(
           self.viewModel.item.name,
-          isPresented: self.$viewModel.deleteItemAlertIsPresented,
+          isPresented: Binding(
+            get: {
+              if case .some(.deleteAlert) = self.viewModel.route {
+                return true
+              } else {
+                return false
+              }
+            },
+            set: { isPresented in
+              if !isPresented {
+                self.viewModel.route = nil
+              }
+            }
+          ),
           actions: {
             Button("Delete", role: .destructive) {
               self.viewModel.deleteConfirmationButtonTapped()
