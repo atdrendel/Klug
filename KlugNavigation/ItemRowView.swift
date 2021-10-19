@@ -1,4 +1,5 @@
 import SwiftUI
+import CasePaths
 
 class ItemRowViewModel: Identifiable, ObservableObject {
     
@@ -27,12 +28,25 @@ class ItemRowViewModel: Identifiable, ObservableObject {
       self.route = route
     }
     
+    func editButtonTapped() {
+      self.route = .edit(self.item)
+    }
+    
     func deleteButtonTapped() {
       self.route = .deleteAlert
     }
     
     func deleteConfirmationButtonTapped() {
         self.onDelete()
+    }
+    
+    func edit(item: Item) {
+      self.item = item
+      self.route = nil
+    }
+
+    func cancelButtonTapped() {
+      self.route = nil
     }
     
 }
@@ -62,6 +76,11 @@ struct ItemRowView: View {
                     .border(Color.black, width: 1)
             }
             
+            Button(action: { self.viewModel.editButtonTapped() }) {
+              Image(systemName: "pencil")
+            }
+            .padding(.leading)
+            
             Button {
                 viewModel.deleteButtonTapped()
             } label: {
@@ -70,32 +89,39 @@ struct ItemRowView: View {
             .padding(.leading)
             
         }
-        .buttonStyle(.plain)
-        .foregroundColor(viewModel.item.status.isInStock ? nil : Color.gray)
+    //b    .buttonStyle(.plain)
+    //    .foregroundColor(viewModel.item.status.isInStock ? nil : Color.gray)
         .alert(
           self.viewModel.item.name,
-          isPresented: Binding(
-            get: {
-              if case .some(.deleteAlert) = self.viewModel.route {
-                return true
-              } else {
-                return false
-              }
-            },
-            set: { isPresented in
-              if !isPresented {
-                self.viewModel.route = nil
-              }
-            }
-          ),
+          isPresented: self.$viewModel.route.isPresent(/ItemRowViewModel.Route.deleteAlert),
           actions: {
             Button("Delete", role: .destructive) {
-              self.viewModel.deleteConfirmationButtonTapped()
+              self.viewModel.delete()
             }
           },
           message: {
             Text("Are you sure you want to delete this item?")
           }
         )
+        .sheet(
+            unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit)
+          ) { $item in
+            NavigationView {
+              ItemView(item: $item)
+                .toolbar {
+                  ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                      self.viewModel.cancelButtonTapped()
+                    }
+                  }
+                  ToolbarItem(placement: .primaryAction) {
+                    Button("Save") {
+                      self.viewModel.edit(item: item)
+                    }
+                  }
+                }
+                .navigationBarTitle("Edit")
+            }
+          }
     }
 }
