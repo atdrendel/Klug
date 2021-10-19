@@ -9,6 +9,14 @@ class ItemRowViewModel: Identifiable, ObservableObject {
 //    @Published var itemToDuplicate: Item?
     
     var onDelete: () -> Void = { }
+    
+    @Published var route: Route?
+
+     enum Route {
+       case deleteAlert
+       case duplicate(Item)
+       case edit(Item)
+     }
 
     
     init(
