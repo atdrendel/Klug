@@ -96,7 +96,7 @@ struct ItemRowView: View {
           isPresented: self.$viewModel.route.isPresent(/ItemRowViewModel.Route.deleteAlert),
           actions: {
             Button("Delete", role: .destructive) {
-              self.viewModel.delete()
+              self.viewModel.onDelete()
             }
           },
           message: {
