@@ -1,10 +1,3 @@
-//
-//  SwiftUIHelpers.swift
-//  KlugNavigation
-//
-//  Created by Evans Domina Attafuah on 09/10/2021.
-//
-
 import SwiftUI
 import CasePaths
 

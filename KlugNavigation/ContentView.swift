@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  KlugNavigation
-//
-//  Created by Evans Domina Attafuah on 06/10/2021.
-//
-
 import SwiftUI
 
 enum Tab {

@@ -1,10 +1,3 @@
-//
-//  Inventory.swift
-//  KlugNavigation
-//
-//  Created by Evans Domina Attafuah on 07/10/2021.
-//
-
 import SwiftUI
 import IdentifiedCollections
 import Foundation
