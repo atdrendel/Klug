@@ -9,7 +9,6 @@ import SwiftUI
 import IdentifiedCollections
 import Foundation
 
-
 struct Item: Equatable, Identifiable {
     let id = UUID()
     var name: String
@@ -52,6 +51,12 @@ struct Item: Equatable, Identifiable {
             .init(red: self.red, green: self.green, blue: self.blue)
         }
     }
+}
+
+extension Item {
+  func duplicate() -> Self {
+    .init(name: self.name, color: self.color, status: self.status)
+  }
 }
 
 

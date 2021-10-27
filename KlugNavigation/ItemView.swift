@@ -1,8 +1,6 @@
 import SwiftUI
 import CasePaths
 
-
-
 struct ItemView: View {
     //2-way communication
     @Binding var item: Item

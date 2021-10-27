@@ -19,7 +19,6 @@ class ItemRowViewModel: Identifiable, ObservableObject {
        case edit(Item)
      }
 
-    
     init(
       item: Item,
       route: Route? = nil
@@ -76,6 +75,11 @@ struct ItemRowView: View {
                     .border(Color.black, width: 1)
             }
             
+            Button(action: { self.viewModel.duplicateButtonTapped() }) {
+              Image(systemName: "square.fill.on.square.fill")
+            }
+            .padding(.leading)
+            
             Button(action: { self.viewModel.editButtonTapped() }) {
               Image(systemName: "pencil")
             }
@@ -122,6 +126,27 @@ struct ItemRowView: View {
                 }
                 .navigationBarTitle("Edit")
             }
+          }
+            .popover(
+            unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.duplicate)
+          ) { $item in
+            NavigationView {
+              ItemView(item: $item)
+                .navigationBarTitle("Duplicate")
+                .toolbar {
+                  ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                      self.viewModel.cancelButtonTapped()
+                    }
+                  }
+                  ToolbarItem(placement: .primaryAction) {
+                    Button("Add") {
+                      self.viewModel.duplicate(item: item)
+                    }
+                  }
+                }
+            }
+            .frame(minWidth: 300, minHeight: 500)
           }
     }
 }

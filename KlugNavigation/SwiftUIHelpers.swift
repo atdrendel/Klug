@@ -20,6 +20,7 @@ public extension Binding {
             }
         )
     }
+    
 }
 
 extension Binding {
@@ -156,6 +157,7 @@ struct IfCaseLet<Enum, Case, Content>: View where Content: View {
 //}
 
 extension View {
+    
     func sheet<Value, Content>(
         unwrap optionalValue: Binding<Value?>,
         @ViewBuilder content: @escaping (Binding<Value>) -> Content
@@ -177,4 +179,5 @@ extension View {
             }
         }
     }
+    
 }
