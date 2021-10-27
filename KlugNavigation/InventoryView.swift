@@ -54,9 +54,9 @@ struct Item: Equatable, Identifiable {
 }
 
 extension Item {
-  func duplicate() -> Self {
-    .init(name: self.name, color: self.color, status: self.status)
-  }
+    func duplicate() -> Self {
+        .init(name: self.name, color: self.color, status: self.status)
+    }
 }
 
 
@@ -85,6 +85,11 @@ class InventoryViewModel: ObservableObject {
         itemRowViewModel.onDelete = { [weak self, id = itemRowViewModel.id] in
             _ = withAnimation {
                 self?.inventory.remove(id: id)
+            }
+        }
+        itemRowViewModel.onDuplicate = { [weak self] item in
+            withAnimation {
+                self?.add(item: item)
             }
         }
         self.inventory.append(itemRowViewModel)
