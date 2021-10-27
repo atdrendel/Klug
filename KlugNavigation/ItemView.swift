@@ -41,6 +41,7 @@ struct ItemView: View {
                     }
                 }
             }
+            
             IfCaseLet(self.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
                 Section(header: Text("Out of stock")) {
                     Toggle("Is on back order?", isOn: $isOnBackOrder)
@@ -49,6 +50,7 @@ struct ItemView: View {
                     }
                 }
             }
+            
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
@@ -70,7 +72,7 @@ struct ItemView_Previews: PreviewProvider {
         NavigationView {
             ItemView(item: .init(
                 projectedValue: .constant(.init(name: "", color: .red, status: .inStock(quantity: 2)))
-            )
+               )
             )
         }
     }
