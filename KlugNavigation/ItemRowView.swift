@@ -39,9 +39,16 @@ class ItemRowViewModel: Identifiable, ObservableObject {
         self.onDelete()
     }
     
+    func duplicateButtonTapped() {
+      self.route = .duplicate(self.item.duplicate())
+    }
+    
     func edit(item: Item) {
       self.item = item
       self.route = nil
+    }
+    
+    func duplicate(item: Item) {
     }
 
     func cancelButtonTapped() {
