@@ -48,7 +48,7 @@ struct ItemView: View {
                         self.item.status = .inStock(quantity: 1)
                     }
                 }
-            }   
+            }
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
