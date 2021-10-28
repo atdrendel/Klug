@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  KlugViewDimension
-//
-//  Created by Evans Domina Attafuah on 13/10/2021.
-//
-
 import SwiftUI
 import Klug
 
