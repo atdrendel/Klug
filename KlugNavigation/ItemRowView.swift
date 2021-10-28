@@ -65,7 +65,8 @@ struct ItemRowView: View {
     @ObservedObject var viewModel: ItemRowViewModel
     
     var body: some View {
-        HStack {
+        NavigationLink(destination: {})
+        { HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.item.name)
                 
@@ -91,10 +92,10 @@ struct ItemRowView: View {
             }
             .padding(.leading)
             
-//            Button(action: { self.viewModel.editButtonTapped() }) {
-//                Image(systemName: "pencil")
-//            }
-//            .padding(.leading)
+            //            Button(action: { self.viewModel.editButtonTapped() }) {
+            //                Image(systemName: "pencil")
+            //            }
+            //            .padding(.leading)
             
             Button {
                 viewModel.deleteButtonTapped()
@@ -118,26 +119,26 @@ struct ItemRowView: View {
                 Text("Are you sure you want to delete this item?")
             }
         )
-//        .sheet(
-//            unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit)
-//        ) { $item in
-//            NavigationView {
-//                ItemView(item: $item)
-//                    .toolbar {
-//                        ToolbarItem(placement: .cancellationAction) {
-//                            Button("Cancel") {
-//                                self.viewModel.cancelButtonTapped()
-//                            }
-//                        }
-//                        ToolbarItem(placement: .primaryAction) {
-//                            Button("Save") {
-//                                self.viewModel.edit(item: item)
-//                            }
-//                        }
-//                    }
-//                    .navigationBarTitle("Edit")
-//            }
-//        }
+            //        .sheet(
+            //            unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit)
+            //        ) { $item in
+            //            NavigationView {
+            //                ItemView(item: $item)
+            //                    .toolbar {
+            //                        ToolbarItem(placement: .cancellationAction) {
+            //                            Button("Cancel") {
+            //                                self.viewModel.cancelButtonTapped()
+            //                            }
+            //                        }
+            //                        ToolbarItem(placement: .primaryAction) {
+            //                            Button("Save") {
+            //                                self.viewModel.edit(item: item)
+            //                            }
+            //                        }
+            //                    }
+            //                    .navigationBarTitle("Edit")
+            //            }
+            //        }
         .popover(
             unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.duplicate)
         ) { $item in
@@ -158,6 +159,7 @@ struct ItemRowView: View {
                     }
             }
             .frame(minWidth: 300, minHeight: 500)
+        }
         }
     }
 }
