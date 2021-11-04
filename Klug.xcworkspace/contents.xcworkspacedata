@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:KlugExample.xcodeproj">
+      location = "group:Klug">
    </FileRef>
    <FileRef
-      location = "group:Klug">
+      location = "group:KlugExample.xcodeproj">
    </FileRef>
 </Workspace>
