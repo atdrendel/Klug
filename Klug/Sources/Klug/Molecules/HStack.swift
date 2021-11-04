@@ -1,8 +1,8 @@
 import SwiftUI
 
-typealias _conditionalText = _ConditionalContent<SecureField<Text>, TextField<Text>>
+public extension Klug {
 
-func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  _conditionalText {
+    static func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  Klug.AccessoryConditionalContent {
     let textField = TextField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
     let secureTextField = SecureField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
     
@@ -10,10 +10,11 @@ func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: Localized
     ViewBuilder.buildEither(first: secureTextField) :
     ViewBuilder.buildEither(second: textField)
 }
+}
 
 extension Klug {
 public struct _TextField {
-    func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  _conditionalText {
+    func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  Klug.AccessoryConditionalContent {
         let textField = TextField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
         let secureTextField = SecureField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
         return isSecureText.wrappedValue ?
@@ -31,11 +32,12 @@ public extension HStack where Content == Klug.AccessoryView {
     ) {
         self.init(alignment: .center, spacing: 10) {
             image.modifier(Klug.TextFieldImageModifier())
-            _textfield(isSecureText, textfield)
+            Klug._textfield(isSecureText, textfield)
             accessoryView
         }
     }
 }
+
 public extension HStack where Content == Klug.AccessoryViewImage {
     init(
         _ image: Image,

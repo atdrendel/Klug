@@ -1,8 +1,5 @@
 import SwiftUI
 
-public extension Klug.CustomView where Content == Image {}
-public extension Klug.CustomView where Content == Rectangle {}
-public extension Klug.CustomView where Content == Circle {}
 public extension Klug {
     
     struct CustomView<Content:View> : View {
@@ -48,7 +45,7 @@ public extension Klug {
     
     typealias AccessoryView = TupleView<(AccessoryModifiedContent, AccessoryConditionalContent, AccessoryViewType)>
     typealias AccessoryViewImage = TupleView<(AccessoryModifiedContent, AccessoryConditionalContent, Image)>
-    typealias AccessoryViewRectangle = TupleView<(AccessoryModifiedContent, AccessoryConditionalContent, AccessoryShapeType)>
+    typealias AccessoryViewShape = TupleView<(AccessoryModifiedContent, AccessoryConditionalContent, AccessoryShapeType)>
 
     enum AccessoryViewType: View {
         case password(_ action: (Bool) -> ())
