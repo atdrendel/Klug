@@ -1,17 +1,8 @@
-//
-//  ContentView.swift
-//  Example
-//
-//  Created by Evans Domina Attafuah on 04/09/2021.
-//
-
 import SwiftUI
 import Klug
 import Relative
 
-
-
-extension String {
+public extension String {
     enum Account: String {
         case email = "bell.fill"
         case password = "key.fill"
