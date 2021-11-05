@@ -50,6 +50,21 @@ public extension HStack where Content == Klug.AccessoryViewImage {
     }
 }
 
+public extension HStack where Content == Klug.AccessoryViewShape {
+    init(
+        _ image: Image,
+        _ isSecureText: Binding<Bool>,
+        _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?),
+        _ accessoryShape: Klug.AccessoryShapeType = .circle(.black)
+    ) {
+        self.init(alignment: .center, spacing: 10) {
+            image.modifier(Klug.TextFieldImageModifier())
+            Klug._TextField(isSecureText, textfield)
+            accessoryShape
+        }
+    }
+}
+
 struct HStack_Preview: PreviewProvider {
     @State static var isSecureText = true
     static var previews: some View {
