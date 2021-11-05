@@ -60,13 +60,15 @@ public extension Klug {
     }
     
     enum AccessoryShapeType: View {
-        case circle(color: Color)
-        case rectangle(color: Color)
+        case circle(_ color: Color)
+        case rectangle(_ color: Color)
         
         public var body: some View {
             switch self {
-            case let circle(color) : Circle().fill(color)
-            case let rectangle(color) : Rectangle().fill(color)
+            case let .circle(color) : Circle().fill(color).frame(width: 10, height: 10, alignment: .center)
+            case let .rectangle(color) :    RoundedRectangle(cornerRadius: 6)
+                    .fill(color)
+                    .frame(width: 20, height: 20)
             }
         }
     }
