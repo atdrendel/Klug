@@ -29,7 +29,7 @@ public extension HStack where Content == Klug.AccessoryView {
     ) {
         self.init(alignment: .center, spacing: 10) {
             image.modifier(Klug.TextFieldImageModifier())
-            Klug._textfield(isSecureText, textfield)
+            Klug._TextField(isSecureText, textfield)
             accessoryView
         }
     }
@@ -44,7 +44,7 @@ public extension HStack where Content == Klug.AccessoryViewImage {
     ) {
         self.init(alignment: .center, spacing: 10) {
             image.modifier(Klug.TextFieldImageModifier())
-            _textfield(isSecureText, textfield)
+            Klug._TextField(isSecureText, textfield)
             imageAccessory
         }
     }
