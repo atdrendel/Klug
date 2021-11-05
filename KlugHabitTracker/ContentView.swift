@@ -6,27 +6,38 @@
 //
 
 import SwiftUI
+import Klug
 
 struct ContentView: View {
     var body: some View {
         NavigationView {
             
-            HStack(alignment: .bottom) {
+            HStack() {
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: -25) {
                     
+                    Text("Today").font(.largeTitle).fontWeight(.bold)
+                        .offset(y:-45)
+                        .foregroundColor(.green)
+                    
+                    Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                        
+                    }
+                    .buttonStyle(.plain)
+
                    
                     Spacer()
                 }
-                .padding(.leading, 30)
-                .padding(.top, 20)
+              .padding(.leading, 18)
+              
+//                .padding(.top, 20)
                 
                 Spacer()
                 
             }.navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                 
                 HStack(spacing: 16) {
-                    Image(systemName: "calendar.circle.fill")
+                    Image(systemName: "graduationcap.circle.fill")
                         .resizable()
                         .frame(width: 30, height: 30, alignment: .leading)
                         .foregroundColor(Color(.black))
@@ -40,7 +51,7 @@ struct ContentView: View {
         }.overlay(ZStack {
             Image("JournalEmpty")
                 .resizable()
-                .opacity(0.5)
+                .opacity(1.0)
         })
     }
 }
