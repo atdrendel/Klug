@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  File
-//
-//  Created by Evans Domina Attafuah on 01/09/2021.
-//
-
 import UIKit
 import SwiftUI
 
@@ -12,6 +5,28 @@ public extension Klug {
     
     typealias SocialButtonStyle = Klug.Social.Style
     typealias IconButton = HStack<TupleView<(Image, Text)>>
+    
+    struct Primitive: ButtonStyle {
+        
+        let backgroundColor: Color
+        let borderColor: Color
+        
+        init(_ backgroundColor: Color = .white, _ borderColor: Color = .white) {
+            self.backgroundColor = backgroundColor
+            self.borderColor = borderColor
+        }
+        
+        public func makeBody(configuration: Configuration) -> some View {
+            return configuration.label
+                .frame(height: 10)
+                .padding()
+                .background(backgroundColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14).stroke(borderColor, lineWidth: 1)
+                )
+            
+        }
+    }
 
      struct Social {
         

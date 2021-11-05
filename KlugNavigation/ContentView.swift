@@ -16,7 +16,6 @@ class AppViewModel: ObservableObject {
         self.selectedTab = selectedTab
     }
     
-    
 }
 
 struct ContentView: View {
@@ -59,7 +58,7 @@ struct ContentView_Previews: PreviewProvider {
                         .init(item: Item(name: "Phone", color: .green, status: .outOfStock(isOnBackOrder: true))),
                         .init(item: Item(name: "Headphones", color: .green, status: .outOfStock(isOnBackOrder: false))),
                     ],
-                                              itemToAdd: keyboard),
+                    itemToAdd: keyboard),
                     selectedTab: .inventory
                 )
             )
