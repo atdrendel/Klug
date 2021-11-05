@@ -14,7 +14,7 @@ public extension Klug {
         }
     }
 
-    private struct PasswordView: View {
+    struct _PasswordView: View {
         var action: (Bool) -> ()
         @State private var isPasswordShowing = false
         
