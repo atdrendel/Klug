@@ -56,6 +56,15 @@ extension PrimitiveButtonStyle where Self == Klug.SocialButtonStyle {
     }
 }
 
+extension ButtonStyle where Self == Klug.Primitive {
+    public static var outline: Klug.Primitive {
+        Klug.Primitive(.clear)
+    }
+    public static var filled: Klug.Primitive {
+        Klug.Primitive()
+    }
+}
+
 public extension Button where Label == Klug.IconButton {
     init(icon: Image, title: String, action: @escaping () -> Void) {
         self.init(action: action) {
