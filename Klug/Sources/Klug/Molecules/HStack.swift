@@ -1,28 +1,25 @@
 import SwiftUI
 
 public extension Klug {
-
-    static func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  Klug.AccessoryConditionalContent {
-    let textField = TextField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
-    let secureTextField = SecureField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
     
-    return isSecureText.wrappedValue ?
-    ViewBuilder.buildEither(first: secureTextField) :
-    ViewBuilder.buildEither(second: textField)
-}
-}
-
-extension Klug {
-public struct _TextField {
-    func _textfield(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) ->  Klug.AccessoryConditionalContent {
-        let textField = TextField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
-        let secureTextField = SecureField(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
-        return isSecureText.wrappedValue ?
-        ViewBuilder.buildEither(first: secureTextField) :
-        ViewBuilder.buildEither(second: textField)
+     struct _TextField: View {
+         
+        private var isSecureText: Binding<Bool>
+        private var textField: TextField<Text>
+        private var secureTextField: SecureField<Text>
+         
+        public init(_ isSecureText: Binding<Bool>, _ textfield: (titleKey: LocalizedStringKey, text: Binding<String>, prompt: Text?)) {
+            self.isSecureText = isSecureText
+            self.textField = .init(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
+            self.secureTextField = .init(textfield.titleKey, text: textfield.text, prompt: textfield.prompt)
+        }
+        
+        public var body: some View {
+            isSecureText.wrappedValue ? ViewBuilder.buildEither(first: secureTextField) : ViewBuilder.buildEither(second: textField)
+        }
     }
 }
-}
+
 public extension HStack where Content == Klug.AccessoryView {
     init(
         _ image: Image,
