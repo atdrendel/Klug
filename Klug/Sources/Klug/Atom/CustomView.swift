@@ -32,7 +32,7 @@ public extension Klug {
 
 public extension Klug {
     
-    struct TextFieldImageModifier: ViewModifier {
+    struct _TextFieldImageModifier: ViewModifier {
         public func body(content: Content) -> some View {
             content
                 .opacity(0.8)
@@ -40,7 +40,7 @@ public extension Klug {
         }
     }
     
-    typealias AccessoryModifiedContent = ModifiedContent<Image, TextFieldImageModifier>
+    typealias AccessoryModifiedContent = ModifiedContent<Image, _TextFieldImageModifier>
     typealias AccessoryConditionalContent = _ConditionalContent<SecureField<Text>, TextField<Text>>
     typealias AccessoryView = TupleView<(AccessoryModifiedContent, _TextField, AccessoryViewType)>
     typealias AccessoryViewImage = TupleView<(AccessoryModifiedContent, _TextField, Image)>
