@@ -47,7 +47,7 @@ struct ContentView: View {
                     (titleKey: "Password", text: .constant(.empty), prompt: nil),
                     .password({isSecureText = $0}))
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
-            
+                
                 HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
                        .rectangle(.blue))
                     .border(.all, .pink)
