@@ -15,6 +15,7 @@ public extension String {
 struct ContentView: View {
     
     @State private var isSecureText = false
+    @State private var password: String = .empty
     
     var body: some View {
         ScrollView {
@@ -44,7 +45,7 @@ struct ContentView: View {
                 HStack(
                     .init(systemName: .init(.password)),
                     $isSecureText,
-                    (titleKey: "Password", text: .constant(.empty), prompt: nil),
+                    (titleKey: "Password", text: $password, prompt: nil),
                     .password({isSecureText = $0}))
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                 
