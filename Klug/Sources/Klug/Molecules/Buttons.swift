@@ -95,6 +95,7 @@ struct Buttons_Preview: PreviewProvider {
                 
             }, label: {
                 Text("All Habits")
+                    .font(.caption)
             })
             .buttonStyle(.outline)
             

@@ -68,10 +68,9 @@ public extension HStack where Content == Klug.AccessoryViewShape {
 }
 
 struct HStack_Preview: PreviewProvider {
-    @State static var isSecureText = true
     static var previews: some View {
-        
-        VStack {
+        @State var isSecureText = true
+        return VStack {
             
             HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil), .password({isSecureText = $0}))
                 .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
