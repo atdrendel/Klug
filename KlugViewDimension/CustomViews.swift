@@ -17,7 +17,7 @@ struct CustomViews: View {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             }
             
-//            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).modifier(CircleModifier())
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).modifier(CircleModifier())
             
         }
     }
@@ -61,14 +61,14 @@ struct CircleWrapper<Content: View>: View {
     }
 }
 
-//struct CircleModifier: ViewModifier {
-//    var foreground = Color.white
-//    var background = Color.blue
-//    func body(content: Content) -> some View {
-//        Circle()
-//            .fill(background)
-//            .overlay(Circle().strokeBorder(foreground).padding(3))
-//            .overlay(content.foregroundColor(foreground))
-//            .frame(width: 75, height: 75)
-//    }
-//}
+struct CircleModifier: ViewModifier {
+    var foreground = Color.white
+    var background = Color.blue
+    func body(content: Content) -> some View {
+        Circle()
+            .fill(background)
+            .overlay(Circle().strokeBorder(foreground).padding(3))
+            .overlay(content.foregroundColor(foreground))
+            .frame(width: 75, height: 75)
+    }
+}
