@@ -8,6 +8,7 @@ struct GridView: View {
             }
         }
         .frame(width: 400)
+        .padding()
     }
 }
 
