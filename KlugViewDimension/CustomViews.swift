@@ -17,7 +17,10 @@ struct CustomViews: View {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             }
             
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).modifier(CircleModifier())
+            Text("Hello")
+                .padding(10)
+                .background(Color.gray)
+                .badge(count: 5)
             
         }
     }
@@ -26,6 +29,7 @@ struct CustomViews: View {
 struct CustomViews_Previews: PreviewProvider {
     static var previews: some View {
         CustomViews()
+            
     }
 }
 
@@ -70,5 +74,24 @@ struct CircleModifier: ViewModifier {
             .overlay(Circle().strokeBorder(foreground).padding(3))
             .overlay(content.foregroundColor(foreground))
             .frame(width: 75, height: 75)
+    }
+}
+
+
+extension View {
+    func badge(count: Int) -> some View {
+        overlay(
+            ZStack {
+                if count != 0 {
+                    Circle()
+                        .fill(Color.red)
+                    Text("\(count)")
+                        .foregroundColor(.white)
+                        .font(.caption)
+                }
+            }
+            .offset(x: 12, y: -12)
+            .frame(width: 24, height: 24)
+        , alignment: .topTrailing)
     }
 }
