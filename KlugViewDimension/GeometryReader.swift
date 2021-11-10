@@ -27,7 +27,11 @@ struct GeometryReaderView: View {
 //                                   height: proxy.size.width)
 //                    })
             
-            TextWithCircle()
+            VStack {
+                TextWithCircle()
+                TextWithCircle()
+                TextWithCircle()
+            }
         }
     }
 }
@@ -50,13 +54,14 @@ struct TextWithCircle: View {
     @State private var width: CGFloat? = nil
     var body: some View {
         Text("Hello, world")
+            .padding()
             .background(GeometryReader { proxy in
-                EmptyView().preference(key: WidthKey.self, value: proxy.size.width)
+                Color.clear.preference(key: WidthKey.self, value: proxy.size.width)
             })
             .onPreferenceChange(WidthKey.self) {
                 self.width = $0
             }
             .frame(width: width, height: width)
-             .background(Circle().fill(.blue))
+            .background(Circle().fill(.blue))
     }
 }
