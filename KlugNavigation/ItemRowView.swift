@@ -28,12 +28,12 @@ class ItemRowViewModel: Identifiable, ObservableObject {
         self.route = route
     }
     
-//    func editButtonTapped() {
-//        self.route = .edit(self.item)
-//    }
+    //    func editButtonTapped() {
+    //        self.route = .edit(self.item)
+    //    }
     
     func setEditNavigation(isActive: Bool) {
-      self.route = isActive ? .edit(self.item) : nil
+        self.route = isActive ? .edit(self.item) : nil
     }
     
     func deleteButtonTapped() {
@@ -81,8 +81,21 @@ struct ItemRowView: View {
             destination: {
                 if let $item = Binding(unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit)) {
                     ItemView(item: $item)
+                        .navigationBarTitle("Edit")
+                        .navigationBarBackButtonHidden(true)
+                        .toolbar {
+                            ToolbarItem(placement: .navigation) {
+                                Button("Cancel") {
+                                    self.viewModel.cancelButtonTapped()
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Save") {
+                                    self.viewModel.edit(item: $item.wrappedValue)
+                                }
+                            }
+                        }
                 }
-                
             }
         )
         { HStack {

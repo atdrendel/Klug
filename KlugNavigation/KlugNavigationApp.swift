@@ -20,5 +20,6 @@ struct KlugNavigationApp: App {
           )
         )
       }
+        
     }
 }

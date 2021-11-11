@@ -52,18 +52,18 @@ struct ItemView: View {
             }
             
         }
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    // self.onCancel()
-                }
-            }
-            ToolbarItem(placement: .primaryAction) {
-                Button("Save") {
-                    //  self.onSave(self.item)
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .cancellationAction) {
+//                Button("Cancel") {
+//                    // self.onCancel()
+//                }
+//            }
+//            ToolbarItem(placement: .primaryAction) {
+//                Button("Save") {
+//                    //  self.onSave(self.item)
+//                }
+//            }
+//        }
     }
 }
 
