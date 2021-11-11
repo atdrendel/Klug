@@ -65,7 +65,9 @@ struct ItemRowView: View {
     @ObservedObject var viewModel: ItemRowViewModel
     
     var body: some View {
-        NavigationLink(destination: {})
+        NavigationLink(destination: {
+            ItemView(item: self.$viewModel.item)
+        })
         { HStack {
             VStack(alignment: .leading) {
                 Text(viewModel.item.name)
