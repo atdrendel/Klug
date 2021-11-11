@@ -11,6 +11,7 @@ class ItemRowViewModel: Identifiable, ObservableObject {
     
     var onDelete: () -> Void = { }
     var onDuplicate: (Item) -> Void = { _ in }
+    @Published var isSaving = false
     
     @Published var route: Route?
     
@@ -32,6 +33,18 @@ class ItemRowViewModel: Identifiable, ObservableObject {
     //        self.route = .edit(self.item)
     //    }
     
+    func edit(item: Item) {
+      self.isSaving = true
+
+      Task { @MainActor in
+        await Task.sleep(NSEC_PER_SEC)
+
+        self.isSaving = false
+        self.item = item
+        self.route = nil
+      }
+    }
+    
     func setEditNavigation(isActive: Bool) {
         self.route = isActive ? .edit(self.item) : nil
     }
@@ -48,10 +61,12 @@ class ItemRowViewModel: Identifiable, ObservableObject {
         self.route = .duplicate(self.item.duplicate())
     }
     
-    func edit(item: Item) {
-        self.item = item
-        self.route = nil
-    }
+//    func edit(item: Item) {
+//        self.item = item
+//        self.route = nil
+//    }
+    
+    
     
     func duplicate(item: Item) {
         self.onDuplicate(item)
@@ -77,16 +92,25 @@ struct ItemRowView: View {
               .navigationBarTitle("Edit")
               .navigationBarBackButtonHidden(true)
               .toolbar {
+                  
                 ToolbarItem(placement: .navigation) {
                   Button("Cancel") {
                     self.viewModel.setEditNavigation(isActive: false)
                   }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                  Button("Save") {
-                    self.viewModel.edit(item: item)
+                  
+                  ToolbarItem(placement: .primaryAction) {
+                      HStack {
+                          if self.viewModel.isSaving {
+                              ProgressView()
+                          }
+                          Button("Save") {
+                              self.viewModel.edit(item: item)
+                          }
+                          .disabled(self.viewModel.isSaving)
+                      }
                   }
-                }
+                  
               }
           }
         )

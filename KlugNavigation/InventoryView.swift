@@ -189,4 +189,5 @@ struct InventoryView_Previews: PreviewProvider {
 }
 
 // ForEach.init:   (Binding<C>,  (Binding<C.Element>) -> some View) -> ForEach
-// sheet(unwrap:): (Binding<V?>, (Binding<V>)         -> some View) -> some View
+// sheet(unwrap:): (Binding<V?>, (Binding<V>) -> some View) -> some View
+//NavLink.init: (Binding<Value?>, (Binding<Value>) -> some View) -> NavLink
