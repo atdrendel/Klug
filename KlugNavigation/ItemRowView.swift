@@ -70,33 +70,24 @@ struct ItemRowView: View {
     
     var body: some View {
         NavigationLink(
-            isActive: .init(
-                get: {
-                    guard case .edit = self.viewModel.route
-                    else { return false }
-                    return true
-                },
-                set: self.viewModel.setEditNavigation(isActive:)
-            ),
-            destination: {
-                if let $item = Binding(unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit)) {
-                    ItemView(item: $item)
-                        .navigationBarTitle("Edit")
-                        .navigationBarBackButtonHidden(true)
-                        .toolbar {
-                            ToolbarItem(placement: .navigation) {
-                                Button("Cancel") {
-                                    self.viewModel.cancelButtonTapped()
-                                }
-                            }
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button("Save") {
-                                    self.viewModel.edit(item: $item.wrappedValue)
-                                }
-                            }
-                        }
+          unwrap: self.$viewModel.route.case(/ItemRowViewModel.Route.edit),
+          destination: { $item in
+            ItemView(item: $item)
+              .navigationBarTitle("Edit")
+              .navigationBarBackButtonHidden(true)
+              .toolbar {
+                ToolbarItem(placement: .navigation) {
+                  Button("Cancel") {
+                    self.viewModel.setEditNavigation(isActive: false)
+                  }
                 }
-            }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                  Button("Save") {
+                    self.viewModel.edit(item: item)
+                  }
+                }
+              }
+          }
         )
         { HStack {
             VStack(alignment: .leading) {
