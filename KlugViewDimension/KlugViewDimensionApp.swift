@@ -4,7 +4,7 @@ import SwiftUI
 struct KlugViewDimensionApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            KlugViewDimension()
         }
     }
 }

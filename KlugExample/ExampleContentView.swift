@@ -49,17 +49,17 @@ struct ExampleContentView: View {
                     .password({isSecureText = $0}))
                     .border(.all, .linearGradient(.init(colors: [.yellow, .red]), startPoint: .top, endPoint: .bottom))
                 
-//                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
-//                       .rectangle(.blue))
-//                    .border(.all, .pink)
-//                
-//                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
-//                       .circle(.green))
-//                    .border(.all, .pink)
-//                
-//                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
-//                       .init(systemName: "swift"))
-//                    .border(.all, .pink)
+                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
+                       .rectangle(.blue))
+                    .border(.all, .pink)
+                
+                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
+                       .circle(.green))
+                    .border(.all, .pink)
+                
+                HStack(.init(systemName: "lock"), $isSecureText, (titleKey: "some text", text: .constant(""), prompt: nil),
+                       .init(systemName: "swift"))
+                    .border(.all, .pink)
                 
             }
             .padding()

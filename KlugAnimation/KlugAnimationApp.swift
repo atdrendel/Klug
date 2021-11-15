@@ -11,7 +11,7 @@ import SwiftUI
 struct KlugAnimationApp: App {
     var body: some Scene {
         WindowGroup {
-            BasicView(basicViewModel: .init())
+            BasicView()
         }
     }
 }

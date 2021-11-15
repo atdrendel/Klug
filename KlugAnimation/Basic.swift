@@ -17,6 +17,10 @@ struct BasicView: View {
     
     @ObservedObject var basicViewModel: BasicViewModel
     
+    init(_ basicViewModel: BasicViewModel = .init()) {
+        self.basicViewModel = basicViewModel
+    }
+    
     var body: some View {
         VStack {
             
@@ -64,6 +68,6 @@ struct BasicView: View {
 
 struct Basic_Previews: PreviewProvider {
     static var previews: some View {
-        BasicView(basicViewModel: .init())
+        BasicView()
     }
 }

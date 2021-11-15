@@ -67,7 +67,7 @@ struct HabitContentView: View {
 
 struct HabitContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HabitContentView()
             .ignoresSafeArea()
     }
 }

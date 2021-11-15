@@ -1,7 +1,7 @@
 import SwiftUI
 import Klug
 
-struct ContentView: View {
+struct KlugViewDimension: View {
     var body: some View {
         VStack {
             
@@ -60,8 +60,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct KlugViewDimension_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        KlugViewDimension()
     }
 }
