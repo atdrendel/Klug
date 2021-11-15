@@ -8,7 +8,7 @@
 import SwiftUI
 import Klug
 
-struct ContentView: View {
+struct HabitContentView: View {
     var body: some View {
         NavigationView {
             
@@ -16,16 +16,25 @@ struct ContentView: View {
                 
                 VStack(alignment: .leading, spacing: -25) {
                     
-                    Text("Today").font(.largeTitle).fontWeight(.bold)
-                        .offset(y:-45)
-                        .foregroundColor(.green)
+                    Text("Today")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
                     
                     Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
                         
                     }
                     .buttonStyle(.plain)
 
-                   
+                    
+                   Spacer()
+                    
+                    ProgressView(value: 1)
+                        .tint(.green)
+                    
+                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+                        .progressViewStyle(.circular)
+
                     Spacer()
                 }
               .padding(.leading, 18)
@@ -51,12 +60,12 @@ struct ContentView: View {
         }.overlay(ZStack {
             Image("JournalEmpty")
                 .resizable()
-                .opacity(1.0)
+                .opacity(0.1)
         })
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HabitContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .ignoresSafeArea()

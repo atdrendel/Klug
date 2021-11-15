@@ -18,7 +18,7 @@ class AppViewModel: ObservableObject {
     
 }
 
-struct ContentView: View {
+struct NavigationContentView: View {
     @ObservedObject var viewModel: AppViewModel
     
     var body: some View {
@@ -46,12 +46,12 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct NavigationContentView_Previews: PreviewProvider {
     static var previews: some View {
         let keyboard = Item(name: "Magic Keyboard", color: .blue, status: .inStock(quantity: 100))
         
         NavigationView {
-            ContentView(
+            NavigationContentView(
                 viewModel: .init(
                     inventoryViewModel: .init(inventory: [
                         .init(item: Item(name: "Charger", color: .yellow, status: .inStock(quantity: 20))),
