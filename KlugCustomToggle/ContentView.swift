@@ -18,11 +18,16 @@ struct ContentView: View {
                     Capsule()
                         .frame(width: 80, height: 44)
                         .foregroundColor(.blue)
-                    Circle()
-                        .frame(width: 40, height: 44)
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.14), radius: 4, x: 0, y: 2)
-                        .offset(x: -18)
+                    ZStack {
+                        Circle()
+                            .frame(width: 40, height: 44)
+                            .foregroundColor(.white)
+                        
+                        Image(systemName: "moon.fill")
+                    }
+                    .shadow(color: .black.opacity(0.14), radius: 4, x: 0, y: 2)
+                    .offset(x: -18)
+                    .padding(24)
                 }
             }
         }
