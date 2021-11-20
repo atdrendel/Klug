@@ -3,7 +3,7 @@ import IdentifiedCollections
 import Foundation
 
 struct Item: Equatable, Identifiable {
-    let id = UUID()
+    let id:String = UUID().uuidString
     var name: String
     var color: Color?
     var status: Status

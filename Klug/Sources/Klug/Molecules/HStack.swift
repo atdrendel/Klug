@@ -84,6 +84,7 @@ struct HStack_Preview: PreviewProvider {
                 .border(.all, .pink)
         }
         .padding()
+        .previewLayout(.fixed(width: 400, height: 100))
         
     }
 }
