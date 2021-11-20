@@ -52,17 +52,15 @@ struct ContentView: View {
                     .shadow(color: .black.opacity(0.14), radius: 4, x: 0, y: 2)
                     .offset(x: toggleOn ? 18 : -18)
                     .padding(24)
-                    .animation(.spring(), value: toggleOn)
                 }
                 .onTapGesture {
-                  //  withAnimation {
+                    withAnimation(.spring(response: 0.60,dampingFraction: 0.5)) {
                         self.toggleOn.toggle()
-                  //  }
+                    }
                 }
             }
         }
         .ignoresSafeArea()
-        .animation(.default, value: toggleOn)
     }
 }
 
