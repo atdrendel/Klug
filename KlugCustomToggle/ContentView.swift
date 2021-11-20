@@ -1,4 +1,5 @@
 import SwiftUI
+import Klug
 
 struct ContentView: View {
     
@@ -9,9 +10,10 @@ struct ContentView: View {
             Color("background")
             VStack {
                 Text("Customize")
-                    .foregroundColor(.white)
+                    .foregroundColor(toggleOn ? .white : .black)
                     .font(.title2)
                     .fontWeight(.bold)
+                
                 
                 Text("Choose your default appearance.")
                     .foregroundColor(.gray)
