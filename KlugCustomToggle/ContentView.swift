@@ -62,6 +62,7 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
+        .animation(.default, value: toggleOn)
     }
 }
 
@@ -69,8 +70,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-            ContentView()
-                .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         }
     }
 }
