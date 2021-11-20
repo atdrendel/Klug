@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var toggleOn = false
+    
     var body: some View {
         ZStack {
             Color("background")
@@ -28,8 +31,14 @@ struct ContentView: View {
                             .foregroundColor(.black)
                     }
                     .shadow(color: .black.opacity(0.14), radius: 4, x: 0, y: 2)
-                    .offset(x: -18)
+                    .offset(x: toggleOn ? 18 : -18)
                     .padding(24)
+                    .animation(.spring(), value: toggleOn)
+                }
+                .onTapGesture {
+                  //  withAnimation {
+                        self.toggleOn.toggle()
+                  //  }
                 }
             }
         }
