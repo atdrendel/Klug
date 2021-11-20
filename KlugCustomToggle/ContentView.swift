@@ -7,12 +7,29 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Color("background")
+            Color(toggleOn ? .black : .purple)
+                .opacity(toggleOn ? 1 : 0.2)
             VStack {
+                
                 Text("Customize")
                     .foregroundColor(toggleOn ? .white : .black)
                     .font(.title2)
                     .fontWeight(.bold)
+                
+                ZStack{
+                    Image("illustrationLight")
+                        .opacity(toggleOn ? 1 : 0)
+                        .rotation3DEffect(
+                            .degrees(toggleOn ? 0 : -180),
+                            axis: (x: 0.0, y: 1.0, z: 0.0)
+                        )
+                    Image("illustrationDark")
+                        .opacity(toggleOn ? 0 : 1)
+                        .rotation3DEffect(
+                            .degrees(toggleOn ? 180 : 0),
+                            axis: (x: 0.0, y: 1.0, z: 0.0)
+                        )
+                }.padding(24)
                 
                 
                 Text("Choose your default appearance.")
@@ -28,7 +45,7 @@ struct ContentView: View {
                             .frame(width: 40, height: 44)
                             .foregroundColor(.white)
                         
-                        Image(systemName: "moon.fill")
+                        Image(systemName: toggleOn ? "moon.fill" : "sun.max.fill")
                             .renderingMode(.template)
                             .foregroundColor(.black)
                     }
