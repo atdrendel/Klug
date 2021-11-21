@@ -78,7 +78,10 @@ public extension Button where Label == Klug.IconButton {
 
 struct Buttons_Preview: PreviewProvider {
     static var previews: some View {
-        Group {
+        buttons
+    }
+    static var buttons: some View {
+        VStack(spacing: 20) {
             
             Button(icon: .google, title: .google) {
                 
@@ -100,8 +103,7 @@ struct Buttons_Preview: PreviewProvider {
             .buttonStyle(.outline)
             
         }
-        .previewLayout(.fixed(width: 400, height: 400))
-        .preferredColorScheme(.dark)
+        .previewLayout(.sizeThatFits)
     }
 }
 
