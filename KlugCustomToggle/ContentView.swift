@@ -6,9 +6,12 @@ struct ContentView: View {
     @State var toggleOn = false
     
     var body: some View {
-        ZStack {
+        
+        ZStack() {
             Color(toggleOn ? .black : .purple)
                 .opacity(toggleOn ? 1 : 0.2)
+                .ignoresSafeArea()
+            
             VStack {
                 
                 Text("Customize")
@@ -54,13 +57,35 @@ struct ContentView: View {
                     .padding(24)
                 }
                 .onTapGesture {
-                    withAnimation(.spring(response: 0.60,dampingFraction: 0.5)) {
+                    withAnimation(.spring(response: 0.60, dampingFraction: 0.5)) {
                         self.toggleOn.toggle()
                     }
                 }
+                Spacer().frame(height: 120)
+                Button(action:{
+                    withAnimation(.spring(response: 0.60, dampingFraction: 0.5)) {
+                        self.toggleOn.toggle()
+                    }
+                }){
+                    HStack{
+                        Text("Continue")
+                            .font(.body)
+                            .fontWeight(.bold)
+                        Image(systemName:"arrow.right")
+                    }
+                }
+                .padding()
+                .background(Color(.white))
+                .foregroundColor(.black)
+                .cornerRadius(40)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color.black.opacity(0.1), lineWidth: 2)
+                )
+                
             }
         }
-        .ignoresSafeArea()
+        
     }
 }
 
