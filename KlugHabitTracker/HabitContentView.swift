@@ -12,55 +12,136 @@ struct HabitContentView: View {
     var body: some View {
         NavigationView {
             
-            HStack() {
+            HStack {
+             
+                VStack {
+                    
+                    
+                    VStack() {
+                        
+                        HStack {
+                            Text("Today")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                            .foregroundColor(.green)
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                                
+                            }
+                            
+                            Button(icon: .init(systemName: "plus"), title: "All Habits") {
+                                
+                            }
+                            
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Spacer()
+
+                    }
+                  .padding(.leading, 18)
+        
                 
-                VStack(alignment: .leading, spacing: -25) {
-                    
-                    Text("Today")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.red)
-                    
-                    Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                    VStack(spacing: 6) {
+                        
+                        Image(systemName: "archivebox")
+                            .font(.system(size: 60))
+                        Text("The start of a better You!")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text("Habits are like dominos. As one is formed, all other will follow!")
+                            .font(.caption)
+                        .multilineTextAlignment(.center)
+                            .frame(width: 200)
+                        
+                        HStack {
+                            
+                            Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                                
+                            }
+                            
+                            Button(icon: .init(systemName: "plus"), title: "All Habits") {
+                                
+                            }
+                            
+                            Button(icon: .init(systemName: "plus"), title: "All Habits") {
+                                
+                            }
+                            
+                        }
+                        .buttonStyle(.plain)
+                        
+                        HStack {
+                            
+                            Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                                
+                            }
+                            
+                            Button(icon: .init(systemName: "plus"), title: "All Habits") {
+                                
+                            }
+                            
+                        }
+                        .buttonStyle(.plain)
                         
                     }
-                    .buttonStyle(.plain)
-
+                    .padding()
+                    .background(.gray.opacity(0.4))
+                    .cornerRadius(4)
                     
-                   Spacer()
                     
-                    ProgressView(value: 1)
-                        .tint(.green)
                     
-                    ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-                        .progressViewStyle(.circular)
-
-                    Spacer()
+                    TabView() {
+                        
+                        Text("Journal")
+                            .tabItem {
+                                Image(systemName: "swift")
+                                Text("Journal")
+                            }
+                        
+                        Text("Progress")
+                            .tabItem {
+                                Image(systemName: "swift")
+                                Text("Progress")
+                            }
+                        
+                        Text("Upgrade")
+                            .tabItem {
+                                Image(systemName: "swift")
+                                Text("Upgrade")
+                            }
+                        
+                        Text("Settings")
+                            .tabItem {
+                                Image(systemName: "swift")
+                                Text("Settings")
+                            }
+                    }
+                    
+                    
                 }
-              .padding(.leading, 18)
-              
-//                .padding(.top, 20)
-                
-                Spacer()
-                
-            }.navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                
-                HStack(spacing: 16) {
-                    Image(systemName: "graduationcap.circle.fill")
-                        .resizable()
-                        .frame(width: 30, height: 30, alignment: .leading)
-                        .foregroundColor(Color(.black))
-                    Image(systemName: "calendar.circle.fill")
-                        .resizable()
-                        .frame(width: 30, height: 30, alignment: .leading)
-                        .foregroundColor(Color(.black))
-                }
+                .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    
+                    HStack(spacing: 16) {
+                        Image(systemName: "graduationcap.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .leading)
+                            .foregroundColor(Color(.black))
+                        Image(systemName: "calendar.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .leading)
+                            .foregroundColor(Color(.black))
+                    }
             }))
+            }
             
         }.overlay(ZStack {
             Image("JournalEmpty")
                 .resizable()
-                .opacity(0.1)
+                .opacity(0.3)
         })
     }
 }
