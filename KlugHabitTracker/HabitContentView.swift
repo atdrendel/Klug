@@ -14,14 +14,14 @@ struct HabitContentView: View {
             
                 VStack {
                     
-                  
+                    NewHabitView()
                     
                     Spacer().frame(height:100)
                     
                     TabView() {
                         
                         VStack {
-                            NewHabitView()
+                        
                             NewHabitEmptyState()
                             AddHabitView()
                         }
