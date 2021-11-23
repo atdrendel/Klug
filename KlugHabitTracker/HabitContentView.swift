@@ -16,16 +16,7 @@ struct HabitContentView: View {
              
                 VStack {
                     
-                    
                     VStack() {
-                        
-                        HStack {
-                            Text("Today")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                            .foregroundColor(.green)
-                            Spacer()
-                        }
                         
                         HStack {
                             Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
@@ -35,11 +26,12 @@ struct HabitContentView: View {
                             Button(icon: .init(systemName: "plus"), title: "All Habits") {
                                 
                             }
+                            Spacer()
                             
                         }
                         .buttonStyle(.plain)
                         
-                        Spacer()
+                      
 
                     }
                   .padding(.leading, 18)
@@ -48,10 +40,13 @@ struct HabitContentView: View {
                     VStack(spacing: 6) {
                         
                         Image(systemName: "archivebox")
-                            .font(.system(size: 60))
+                            .font(.system(size: 50))
+                            .padding(20)
+                        
                         Text("The start of a better You!")
-                            .font(.title2)
+                            .font(.title)
                             .fontWeight(.bold)
+                        
                         Text("Habits are like dominos. As one is formed, all other will follow!")
                             .font(.caption)
                         .multilineTextAlignment(.center)
@@ -123,6 +118,8 @@ struct HabitContentView: View {
                     
                     
                 }
+                .navigationTitle(Text("Today").foregroundColor(.green)
+                )
                 .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                     
                     HStack(spacing: 16) {
