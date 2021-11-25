@@ -8,6 +8,7 @@
 import SwiftUI
 import Klug
 
+
 struct HabitContentView: View {
     
     init() {
@@ -38,7 +39,6 @@ struct HabitContentView: View {
                     
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         
-                        HStack {
                             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                 
                                 Image(systemName: "graduationcap.circle.fill")
@@ -47,7 +47,7 @@ struct HabitContentView: View {
                                 .foregroundColor(Color("blue"))
                                 
                             })
-                        }
+                    
                         
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             
@@ -62,11 +62,11 @@ struct HabitContentView: View {
             }
       
         }
-        //        .overlay(ZStack {
-        //            Image("JournalEmpty")
-        //                .resizable()
-        //                .opacity(0.0)
-        //        })
+                .overlay(ZStack {
+                    Image("JournalEmpty")
+                        .resizable()
+                        .opacity(1)
+                })
     }
 }
 
