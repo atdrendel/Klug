@@ -185,6 +185,13 @@ struct AddHabitView: View {
 }
 
 struct MainTabView: View {
+    init() {
+        let tabbar = UITabBar.appearance()
+        tabbar.backgroundColor = .init(named: "blue")
+        tabbar.barTintColor = .white
+        tabbar.unselectedItemTintColor = .init(named: "gray")
+        tabbar.isTranslucent = false
+    }
     var body: some View {
         TabView() {
             
