@@ -9,6 +9,12 @@ import SwiftUI
 import Klug
 
 struct HabitContentView: View {
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
+    }
     var body: some View {
         NavigationView {
             
@@ -27,10 +33,7 @@ struct HabitContentView: View {
                     
                 }
                 
-                .navigationTitle (
-                    Text("Today")
-                        .foregroundColor(.green)
-                )
+                .navigationTitle("Today")
                 .toolbar{
                     
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
