@@ -11,72 +11,50 @@ import Klug
 struct HabitContentView: View {
     var body: some View {
         NavigationView {
-            
+
+            ZStack {
+                Color("seaBlue")
+                    .ignoresSafeArea()
+                
                 VStack {
-                    
-                    NewHabitView()
-                    
-                    Spacer().frame(height:100)
-                    
-                    TabView() {
                         
-                        VStack {
+                        NewHabitView()
                         
-                            NewHabitEmptyState()
-                            AddHabitView()
+                        Spacer().frame(height:100)
+                        
+                        MainTabView()
+                       
+                        
+                    }
+                   
+                    .navigationTitle (
+                        Text("Today")
+                            .foregroundColor(.green)
+                    )
+                    .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        
+                        HStack(spacing: 16) {
+                            
+                            Image(systemName: "graduationcap.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30, alignment: .leading)
+                                .foregroundColor(Color(.black))
+                            
+                            Image(systemName: "calendar.circle.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30, alignment: .leading)
+                                .foregroundColor(Color(.black))
                         }
-                            .tabItem {
-                                Image(systemName: "swift")
-                                Text("Journal")
-                            }
-                        
-                        Text("Progress")
-                            .tabItem {
-                                Image(systemName: "swift")
-                                Text("Progress")
-                            }
-                        
-                        Text("Upgrade")
-                            .tabItem {
-                                Image(systemName: "swift")
-                                Text("Upgrade")
-                            }
-                        
-                        Text("Settings")
-                            .tabItem {
-                                Image(systemName: "swift")
-                                Text("Settings")
-                            }
-                    }
-                    
-                    
-                }
-                .navigationTitle (
-                    Text("Today")
-                        .foregroundColor(.green)
-                )
-                .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    
-                    HStack(spacing: 16) {
-                        
-                        Image(systemName: "graduationcap.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30, alignment: .leading)
-                            .foregroundColor(Color(.black))
-                        
-                        Image(systemName: "calendar.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30, alignment: .leading)
-                            .foregroundColor(Color(.black))
-                    }
-            }))
+                }))
+            }
             
             
-        }.overlay(ZStack {
-            Image("JournalEmpty")
-                .resizable()
-                .opacity(0.0)
-        })
+        }
+//        .overlay(ZStack {
+//            Image("JournalEmpty")
+//                .resizable()
+//                .opacity(0.0)
+//        })
     }
 }
 
@@ -167,14 +145,14 @@ struct NewHabitEmptyState: View {
             .buttonStyle(.plain)
             .padding(.bottom, 10)
             
-        //    Spacer().frame(height: 120)
+        Spacer().frame(height: 120)
             
             
             
             
         }
         .padding()
-        .background(.gray.opacity(0.4))
+        .background(Color("lightGreen"))
         .cornerRadius(12)
     }
 }
@@ -185,6 +163,7 @@ struct AddHabitView: View {
             HStack {
                 Spacer()
                 Circle()
+                    .fill(Color("blue"))
                     .frame(width: 80, height: 80)
                     .overlay(
                         Image(systemName: "plus")
@@ -197,3 +176,41 @@ struct AddHabitView: View {
         .offset(y: -50)
     }
 }
+
+struct MainTabView: View {
+    var body: some View {
+        TabView() {
+            
+            VStack {
+                
+                NewHabitEmptyState()
+                AddHabitView()
+            }
+            .tabItem {
+                Image(systemName: "swift")
+                Text("Journal")
+            }
+            
+            Text("Progress")
+                .tabItem {
+                    Image(systemName: "swift")
+                    Text("Progress")
+                }
+            
+            Text("Upgrade")
+                .tabItem {
+                    Image(systemName: "swift")
+                    Text("Upgrade")
+                }
+            
+            Text("Settings")
+                .tabItem {
+                    Image(systemName: "swift")
+                    Text("Settings")
+                }
+        }
+    }
+}
+
+
+
