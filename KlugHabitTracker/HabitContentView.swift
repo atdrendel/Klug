@@ -17,35 +17,45 @@ struct HabitContentView: View {
                     .ignoresSafeArea()
                 
                 VStack {
+                    
+                    NewHabitView()
+                    
+                    Spacer().frame(height:100)
+                    
+                    MainTabView()
+                    
+                    
+                }
+                
+                .navigationTitle (
+                    Text("Today")
+                        .foregroundColor(.green)
+                )
+                .toolbar{
+                    
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
                         
-                        NewHabitView()
-                        
-                        Spacer().frame(height:100)
-                        
-                        MainTabView()
-                       
-                        
-                    }
-                   
-                    .navigationTitle (
-                        Text("Today")
-                            .foregroundColor(.green)
-                    )
-                    .navigationBarItems(trailing: Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                        
-                        HStack(spacing: 16) {
-                            
-                            Image(systemName: "graduationcap.circle.fill")
-                                .resizable()
+                        HStack {
+                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                
+                                Image(systemName: "graduationcap.circle.fill")
+                                    .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
-                                .foregroundColor(Color(.black))
+                                .foregroundColor(Color("blue"))
+                                
+                            })
+                        }
+                        
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             
                             Image(systemName: "calendar.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
                                 .foregroundColor(Color(.black))
-                        }
-                }))
+                            
+                        })
+                    }
+                }
             }
       
         }
