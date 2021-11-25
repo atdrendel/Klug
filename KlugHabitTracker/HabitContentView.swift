@@ -11,7 +11,7 @@ import Klug
 struct HabitContentView: View {
     var body: some View {
         NavigationView {
-
+            
             ZStack {
                 Color("seaBlue")
                     .ignoresSafeArea()
@@ -47,14 +47,13 @@ struct HabitContentView: View {
                         }
                 }))
             }
-            
-            
+      
         }
-//        .overlay(ZStack {
-//            Image("JournalEmpty")
-//                .resizable()
-//                .opacity(0.0)
-//        })
+        //        .overlay(ZStack {
+        //            Image("JournalEmpty")
+        //                .resizable()
+        //                .opacity(0.0)
+        //        })
     }
 }
 
@@ -145,9 +144,7 @@ struct NewHabitEmptyState: View {
             .buttonStyle(.plain)
             .padding(.bottom, 10)
             
-        Spacer().frame(height: 120)
-            
-            
+            Spacer().frame(height: 120)
             
             
         }
@@ -164,16 +161,16 @@ struct AddHabitView: View {
                 Spacer()
                 Circle()
                     .fill(Color("blue"))
-                    .frame(width: 80, height: 80)
+                    .frame(width: 60, height: 60)
                     .overlay(
                         Image(systemName: "plus")
-                            .font(.system(size: 30))
+                            .font(.system(size: 26, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                     )
             }
             .padding(.trailing, 40)
         }
-        .offset(y: -50)
+        .offset(y: -40)
     }
 }
 
@@ -185,30 +182,40 @@ struct MainTabView: View {
                 
                 NewHabitEmptyState()
                 AddHabitView()
+                
+                ZStack {
+                    Color("seaBlue")
+                }
+                
             }
+            .background(Color("seaBlue"))
             .tabItem {
-                Image(systemName: "swift")
+                Image(systemName: "square.stack.fill")
                 Text("Journal")
             }
             
+            
+            
             Text("Progress")
                 .tabItem {
-                    Image(systemName: "swift")
+                    Image(systemName: "chart.pie.fill")
                     Text("Progress")
                 }
             
             Text("Upgrade")
                 .tabItem {
-                    Image(systemName: "swift")
+                    Image(systemName: "star.fill")
                     Text("Upgrade")
                 }
             
             Text("Settings")
                 .tabItem {
-                    Image(systemName: "swift")
+                    Image(systemName: "person.circle.fill")
                     Text("Settings")
                 }
         }
+        
+        .accentColor(Color("yellow"))
     }
 }
 
