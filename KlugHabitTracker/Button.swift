@@ -83,7 +83,10 @@ typealias HabitButtonTupleView = TupleView<(Image, HabitText)>
 typealias HabitButton = HStack<HabitButtonTupleView>
 
 extension Text {
-    
+    init(string: String, count: Binding<Int> = .constant(0)) {
+        let _count = count.wrappedValue > 0 ? "\(count.wrappedValue)" : ""
+        self.init("\(string) \(_count)")
+    }
 }
 
 extension Button where Label == HabitButton {
