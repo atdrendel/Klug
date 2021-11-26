@@ -66,22 +66,29 @@ extension ButtonStyle where Self == HabitButtonStyle {
     }
 }
 
-struct HabitButton: View {
-    let buttonStyle: HabitButtonStyle
-    init(_ buttonStyle: HabitButtonStyle) {
-        self.buttonStyle = buttonStyle
-    }
-    var body: some View {
-        Button(action: {}) {
-            HStack {
-                Image(systemName: "mail.stack")
-                Text("All Habits")
-                Text("0")
-            }
-        }
-        .buttonStyle(buttonStyle)
+typealias HabitButton = HStack<TupleView<(Image, Text, Text)>>
+extension Button where Label == HabitButton {
+    init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButton) {
+        self.init(action: action, label: habit)
     }
 }
+
+//struct HabitButton: View {
+//    let buttonStyle: HabitButtonStyle
+//    init(_ buttonStyle: HabitButtonStyle) {
+//        self.buttonStyle = buttonStyle
+//    }
+//    var body: some View {
+//        Button(action: {}) {
+//            HStack {
+//                Image(systemName: "mail.stack")
+//                Text("All Habits")
+//                Text("0")
+//            }
+//        }
+//        .buttonStyle(buttonStyle)
+//    }
+//}
 
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
@@ -91,13 +98,7 @@ struct Button_Previews: PreviewProvider {
                 .resizable()
                 .frame(width: 379, height: 322)
             
-            HabitButton(.primary)
-            
-            HabitButton(.secondary)
-            
-            HabitButton(.accent)
-            
-            HabitButton(.alt)
+           
             
         }
         .padding()
