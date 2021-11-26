@@ -65,7 +65,7 @@ struct HabitContentView: View {
                 .overlay(ZStack {
                     Image("JournalEmpty")
                         .resizable()
-                        .opacity(1)
+                        .opacity(0.1)
                 })
     }
 }

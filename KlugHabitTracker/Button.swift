@@ -15,10 +15,16 @@ struct HabitButtonStyle: ButtonStyle {
             .font(.caption)
             .frame(height:0)
             .padding()
+            .foregroundColor(Color("blue"))
             .background(
                 Capsule()
                 .fill(Color("seaBlue"))
+                    .overlay(
+                        Capsule()
+                            .stroke(Color("green"))
+                    )
             )
+        
             
     }
 }
