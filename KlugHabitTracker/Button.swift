@@ -1,10 +1,3 @@
-//
-//  Button.swift
-//  KlugHabitTracker
-//
-//  Created by Evans Domina Attafuah on 25/11/2021.
-//
-
 import SwiftUI
 
 struct HabitButtonStyle: ButtonStyle {
@@ -116,14 +109,7 @@ extension Button where Label == HabitButton {
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            
-            Button(role: .destructive) {
-                
-            } label: {
-                
-            }
-
-            
+                        
             Image("Buttons")
                 .resizable()
                 .frame(width: 379, height: 322)
@@ -153,14 +139,12 @@ struct Button_Previews: PreviewProvider {
             } habit: {
                 Image(systemName: "mail.stack")
                 Text(habit: "All Habits")
-                
             }
             .buttonStyle(.accent)
             
             Button {
                 
             } habit: {
-              
                 Image(systemName: "list.dash")
                 Text(habit: "Set a To-do List")
                 
