@@ -78,16 +78,15 @@ struct HabitText: View {
     }
 }
 
-
-typealias HabitButtonTupleView = TupleView<(Image, HabitText)>
-typealias HabitButton = HStack<HabitButtonTupleView>
-
 extension Text {
-    init(string: String, count: Binding<Int> = .constant(0)) {
+    init(habit: String, count: Binding<Int> = .constant(0)) {
         let _count = count.wrappedValue > 0 ? "\(count.wrappedValue)" : ""
-        self.init("\(string) \(_count)")
+        self.init("\(habit) \(_count)")
     }
 }
+
+typealias HabitButtonTupleView = TupleView<(Image, Text)>
+typealias HabitButton = HStack<HabitButtonTupleView>
 
 extension Button where Label == HabitButton {
     init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButtonTupleView) {
@@ -132,8 +131,11 @@ struct Button_Previews: PreviewProvider {
             Button {
                 
             } habit: {
-                    Image(systemName: "leaf")
-                HabitText("All Habits")
+                Image(systemName: "leaf")
+                Text(
+                    habit: "All Habits",
+                    count: .constant(1)
+                )
             }
             .buttonStyle(.primary)
             
@@ -141,7 +143,7 @@ struct Button_Previews: PreviewProvider {
                 
             } habit: {
                 Image(systemName: "plus")
-                HabitText("New Area")
+                Text(habit: "New Area")
                 
             }
             .buttonStyle(.secondary)
@@ -150,7 +152,7 @@ struct Button_Previews: PreviewProvider {
                 
             } habit: {
                 Image(systemName: "mail.stack")
-                HabitText("All Habits")
+                Text(habit: "All Habits")
                 
             }
             .buttonStyle(.accent)
@@ -159,8 +161,8 @@ struct Button_Previews: PreviewProvider {
                 
             } habit: {
               
-                    Image(systemName: "list.dash")
-                HabitText("Set a To-do List")
+                Image(systemName: "list.dash")
+                Text(habit: "Set a To-do List")
                 
             }
             .buttonStyle(.alt)
