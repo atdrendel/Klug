@@ -9,25 +9,45 @@ import SwiftUI
 
 struct HabitButtonStyle: ButtonStyle {
     
+    var strokeColor: Color
+    var fillColor: Color
+    var fontColor: Color
+    
     func makeBody(configuration: Self.Configuration)
     -> some View {
         configuration.label
-            .font(.caption)
+            .font(.caption2)
             .frame(height:0)
             .padding()
-            .foregroundColor(Color("blue"))
+            .foregroundColor(fontColor)
             .background(
                 Capsule()
-                .fill(Color("seaBlue"))
+                    .fill(fillColor)
                     .overlay(
                         Capsule()
-                            .stroke(Color("green"))
+                            .stroke(strokeColor)
                     )
             )
-        
-            
     }
 }
+
+//extension ButtonStyle where Self == HabitButtonStyle {
+//
+//    static var primary: Self {
+//        HabitButtonStyle(
+//            strokeColor: <#Color#>,
+//            fillColor: <#Color#>,
+//            fontColor: <#Color#>)
+//    }
+//
+//    static var secondary: Self {
+//        Klug.Primitive()
+//    }
+//
+//    static var secondary: Self {
+//        Klug.Primitive()
+//    }
+//}
 
 struct HabitButton: View {
     var body: some View {
@@ -38,7 +58,10 @@ struct HabitButton: View {
                 Text("0")
             }
         }
-        .buttonStyle(HabitButtonStyle())
+        .buttonStyle(HabitButtonStyle(
+            strokeColor: .init("green"),
+            fillColor: .init("seaBlue"),
+            fontColor: .init("blue")))
     }
 }
 
