@@ -67,11 +67,11 @@ extension ButtonStyle where Self == HabitButtonStyle {
 }
 
 struct HabitText: View {
-    @Binding var count: Int
+    @State var count: Int = 0
     var text: String
-    init(_ text: String, _ count: Binding<Int> = .constant(0)) {
+    init(_ text: String) {
         self.text = text
-        self.count = count.wrappedValue
+        self.count = count
     }
     var body: some View {
         count > 0 ? Text("\(text) \(count)") : Text(text)
@@ -82,7 +82,9 @@ struct HabitText: View {
 typealias HabitButtonTupleView = TupleView<(Image, HabitText)>
 typealias HabitButton = HStack<HabitButtonTupleView>
 
-
+extension Text {
+    
+}
 
 extension Button where Label == HabitButton {
     init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButtonTupleView) {
@@ -128,16 +130,15 @@ struct Button_Previews: PreviewProvider {
                 
             } habit: {
                     Image(systemName: "leaf")
-                HabitText("All Habits", .constant(0))
+                HabitText("All Habits")
             }
             .buttonStyle(.primary)
             
             Button {
                 
             } habit: {
-                    Image(systemName: "plus")
-                    Text("New Area")
-                    Text("0")
+                Image(systemName: "plus")
+                HabitText("New Area")
                 
             }
             .buttonStyle(.secondary)
@@ -145,10 +146,8 @@ struct Button_Previews: PreviewProvider {
             Button {
                 
             } habit: {
-               
-                    Image(systemName: "mail.stack")
-                    Text("All Habits")
-                    Text("0")
+                Image(systemName: "mail.stack")
+                HabitText("All Habits")
                 
             }
             .buttonStyle(.accent)
@@ -158,8 +157,7 @@ struct Button_Previews: PreviewProvider {
             } habit: {
               
                     Image(systemName: "list.dash")
-                    Text("Set a To-do List")
-                    Text("")
+                HabitText("Set a To-do List")
                 
             }
             .buttonStyle(.alt)
