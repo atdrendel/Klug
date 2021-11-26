@@ -31,23 +31,40 @@ struct HabitButtonStyle: ButtonStyle {
     }
 }
 
-//extension ButtonStyle where Self == HabitButtonStyle {
-//
-//    static var primary: Self {
-//        HabitButtonStyle(
-//            strokeColor: <#Color#>,
-//            fillColor: <#Color#>,
-//            fontColor: <#Color#>)
-//    }
-//
-//    static var secondary: Self {
-//        Klug.Primitive()
-//    }
-//
-//    static var secondary: Self {
-//        Klug.Primitive()
-//    }
-//}
+extension ButtonStyle where Self == HabitButtonStyle {
+    
+    static var primary: Self {
+        HabitButtonStyle(
+            strokeColor: .init("green"),
+            fillColor: .init("seaBlue"),
+            fontColor: .init("blue")
+        )
+    }
+    
+    static var secondary: Self {
+        HabitButtonStyle(
+            strokeColor: .init("green"),
+            fillColor: .init("seaBlue"),
+            fontColor: .init("blue")
+        )
+    }
+    
+    static var accent: Self {
+        HabitButtonStyle(
+            strokeColor: .init("green"),
+            fillColor: .init("seaBlue"),
+            fontColor: .init("blue")
+        )
+    }
+    
+    static var alt: Self {
+        HabitButtonStyle(
+            strokeColor: .init("green"),
+            fillColor: .init("seaBlue"),
+            fontColor: .init("blue")
+        )
+    }
+}
 
 struct HabitButton: View {
     var body: some View {
@@ -61,7 +78,9 @@ struct HabitButton: View {
         .buttonStyle(HabitButtonStyle(
             strokeColor: .init("green"),
             fillColor: .init("seaBlue"),
-            fontColor: .init("blue")))
+            fontColor: .init("blue")
+        )
+        )
     }
 }
 
