@@ -60,16 +60,35 @@ extension ButtonStyle where Self == HabitButtonStyle {
     static var alt: Self {
         HabitButtonStyle(
             strokeColor: .init("green"),
-            fillColor: .init("seaBlue"),
+            fillColor: .init("lightGreen"),
             fontColor: .init("green")
         )
     }
 }
 
-typealias HabitButton = HStack<TupleView<(Image, Text, Text)>>
+struct HabitText: View {
+    @Binding var count: Int
+    var text: String
+    init(_ text: String, _ count: Binding<Int> = .constant(0)) {
+        self.text = text
+        self.count = count.wrappedValue
+    }
+    var body: some View {
+        count > 0 ? Text("\(text) \(count)") : Text(text)
+    }
+}
+
+
+typealias HabitButtonTupleView = TupleView<(Image, HabitText)>
+typealias HabitButton = HStack<HabitButtonTupleView>
+
+
+
 extension Button where Label == HabitButton {
-    init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButton) {
-        self.init(action: action, label: habit)
+    init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButtonTupleView) {
+        self.init(action: action) {
+            HStack(content: habit)
+        }
     }
 }
 
@@ -94,6 +113,13 @@ struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             
+            Button(role: .destructive) {
+                
+            } label: {
+                
+            }
+
+            
             Image("Buttons")
                 .resizable()
                 .frame(width: 379, height: 322)
@@ -101,44 +127,40 @@ struct Button_Previews: PreviewProvider {
             Button {
                 
             } habit: {
-                HStack {
                     Image(systemName: "leaf")
-                    Text("All Habits")
-                    Text("0")
-                }
+                HabitText("All Habits", .constant(0))
             }
             .buttonStyle(.primary)
             
             Button {
                 
             } habit: {
-                HStack {
                     Image(systemName: "plus")
                     Text("New Area")
                     Text("0")
-                }
+                
             }
             .buttonStyle(.secondary)
             
             Button {
                 
             } habit: {
-                HStack {
+               
                     Image(systemName: "mail.stack")
                     Text("All Habits")
                     Text("0")
-                }
+                
             }
             .buttonStyle(.accent)
             
             Button {
                 
             } habit: {
-                HStack {
+              
                     Image(systemName: "list.dash")
                     Text("Set a To-do List")
                     Text("")
-                }
+                
             }
             .buttonStyle(.alt)
     
