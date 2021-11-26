@@ -35,8 +35,8 @@ extension ButtonStyle where Self == HabitButtonStyle {
     
     static var primary: Self {
         HabitButtonStyle(
-            strokeColor: .init("green"),
-            fillColor: .init("seaBlue"),
+            strokeColor: .clear,
+            fillColor: .init("lightBlue"),
             fontColor: .init("blue")
         )
     }
@@ -44,7 +44,7 @@ extension ButtonStyle where Self == HabitButtonStyle {
     static var secondary: Self {
         HabitButtonStyle(
             strokeColor: .init("green"),
-            fillColor: .init("seaBlue"),
+            fillColor: .init("lightGreen"),
             fontColor: .init("blue")
         )
     }
@@ -67,6 +67,10 @@ extension ButtonStyle where Self == HabitButtonStyle {
 }
 
 struct HabitButton: View {
+    let buttonStyle: HabitButtonStyle
+    init(_ buttonStyle: HabitButtonStyle) {
+        self.buttonStyle = buttonStyle
+    }
     var body: some View {
         Button(action: {}) {
             HStack {
@@ -75,12 +79,7 @@ struct HabitButton: View {
                 Text("0")
             }
         }
-        .buttonStyle(HabitButtonStyle(
-            strokeColor: .init("green"),
-            fillColor: .init("seaBlue"),
-            fontColor: .init("blue")
-        )
-        )
+        .buttonStyle(buttonStyle)
     }
 }
 
@@ -92,10 +91,17 @@ struct Button_Previews: PreviewProvider {
                 .resizable()
                 .frame(width: 379, height: 322)
             
-            HabitButton()
+            HabitButton(.primary)
+            
+            HabitButton(.secondary)
+            
+            HabitButton(.accent)
+            
+            HabitButton(.alt)
             
         }
         .padding()
+        .background(Color("seaBlue"))
         .previewLayout(.sizeThatFits)
     }
 }
