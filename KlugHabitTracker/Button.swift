@@ -27,7 +27,7 @@ struct HabitButtonStyle: ButtonStyle {
 extension ButtonStyle where Self == HabitButtonStyle {
     
     static var primary: Self {
-        HabitButtonStyle(
+        .init(
             strokeColor: .clear,
             fillColor: .init("lightBlue"),
             fontColor: .init("blue")
@@ -35,7 +35,7 @@ extension ButtonStyle where Self == HabitButtonStyle {
     }
     
     static var secondary: Self {
-        HabitButtonStyle(
+        .init(
             strokeColor: .white,
             fillColor: .init("seaBlue"),
             fontColor: .init("blue")
@@ -43,7 +43,7 @@ extension ButtonStyle where Self == HabitButtonStyle {
     }
     
     static var accent: Self {
-        HabitButtonStyle(
+        .init(
             strokeColor: .clear,
             fillColor: .init("lightGreen"),
             fontColor: .init("blue")
@@ -51,7 +51,7 @@ extension ButtonStyle where Self == HabitButtonStyle {
     }
     
     static var alt: Self {
-        HabitButtonStyle(
+        .init(
             strokeColor: .init("green"),
             fillColor: .init("lightGreen"),
             fontColor: .init("green")
@@ -59,22 +59,10 @@ extension ButtonStyle where Self == HabitButtonStyle {
     }
 }
 
-struct HabitText: View {
-    @State var count: Int = 0
-    var text: String
-    init(_ text: String) {
-        self.text = text
-        self.count = count
-    }
-    var body: some View {
-        count > 0 ? Text("\(text) \(count)") : Text(text)
-    }
-}
-
 extension Text {
     init(habit: String, count: Binding<Int> = .constant(0)) {
         let _count = count.wrappedValue > 0 ? "\(count.wrappedValue)" : ""
-        self.init("\(habit) \(_count)")
+        self.init("\(habit)   \(_count)")
     }
 }
 
@@ -138,7 +126,7 @@ struct Button_Previews: PreviewProvider {
                 
             } habit: {
                 Image(systemName: "mail.stack")
-                Text(habit: "All Habits")
+                Text(habit: "All Habits", count: .constant(2))
             }
             .buttonStyle(.accent)
             
