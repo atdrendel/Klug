@@ -43,16 +43,16 @@ extension ButtonStyle where Self == HabitButtonStyle {
     
     static var secondary: Self {
         HabitButtonStyle(
-            strokeColor: .init("green"),
-            fillColor: .init("lightGreen"),
+            strokeColor: .white,
+            fillColor: .init("seaBlue"),
             fontColor: .init("blue")
         )
     }
     
     static var accent: Self {
         HabitButtonStyle(
-            strokeColor: .init("green"),
-            fillColor: .init("seaBlue"),
+            strokeColor: .clear,
+            fillColor: .init("lightGreen"),
             fontColor: .init("blue")
         )
     }
@@ -61,7 +61,7 @@ extension ButtonStyle where Self == HabitButtonStyle {
         HabitButtonStyle(
             strokeColor: .init("green"),
             fillColor: .init("seaBlue"),
-            fontColor: .init("blue")
+            fontColor: .init("green")
         )
     }
 }
