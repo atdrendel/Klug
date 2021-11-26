@@ -98,8 +98,50 @@ struct Button_Previews: PreviewProvider {
                 .resizable()
                 .frame(width: 379, height: 322)
             
-           
+            Button {
+                
+            } habit: {
+                HStack {
+                    Image(systemName: "leaf")
+                    Text("All Habits")
+                    Text("0")
+                }
+            }
+            .buttonStyle(.primary)
             
+            Button {
+                
+            } habit: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("New Area")
+                    Text("0")
+                }
+            }
+            .buttonStyle(.secondary)
+            
+            Button {
+                
+            } habit: {
+                HStack {
+                    Image(systemName: "mail.stack")
+                    Text("All Habits")
+                    Text("0")
+                }
+            }
+            .buttonStyle(.accent)
+            
+            Button {
+                
+            } habit: {
+                HStack {
+                    Image(systemName: "list.dash")
+                    Text("Set a To-do List")
+                    Text("")
+                }
+            }
+            .buttonStyle(.alt)
+    
         }
         .padding()
         .background(Color("seaBlue"))
