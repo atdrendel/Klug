@@ -15,10 +15,10 @@ struct HabitButtonStyle: ButtonStyle {
             .foregroundColor(fontColor)
             .background(
                 Capsule()
-                    .fill(fillColor)
+                    .fill(configuration.isPressed ? fillColor.opacity(0.4) : fillColor.opacity(1))
                     .overlay(
                         Capsule()
-                            .stroke(strokeColor)
+                            .stroke(configuration.isPressed ? strokeColor.opacity(0.4) : strokeColor.opacity(1))
                     )
             )
     }
