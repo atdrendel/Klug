@@ -178,20 +178,37 @@ struct NewHabitEmptyState: View {
 
 struct AddHabitView: View {
     var body: some View {
-        ZStack() {
-            HStack {
-                Spacer()
-                Circle()
-                    .fill(Color("blue"))
-                    .frame(width: 60, height: 60)
-                    .overlay(
-                        Image(systemName: "plus")
-                            .font(.system(size: 26, weight: .semibold, design: .rounded))
-                            .foregroundColor(.white)
-                    )
+        ZStack(alignment: .bottomTrailing) {
+            Button {
+                
+            } label: {
+                HStack {
+                    Spacer()
+                    Circle()
+                        .fill(Color("blue"))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Image(systemName: "plus")
+                                .font(.system(size: 26, weight: .semibold, design: .rounded))
+                                .foregroundColor(.white)
+                        )
+                }
             }
-            .padding(.trailing, 40)
+
+//            HStack {
+//                Spacer()
+//                Circle()
+//                    .fill(Color("blue"))
+//                    .frame(width: 60, height: 60)
+//                    .overlay(
+//                        Image(systemName: "plus")
+//                            .font(.system(size: 26, weight: .semibold, design: .rounded))
+//                            .foregroundColor(.white)
+//                    )
+//            }
+//            .padding(.trailing, 40)
         }
+        .padding(.trailing, 30)
         .offset(y: -40)
     }
 }
@@ -222,7 +239,6 @@ struct MainTabView: View {
                 Image(systemName: "square.stack.fill")
                 Text("Journal")
             }
-            
             
             
             Text("Progress")
