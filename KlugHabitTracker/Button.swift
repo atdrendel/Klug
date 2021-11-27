@@ -15,12 +15,14 @@ struct HabitButtonStyle: ButtonStyle {
             .foregroundColor(fontColor)
             .background(
                 Capsule()
-                    .fill(configuration.isPressed ? fillColor.opacity(0.4) : fillColor.opacity(1))
+                    .fill(configuration.isPressed ? fillColor.opacity(0.3) : fillColor.opacity(1))
                     .overlay(
                         Capsule()
-                            .stroke(configuration.isPressed ? strokeColor.opacity(0.4) : strokeColor.opacity(1))
+                            .stroke(configuration.isPressed ? strokeColor.opacity(0.3) : strokeColor.opacity(1))
                     )
             )
+            .scaleEffect(.init(configuration.isPressed ? 0.8 : 1))
+            .animation(.easeOut, value: configuration.isPressed)
     }
 }
 

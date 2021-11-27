@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  KlugHabitTracker
-//
-//  Created by Evans Domina Attafuah on 05/11/2021.
-//
-
 import SwiftUI
 import Klug
 
@@ -65,7 +58,7 @@ struct HabitContentView: View {
                 .overlay(ZStack {
                     Image("JournalEmpty")
                         .resizable()
-                        .opacity(0.1)
+                        .opacity(0.0)
                 })
     }
 }
@@ -83,13 +76,25 @@ struct NewHabitView: View {
             
             HStack {
                 
-                Button(icon: .init(systemName: "mail.stack"), title: "All Habits") {
+                Button {
                     
+                } habit: {
+                    Image(systemName: "leaf")
+                    Text(
+                        habit: "All Habits",
+                        count: .constant(1)
+                    )
                 }
+                .buttonStyle(.primary)
                 
-                Button(icon: .init(systemName: "plus"), title: "New Area") {
+                Button {
+                    
+                } habit: {
+                    Image(systemName: "plus")
+                    Text(habit: "New Area")
                     
                 }
+                .buttonStyle(.secondary)
                 
                 Spacer()
                 
@@ -104,6 +109,7 @@ struct NewHabitView: View {
 }
 
 struct NewHabitEmptyState: View {
+    
     var body: some View {
         VStack(spacing: 6) {
             
@@ -113,20 +119,22 @@ struct NewHabitEmptyState: View {
                 .padding(20)
             
             Text("The start of a better You!")
-                .font(.title)
+                .font(.title2)
                 .fontWeight(.bold)
             
             Text("Habits are like dominos. As one is formed, all other will follow!")
-                .font(.title3)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-            
-            
+
             HStack {
                 
                 Button(icon: .init(systemName: "leaf"), title: "Meditate") {
                     
                 }
+                
                 
                 Button(icon: .init(systemName: "list.bullet"), title: "Set a To-do List") {
                     
@@ -137,7 +145,7 @@ struct NewHabitEmptyState: View {
                 }
                 
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.alt)
             .padding(.top, 10)
             
             HStack {
@@ -154,16 +162,17 @@ struct NewHabitEmptyState: View {
                 }
                 
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.alt)
             .padding(.bottom, 10)
             
             Spacer().frame(height: 120)
             
             
         }
-        .padding()
-        .background(Color("lightGreen"))
-        .cornerRadius(12)
+        .background(RoundedRectangle(cornerRadius:15)
+              .fill(Color("lightGreen"))
+            )
+        
     }
 }
 
