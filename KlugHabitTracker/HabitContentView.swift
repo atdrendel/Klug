@@ -2,7 +2,7 @@ import SwiftUI
 import Klug
 
 extension NavigationView {
-    init(titleColor: UIColor, content: () -> Content) {
+    init(_ titleColor: UIColor, content: () -> Content) {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: titleColor]
         
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: titleColor]
@@ -51,8 +51,9 @@ struct HabitContentView: View {
                         })
                         
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(action: {
                             
+                        }, label: {
                             Image(systemName: "calendar.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
@@ -67,7 +68,7 @@ struct HabitContentView: View {
         .sheet(isPresented: $isPresented, onDismiss: {
             
         }) {
-            NavigationView {
+            NavigationView(.black) {
                 NewHabitEmptyState()
                     .navigationTitle("New Habit")
                     .navigationBarTitleDisplayMode(.inline)
