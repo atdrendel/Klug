@@ -1,7 +1,14 @@
 import SwiftUI
 import Klug
 
-
+extension NavigationView {
+    init(titleColor: UIColor, content: () -> Content) {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: titleColor]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: titleColor]
+        self.init(content: content)
+    }
+}
 struct HabitContentView: View {
     
     @State var isPresented = true
@@ -69,13 +76,10 @@ struct HabitContentView: View {
                             Button {
                                 
                             } label: {
-                                Image(systemName: "swift")
-                                    .foregroundColor(.white)
+                                Image(systemName: "xmark.circle.fill").resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.init("blue"))
                             }
-                            .background(
-                                Circle().fill(Color("blue"))
-                            )
-                            .padding()
 
                         }
                     }
