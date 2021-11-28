@@ -8,9 +8,9 @@ struct HabitContentView: View {
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
-        
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
     }
+    
     var body: some View {
         NavigationView {
             
@@ -50,7 +50,7 @@ struct HabitContentView: View {
                             Image(systemName: "calendar.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
-                                .foregroundColor(Color(.black))
+                                .foregroundColor(Color("blue"))
                             
                         })
                     }
@@ -61,14 +61,14 @@ struct HabitContentView: View {
         .sheet(isPresented: $isPresented, onDismiss: {
             
         }) {
-            NavigationView(.black) {
+            NavigationView {
                 NewHabitEmptyState()
                     .navigationTitle("New Habit")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
-                                
+                                isPresented = false
                             } label: {
                                 Image(systemName: "xmark.circle.fill").resizable()
                                     .frame(width: 30, height: 30)
