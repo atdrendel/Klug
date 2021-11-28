@@ -100,9 +100,9 @@ struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
                         
-            Image("Buttons")
-                .resizable()
-                .frame(width: 379, height: 322)
+//            Image("Buttons")
+//                .resizable()
+//                .frame(width: 379, height: 322)
             
             Button {
                 

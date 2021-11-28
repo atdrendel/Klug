@@ -4,6 +4,8 @@ import Klug
 
 struct HabitContentView: View {
     
+    @State var isPresented = true
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
         
@@ -32,15 +34,15 @@ struct HabitContentView: View {
                     
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         
-                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                
-                                Image(systemName: "graduationcap.circle.fill")
-                                    .resizable()
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            
+                            Image(systemName: "graduationcap.circle.fill")
+                                .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
                                 .foregroundColor(Color("blue"))
-                                
-                            })
-                    
+                            
+                        })
+                        
                         
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                             
@@ -53,13 +55,41 @@ struct HabitContentView: View {
                     }
                 }
             }
-      
+            
         }
-                .overlay(ZStack {
-                    Image("JournalEmpty")
-                        .resizable()
-                        .opacity(0.0)
-                })
+        .sheet(isPresented: $isPresented, onDismiss: {
+            
+        }) {
+            NavigationView {
+                NewHabitEmptyState()
+                    .navigationTitle("New Habit")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "swift")
+                                    .foregroundColor(.white)
+                            }
+                            .background(
+                                Circle().fill(Color("blue"))
+                            )
+                            .padding()
+
+                        }
+                    }
+            
+            }
+           
+        }
+        .overlay(ZStack {
+            Image("JournalEmpty")
+                .resizable()
+                .opacity(0.0)
+        })
+        
+        
     }
 }
 
@@ -128,7 +158,7 @@ struct NewHabitEmptyState: View {
                 .foregroundColor(.gray)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
-
+            
             HStack {
                 
                 Button(icon: .init(systemName: "leaf"), title: "Meditate") {
@@ -170,8 +200,8 @@ struct NewHabitEmptyState: View {
             
         }
         .background(RoundedRectangle(cornerRadius:15)
-              .fill(Color("lightGreen"))
-            )
+                        .fill(Color("lightGreen"))
+        )
         
     }
 }
@@ -194,23 +224,27 @@ struct AddHabitView: View {
                         )
                 }
             }
-
-//            HStack {
-//                Spacer()
-//                Circle()
-//                    .fill(Color("blue"))
-//                    .frame(width: 60, height: 60)
-//                    .overlay(
-//                        Image(systemName: "plus")
-//                            .font(.system(size: 26, weight: .semibold, design: .rounded))
-//                            .foregroundColor(.white)
-//                    )
-//            }
-//            .padding(.trailing, 40)
+            
+            //            HStack {
+            //                Spacer()
+            //                Circle()
+            //                    .fill(Color("blue"))
+            //                    .frame(width: 60, height: 60)
+            //                    .overlay(
+            //                        Image(systemName: "plus")
+            //                            .font(.system(size: 26, weight: .semibold, design: .rounded))
+            //                            .foregroundColor(.white)
+            //                    )
+            //            }
+            //            .padding(.trailing, 40)
         }
         .padding(.trailing, 30)
         .offset(y: -40)
+        
+        
     }
+    
+    
 }
 
 struct MainTabView: View {
