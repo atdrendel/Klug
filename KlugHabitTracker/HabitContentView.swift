@@ -19,7 +19,7 @@ struct HabitContentView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    
+                  
                     NewHabitView()
                     
                     Spacer().frame(height:100)
