@@ -1,14 +1,6 @@
-//
-//  SavannaTours.swift
-//  SavannaTours
-//
-//  Created by Evans Domina Attafuah on 13/08/2021.
-//
-
 import SwiftUI
 
 struct SavannaTours: View {
-    
     @State private var zoomed = false
     
     var body: some View {
@@ -30,7 +22,7 @@ struct SavannaTours: View {
                         .clipShape(RoundedRectangle(cornerRadius: zoomed ? 40 : 500))
                         .overlay(
                             Circle()
-                                .fill(zoomed ? .clear : Color( red: 1.0, green: 1.0, blue: 1.0, opacity: 0.4))
+                                .fill(zoomed ? .clear : Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.4))
                                 .scaleEffect(0.8)
                         )
                         .saturation(zoomed ? 1 : 0)
@@ -42,7 +34,7 @@ struct SavannaTours: View {
                             withAnimation(.spring()) {
                                 zoomed.toggle()
                             }
-                    }
+                        }
                 }
             }
             .background(Color(red: 0.1, green: 0.1, blue: 0.1))
@@ -65,12 +57,12 @@ struct HeroImage: View {
 
 struct MilestonesList: View {
     var body: some View {
-        List((0...4), id: \.self) { num in
+        List(0 ... 4, id: \.self) { num in
             VStack(alignment: .leading) {
-                Text("Milestone #\(num+1)")
+                Text("Milestone #\(num + 1)")
                     .font(.title)
                 HStack(alignment: .lastTextBaseline) {
-                    Text("Savanna National Park (\(num*12 + 5)km)")
+                    Text("Savanna National Park (\(num * 12 + 5)km)")
                         .font(.subheadline)
                     Image(systemName: "pin")
                     Spacer()
