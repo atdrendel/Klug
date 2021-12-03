@@ -1,20 +1,11 @@
-//
-//  ParticleSystem.swift
-//  ParticleSystem
-//
-//  Created by Evans Domina Attafuah on 12/08/2021.
-//
-
 import SwiftUI
 
 struct ParticleSystem: View {
-    
     @State private var acceleration = 5
-    
+
     var body: some View {
         ZStack {
-           
-            ForEach(0..<12) { item in
+            ForEach(0 ..< 12) { item in
                 VStack(spacing: 100) {
                     Capsule()
                         .frame(width: 3, height: 6)
@@ -28,7 +19,7 @@ struct ParticleSystem: View {
                                 acceleration = 300
                             }
                         }
-                    
+
                     Capsule()
                         .frame(width: 3, height: 6)
                         .foregroundColor(.cyan)
@@ -41,7 +32,7 @@ struct ParticleSystem: View {
                                 acceleration = 300
                             }
                         }
-                    
+
                     Capsule()
                         .frame(width: 3, height: 6)
                         .foregroundColor(.cyan)
@@ -54,7 +45,7 @@ struct ParticleSystem: View {
                                 acceleration = 300
                             }
                         }
-                    
+
                     Capsule()
                         .frame(width: 3, height: 6)
                         .foregroundColor(.cyan)
@@ -67,11 +58,8 @@ struct ParticleSystem: View {
                                 acceleration = 300
                             }
                         }
-             
                 }
-                
             }
-            
         }
     }
 }

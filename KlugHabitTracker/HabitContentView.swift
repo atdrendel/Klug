@@ -1,10 +1,8 @@
-import SwiftUI
 import Klug
-
+import SwiftUI
 
 struct HabitContentView: View {
-    
-    @State var isPresented = true
+    @State var isPresented = false
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "green")!]
@@ -13,29 +11,22 @@ struct HabitContentView: View {
     
     var body: some View {
         NavigationView {
-            
             ZStack {
                 Color("seaBlue")
                     .ignoresSafeArea()
                 
                 VStack {
-                  
                     NewHabitView()
                     
-                    Spacer().frame(height:100)
+                    Spacer().frame(height: 100)
                     
                     MainTabView()
-                    
-                    
                 }
                 
                 .navigationTitle("Today")
-                .toolbar{
-                    
+                .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            
+                        Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
                             Image(systemName: "graduationcap.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
@@ -43,10 +34,7 @@ struct HabitContentView: View {
                             
                         })
                         
-                        
-                        Button(action: {
-                            
-                        }, label: {
+                        Button(action: {}, label: {
                             Image(systemName: "calendar.circle.fill")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
@@ -56,11 +44,8 @@ struct HabitContentView: View {
                     }
                 }
             }
-            
         }
-        .sheet(isPresented: $isPresented, onDismiss: {
-            
-        }) {
+        .sheet(isPresented: $isPresented, onDismiss: {}) {
             NavigationView {
                 NewHabitEmptyState()
                     .navigationTitle("New Habit")
@@ -74,20 +59,15 @@ struct HabitContentView: View {
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(.init("blue"))
                             }
-
                         }
                     }
-            
             }
-           
         }
         .overlay(ZStack {
             Image("JournalEmpty")
                 .resizable()
                 .opacity(0.0)
         })
-        
-        
     }
 }
 
@@ -101,12 +81,8 @@ struct HabitContentView_Previews: PreviewProvider {
 struct NewHabitView: View {
     var body: some View {
         VStack {
-            
             HStack {
-                
-                Button {
-                    
-                } habit: {
+                Button {} habit: {
                     Image(systemName: "leaf")
                     Text(
                         habit: "All Habits",
@@ -115,32 +91,23 @@ struct NewHabitView: View {
                 }
                 .buttonStyle(.primary)
                 
-                Button {
-                    
-                } habit: {
+                Button {} habit: {
                     Image(systemName: "plus")
                     Text(habit: "New Area")
-                    
                 }
                 .buttonStyle(.secondary)
                 
                 Spacer()
-                
             }
             .buttonStyle(.plain)
-            
-            
-            
         }
         .padding(.leading, 18)
     }
 }
 
 struct NewHabitEmptyState: View {
-    
     var body: some View {
         VStack(spacing: 6) {
-            
             Image(systemName: "archivebox")
                 .font(.system(size: 50))
                 .foregroundColor(.black.opacity(0.7))
@@ -158,58 +125,38 @@ struct NewHabitEmptyState: View {
                 .multilineTextAlignment(.center)
             
             HStack {
+                Button(icon: .init(systemName: "leaf"), title: "Meditate") {}
                 
-                Button(icon: .init(systemName: "leaf"), title: "Meditate") {
-                    
-                }
+                Button(icon: .init(systemName: "list.bullet"), title: "Set a To-do List") {}
                 
-                
-                Button(icon: .init(systemName: "list.bullet"), title: "Set a To-do List") {
-                    
-                }
-                
-                Button(icon: .init(systemName: "figure.walk"), title: "Walk") {
-                    
-                }
-                
+                Button(icon: .init(systemName: "figure.walk"), title: "Walk") {}
             }
             .buttonStyle(.alt)
             .padding(.top, 10)
             
             HStack {
-                
                 Button(
                     icon: .init(systemName: "drop.fill"),
                     title: "Drink Water"
-                ) {
-                    
-                }
+                ) {}
                 
-                Button(icon: .init(systemName: "book"), title: "Read Books") {
-                    
-                }
-                
+                Button(icon: .init(systemName: "book"), title: "Read Books") {}
             }
             .buttonStyle(.alt)
             .padding(.bottom, 10)
             
             Spacer().frame(height: 120)
-            
-            
         }
-        .background(RoundedRectangle(cornerRadius:15)
-                        .fill(Color("lightGreen"))
+        .background(RoundedRectangle(cornerRadius: 15)
+            .fill(Color("lightGreen"))
         )
-        
     }
 }
 
 struct AddHabitView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Button {
-                
-            } label: {
+            Button {} label: {
                 HStack {
                     Spacer()
                     Circle()
@@ -238,11 +185,7 @@ struct AddHabitView: View {
         }
         .padding(.trailing, 30)
         .offset(y: -40)
-        
-        
     }
-    
-    
 }
 
 struct MainTabView: View {
@@ -253,25 +196,22 @@ struct MainTabView: View {
         tabbar.unselectedItemTintColor = .init(named: "gray")
         tabbar.isTranslucent = false
     }
+
     var body: some View {
-        TabView() {
-            
+        TabView {
             VStack {
-                
                 NewHabitEmptyState()
                 AddHabitView()
                 
                 ZStack {
                     Color("seaBlue")
                 }
-                
             }
             .background(Color("seaBlue"))
             .tabItem {
                 Image(systemName: "square.stack.fill")
                 Text("Journal")
             }
-            
             
             Text("Progress")
                 .tabItem {
@@ -295,6 +235,3 @@ struct MainTabView: View {
         .accentColor(Color("yellow"))
     }
 }
-
-
-

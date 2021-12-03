@@ -1,16 +1,16 @@
 import SwiftUI
 
 struct HabitButtonStyle: ButtonStyle {
-    
     var strokeColor: Color
     var fillColor: Color
     var fontColor: Color
     
     func makeBody(configuration: Self.Configuration)
-    -> some View {
+        -> some View
+    {
         configuration.label
             .font(.caption2)
-            .frame(height:0)
+            .frame(height: 0)
             .padding()
             .foregroundColor(fontColor)
             .background(
@@ -27,7 +27,6 @@ struct HabitButtonStyle: ButtonStyle {
 }
 
 extension ButtonStyle where Self == HabitButtonStyle {
-    
     static var primary: Self {
         .init(
             strokeColor: .clear,
@@ -79,7 +78,7 @@ extension Button where Label == HabitButton {
     }
 }
 
-//struct HabitButton: View {
+// struct HabitButton: View {
 //    let buttonStyle: HabitButtonStyle
 //    init(_ buttonStyle: HabitButtonStyle) {
 //        self.buttonStyle = buttonStyle
@@ -94,19 +93,16 @@ extension Button where Label == HabitButton {
 //        }
 //        .buttonStyle(buttonStyle)
 //    }
-//}
+// }
 
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-                        
 //            Image("Buttons")
 //                .resizable()
 //                .frame(width: 379, height: 322)
             
-            Button {
-                
-            } habit: {
+            Button {} habit: {
                 Image(systemName: "leaf")
                 Text(
                     habit: "All Habits",
@@ -115,32 +111,23 @@ struct Button_Previews: PreviewProvider {
             }
             .buttonStyle(.primary)
             
-            Button {
-                
-            } habit: {
+            Button {} habit: {
                 Image(systemName: "plus")
                 Text(habit: "New Area")
-                
             }
             .buttonStyle(.secondary)
             
-            Button {
-                
-            } habit: {
+            Button {} habit: {
                 Image(systemName: "mail.stack")
                 Text(habit: "All Habits", count: .constant(2))
             }
             .buttonStyle(.accent)
             
-            Button {
-                
-            } habit: {
+            Button {} habit: {
                 Image(systemName: "list.dash")
                 Text(habit: "Set a To-do List")
-                
             }
             .buttonStyle(.alt)
-    
         }
         .padding()
         .background(Color("seaBlue"))

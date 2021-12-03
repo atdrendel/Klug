@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CircleView: View {
-    
     @State private var animateGreenCircle = false
     @State private var animateRedCircle = false
     @State private var animateBlueCircle = false
@@ -21,7 +20,6 @@ struct CircleView: View {
      
     var body: some View {
         ZStack {
-            
             Circle()
                 .strokeBorder(lineWidth: .init(removeInnerFill))
                 .frame(width: 90, height: 90)
@@ -30,19 +28,17 @@ struct CircleView: View {
                 .task {
                     withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
                         removeInnerFill = 0
-                     
                     }
                     
-                    //.timingCurve(1.00, -0.600, 1.000, 1.635)
+                    // .timingCurve(1.00, -0.600, 1.000, 1.635)
                     withAnimation(.easeInOut
-                                    .speed(0.2)
-                                    .delay(1.25)
-                                    .repeatForever(autoreverses: true)) {
-                        showCircle = 1
-                        rotation3D = 180
-                    }
+                        .speed(0.2)
+                        .delay(1.25)
+                        .repeatForever(autoreverses: true)) {
+                            showCircle = 1
+                            rotation3D = 180
+                        }
                 }
-            
             
             Circle()
                 .trim(from: 0, to: .init(path))
@@ -109,9 +105,7 @@ struct CircleView: View {
                         isOpacity = 1
                     }
                 }
-            
         }
-        
     }
 }
 
@@ -119,15 +113,12 @@ struct Circle_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CircleView()
-             //   .environment(\.colorScheme, .dark)
-            
-
+            //   .environment(\.colorScheme, .dark)
         }
     }
 }
 
 struct CircleItem: View {
-    
     let color: Color
     let size: CGFloat
     let width = UIScreen.main.bounds.width

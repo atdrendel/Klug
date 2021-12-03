@@ -1,9 +1,8 @@
-import XCTest
 import CasePaths
 @testable import KlugNavigation
+import XCTest
 
 class KlugNavigationTests: XCTestCase {
-    
     func testAddItem() throws {
         let viewModel = InventoryViewModel()
         viewModel.addButtonTapped()
@@ -56,5 +55,4 @@ class KlugNavigationTests: XCTestCase {
         XCTAssertEqual(viewModel.inventory[1].item, dupe)
         XCTAssertNil(viewModel.inventory[0].route)
     }
-    
 }

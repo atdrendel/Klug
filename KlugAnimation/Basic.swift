@@ -14,7 +14,6 @@ class BasicViewModel: ObservableObject {
 }
 
 struct BasicView: View {
-    
     @ObservedObject var basicViewModel: BasicViewModel
     
     init(_ basicViewModel: BasicViewModel = .init()) {
@@ -23,16 +22,15 @@ struct BasicView: View {
     
     var body: some View {
         VStack {
-            
             Circle()
                 .fill(basicViewModel.circleColor)
-            //  .animation(.linear)
+                //  .animation(.linear)
                 .overlay(Text("Hi"))
                 .foregroundColor(basicViewModel.isCircleScaled ? .red : nil)
                 .frame(width: 50, height: 50)
                 .scaleEffect(basicViewModel.isCircleScaled ? 2 : 1)
                 .offset(x: basicViewModel.circleCenter.x - 25, y: basicViewModel.circleCenter.y - 25)
-            //     .animation(.spring(response: 0.2, dampingFraction: 0.1))
+                //     .animation(.spring(response: 0.2, dampingFraction: 0.1))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -61,7 +59,6 @@ struct BasicView: View {
                 }
                 basicViewModel.isCircleScaled = false
             }
-            
         }
     }
 }

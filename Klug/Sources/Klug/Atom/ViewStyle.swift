@@ -26,7 +26,7 @@ import SwiftUI
 
 public extension View {
     
-    public func border<C>(_ edges: Edge.Set, length: CGFloat? = nil, _ content: C, width: CGFloat = 1, cornerRadius: CGFloat = 10) -> some View where C : ShapeStyle {
+    func border<C>(_ edges: Edge.Set, length: CGFloat? = nil, _ content: C, width: CGFloat = 1, cornerRadius: CGFloat = 10) -> some View where C : ShapeStyle {
         padding(edges, length).overlay(RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(content, lineWidth: width))
     }
     
@@ -38,6 +38,30 @@ public extension View {
         }
     }
 }
+
+extension View {
+    
+    // center view horizontally
+    func centerHorizontally() -> some View {
+        HStack {
+            Spacer()
+            self
+            Spacer()
+        }
+    }
+    
+}
+
+extension View {
+    func navigationView() -> some View {
+        NavigationView { self }
+    }
+}
+
+// usage
+//VStack {
+//
+//}.embedInNavigationView()
 
 
 //AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.2274509804, green: 0.4, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.2156862745, green: 1, blue: 0.6235294118, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.9176470588, blue: 0.1960784314, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.2039215686, blue: 0.2745098039, alpha: 1))]), center: .center)
