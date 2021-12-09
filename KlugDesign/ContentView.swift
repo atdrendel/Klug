@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
+            Spacer()
             Image("Logo 2")
                 .resizable(resizingMode: .stretch)
                 .aspectRatio(contentMode: .fit)
