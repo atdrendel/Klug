@@ -12,6 +12,7 @@ struct ContentView: View {
             Text("SwiftUI for iOS 15")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .foregroundStyle(.linearGradient(colors: [.red, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
 
             Text("20 sections - 3 hours".uppercased())
                 .font(.footnote)
@@ -37,6 +38,9 @@ struct ContentView: View {
         .overlay(
             Image("Illustration 5")
                 .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 230)
+                .offset(x: 34, y: -90)
         )
     }
 }
