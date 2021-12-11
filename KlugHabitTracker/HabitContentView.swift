@@ -108,14 +108,17 @@ struct NewHabitView: View {
 struct NewHabitEmptyState: View {
     var body: some View {
         VStack(spacing: 6) {
+            Spacer()
+            
             Image(systemName: "archivebox")
-                .font(.system(size: 50))
+                .font(.system(size: 40))
                 .foregroundColor(.black.opacity(0.7))
-                .padding(20)
+//
             
             Text("The start of a better You!")
                 .font(.title2)
                 .fontWeight(.bold)
+                .padding(.top, 10)
             
             Text("Habits are like dominos. As one is formed, all other will follow!")
                 .font(.headline)
@@ -123,6 +126,10 @@ struct NewHabitEmptyState: View {
                 .foregroundColor(.gray)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding()
+                .padding(.top, 0)
             
             HStack {
                 Button(icon: .init(systemName: "leaf"), title: "Meditate") {}
@@ -147,9 +154,11 @@ struct NewHabitEmptyState: View {
             
             Spacer().frame(height: 120)
         }
-        .background(RoundedRectangle(cornerRadius: 15)
-            .fill(Color("lightGreen"))
+        .background(Color("lightGreen")
         )
+        .cornerRadius(16)
+        .padding(12.0)
+        .padding(.horizontal, 5)
     }
 }
 
@@ -169,22 +178,9 @@ struct AddHabitView: View {
                         )
                 }
             }
-            
-            //            HStack {
-            //                Spacer()
-            //                Circle()
-            //                    .fill(Color("blue"))
-            //                    .frame(width: 60, height: 60)
-            //                    .overlay(
-            //                        Image(systemName: "plus")
-            //                            .font(.system(size: 26, weight: .semibold, design: .rounded))
-            //                            .foregroundColor(.white)
-            //                    )
-            //            }
-            //            .padding(.trailing, 40)
         }
         .padding(.trailing, 30)
-        .offset(y: -40)
+        .offset(y: -60)
     }
 }
 
@@ -202,6 +198,7 @@ struct MainTabView: View {
             VStack {
                 NewHabitEmptyState()
                 AddHabitView()
+                
                 
                 ZStack {
                     Color("seaBlue")
