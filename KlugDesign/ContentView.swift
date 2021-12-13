@@ -8,12 +8,13 @@ struct ContentView: View {
                 .resizable(resizingMode: .stretch)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26.0, height: 26.0)
-                .cornerRadius(20.0)
+                .cornerRadius(10.0)
                 .padding(9)
                 .background(.ultraThinMaterial, in: RoundedRectangle(
-                    cornerRadius: 20,
+                    cornerRadius: 16,
                     style: .continuous
                 ))
+                .strokeStyle(cornerRadius: 16)
 
             Text("SwiftUI for iOS 15")
                 .font(.largeTitle)
@@ -43,12 +44,7 @@ struct ContentView: View {
 //            )
 //        )
         .shadow(color: .init("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-//                .stroke(.black, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round, miterLimit: .infinity, dash: [50, 10], dashPhase: 20))
-                .stroke(.linearGradient(colors: [.white.opacity(0.3), .black.opacity(0.1)], startPoint: .top, endPoint: .bottom))
-                .blendMode(.overlay)
-        )
+        .strokeStyle()
         .padding(.horizontal, 20)
         .background(
             Image("Blob 1")
