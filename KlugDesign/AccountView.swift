@@ -11,7 +11,6 @@ struct AccountView: View {
     var body: some View {
         NavigationView {
             List {
-                
                 VStack {
                     Image(systemName: "person.crop.circle.fill.badge.checkmark")
                         .symbolVariant(.circle.fill)
@@ -26,7 +25,7 @@ struct AccountView: View {
                                 .foregroundStyle(.blue)
                                 .font(.system(size: 200))
                                 .offset(x: -50, y: -100)
-                    )
+                        )
                     
                     Text("Codebendr")
                         .font(.title.weight(.semibold))
@@ -36,25 +35,44 @@ struct AccountView: View {
                         Text("Canada")
                             .foregroundColor(.secondary)
                     }
-                    
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
                 
                 Section {
-                    Label("Settings", systemImage: "gear")
-                    Label("Billing", systemImage: "creditcard")
-                    Label("Help", systemImage: "questionmark")
-                        .imageScale(.large)
-          
+                    
+                    NavigationLink {
+                        ContentView()
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                    }
+       
+                    NavigationLink {
+                        ContentView()
+                    } label: {
+                        Label("Billing", systemImage: "creditcard")
+                    }
+       
+                    NavigationLink {
+                        ContentView()
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                    }
+       
                     Image(systemName: "person.3.sequence")
                         .symbolVariant(.fill)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.yellow, .red, .teal)
                         .font(.largeTitle)
                 }
+                .accentColor(.primary)
                 .listRowSeparatorTint(.blue)
                 .listRowSeparator(.hidden)
+                
+                Link(destination: .init(string: "https://designcode.io/swiftui-ios15-navigation-link-url")!) {
+                    Label("Link", systemImage: "house")
+                }
+                
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Account")
