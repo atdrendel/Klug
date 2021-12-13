@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct AccountView: View {
+    @State var isDeleted = false
+    
     var body: some View {
+        
         NavigationView {
             List {
                 VStack {
@@ -22,17 +25,18 @@ struct AccountView: View {
                         .background(
                             Image(systemName: "hexagon")
                                 .symbolVariant(.fill)
+                            
                                 .foregroundStyle(.blue)
                                 .font(.system(size: 200))
                                 .offset(x: -50, y: -100)
                         )
                     
-                    Text("Codebendr")
+                    Text("codebendr")
                         .font(.title.weight(.semibold))
                     HStack {
                         Image(systemName: "location")
                             .imageScale(.small)
-                        Text("Canada")
+                        Text("Ghana")
                             .foregroundColor(.secondary)
                     }
                 }
@@ -70,7 +74,7 @@ struct AccountView: View {
                 .listRowSeparator(.hidden)
                 
                 Section {
-                    
+                    if !isDeleted {
                         Link(destination: .init(string: "https://apple.com")!) {
                             HStack {
                                 Label("Website", systemImage: "house")
@@ -78,8 +82,20 @@ struct AccountView: View {
                                 Image(systemName: "link")
                                     .foregroundColor(.secondary)
                             }
+                      
+                          
                         }
-                    
+                 
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button {
+                                isDeleted.toggle()
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+
+                        }
+                }
                     Link(destination: .init(string: "https://youtube.com")!) {
                         HStack {
                             Label("Youtube", systemImage: "tv")
