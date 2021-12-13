@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @State var isDeleted = false
+    @State var isPinned = false
     
     var body: some View {
         NavigationView {
@@ -105,11 +106,13 @@ struct AccountView: View {
                     .tint(.red)
                     
                     Button {
-                        isDeleted.toggle()
+                        isPinned.toggle()
                     } label: {
-                        Label("Pin", systemImage: "pin")
+                        isPinned ?
+                            Label("Unpin", systemImage: "pin.slash") :
+                            Label("Pin", systemImage: "pin")
                     }
-                    .tint(.yellow)
+                    .tint(isPinned ? .gray : .yellow)
                 }
             }
             Link(destination: .init(string: "https://youtube.com")!) {
