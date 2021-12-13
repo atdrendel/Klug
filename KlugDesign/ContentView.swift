@@ -43,6 +43,10 @@ struct ContentView: View {
 //            )
 //        )
         .shadow(color: .init("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                .stroke(.black, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round, miterLimit: .infinity, dash: [50, 10], dashPhase: 20))
+        )
         .padding(.horizontal, 20)
         .background(
             Image("Blob 1")
