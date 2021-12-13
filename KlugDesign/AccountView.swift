@@ -69,9 +69,29 @@ struct AccountView: View {
                 .listRowSeparatorTint(.blue)
                 .listRowSeparator(.hidden)
                 
-                Link(destination: .init(string: "https://designcode.io/swiftui-ios15-navigation-link-url")!) {
-                    Label("Link", systemImage: "house")
+                Section {
+                    
+                        Link(destination: .init(string: "https://apple.com")!) {
+                            HStack {
+                                Label("Website", systemImage: "house")
+                                Spacer()
+                                Image(systemName: "link")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    
+                    Link(destination: .init(string: "https://youtube.com")!) {
+                        HStack {
+                            Label("Youtube", systemImage: "tv")
+                            Spacer()
+                            Image(systemName: "link")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                        
+                    
                 }
+                .accentColor(.primary)
                 
             }
             .listStyle(.insetGrouped)
@@ -82,6 +102,10 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        Group {
+            AccountView()
+            AccountView()
+                .preferredColorScheme(.dark)
+        }
     }
 }
