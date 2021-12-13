@@ -46,6 +46,8 @@ struct ContentView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 30, style: .continuous)
 //                .stroke(.black, style: .init(lineWidth: 5, lineCap: .round, lineJoin: .round, miterLimit: .infinity, dash: [50, 10], dashPhase: 20))
+                .stroke(.linearGradient(colors: [.white.opacity(0.3), .black.opacity(0.1)], startPoint: .top, endPoint: .bottom))
+                .blendMode(.overlay)
         )
         .padding(.horizontal, 20)
         .background(
