@@ -1,84 +1,113 @@
-import SwiftUI
 import CasePaths
+import SwiftUI
 
 struct ColorPickerView: View {
-  @Binding var color: Item.Color?
-  @Environment(\.dismiss) var dismiss
-  @State var newColors: [Item.Color] = []
+    @Binding var color: Item.Color?
+    @Environment(\.dismiss) var dismiss
+    @State var newColors: [Item.Color] = []
 
-  var body: some View {
-      Form {
-        Button(action: { self.color = nil }) {
-          HStack {
-            Text("None")
-            Spacer()
-            if self.color == nil {
-              Image(systemName: "checkmark")
-            }
-          }
-        }
-
-        Section(header: Text("Default colors")) {
-          ForEach(Item.Color.defaults, id: \.name) { color in
+    var body: some View {
+        Form {
             Button(action: {
-                self.color = color
+                self.color = nil
                 self.dismiss()
             }) {
-              HStack {
-                Text(color.name)
-                Spacer()
-                if self.color == color {
-                  Image(systemName: "checkmark")
+                HStack {
+                    Text("None")
+                    Spacer()
+                    if self.color == nil {
+                        Image(systemName: "checkmark")
+                    }
                 }
-              }
             }
-          }
+
+            Section(header: Text("Default colors")) {
+                ForEach(self.newColors, id: \.name) { color in
+                    Button(action: {
+                        self.color = color
+                        self.dismiss()
+                    }) {
+                        HStack {
+                            Text(color.name)
+                            Spacer()
+                            if self.color == color {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }
+
+            if !self.newColors.isEmpty {
+                Section(header: Text("New colors")) {
+                    ForEach(self.newColors, id: \.name) { color in
+                        Button(action: {
+                            self.color = color
+                            self.dismiss()
+                        }) {
+                            HStack {
+                                Text(color.name)
+                                Spacer()
+                                if self.color == color {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         .task {
-          await Task.sleep(NSEC_PER_MSEC * 500)
-          self.newColors = [
-            .init(name: "Pink", red: 1, green: 0.7, blue: 0.7)
-          ]
+            await Task.sleep(NSEC_PER_MSEC * 500)
+            self.newColors = [
+                .init(name: "Pink", red: 1, green: 0.7, blue: 0.7)
+            ]
         }
-      }
-  }
+    }
+}
+
+class ItemViewModel: ObservableObject {
+    @Published var item: Item
+
+    init(item: Item) {
+        self.item = item
+    }
 }
 
 struct ItemView: View {
-    //2-way communication
+    // 2-way communication
     @Binding var item: Item
     @State var nameIsDuplicate = false
-    
+
     var body: some View {
         Form {
             TextField("Name", text: self.$item.name)
                 .background(self.nameIsDuplicate ? .red.opacity(0.1) : .clear)
                 .onChange(of: self.item.name) { newName in
-                    //TODO: Validation Logic
+                    // TODO: Validation Logic
                     Task { @MainActor in
                         await Task.sleep(NSEC_PER_MSEC * 300)
                         self.nameIsDuplicate = newName == "Keyboard"
                     }
-                   
                 }
-            
+
             NavigationLink(
-              destination: ColorPickerView(color: self.$item.color)
+                destination: ColorPickerView(color: self.$item.color)
             ) {
-              HStack {
-                Text("Color")
-                Spacer()
-                if let color = self.item.color {
-                  Rectangle()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(color.swiftUIColor)
-                    .border(Color.black, width: 1)
+                HStack {
+                    Text("Color")
+                    Spacer()
+                    if let color = self.item.color {
+                        Rectangle()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(color.swiftUIColor)
+                            .border(Color.black, width: 1)
+                    }
+                    Text(self.item.color?.name ?? "None")
+                        .foregroundColor(.gray)
                 }
-                Text(self.item.color?.name ?? "None")
-                  .foregroundColor(.gray)
-              }
             }
-            
+
             IfCaseLet(self.$item.status, pattern: /Item.Status.inStock) { $quantity in
                 Section(header: Text("In stock")) {
                     Stepper("Quantity: \(quantity)", value: $quantity)
@@ -87,7 +116,7 @@ struct ItemView: View {
                     }
                 }
             }
-            
+
             IfCaseLet(self.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
                 Section(header: Text("Out of stock")) {
                     Toggle("Is on back order?", isOn: $isOnBackOrder)
@@ -96,7 +125,6 @@ struct ItemView: View {
                     }
                 }
             }
-            
         }
 //        .toolbar {
 //            ToolbarItem(placement: .cancellationAction) {
@@ -118,7 +146,7 @@ struct ItemView_Previews: PreviewProvider {
         NavigationView {
             ItemView(item: .init(
                 projectedValue: .constant(.init(name: "", color: .red, status: .inStock(quantity: 2)))
-               )
+            )
             )
         }
     }
