@@ -5,23 +5,17 @@ struct ItemView: View {
     //2-way communication
     @Binding var item: Item
     
-    //    let onSave: (Item) -> Void
-    //    let onCancel: () -> Void
-    
-    //  init(
-    //    item: Item,
-    //    onSave: @escaping (Item) -> Void,
-    //    onCancel: @escaping () -> Void
-    //  ) {
-    //    print("ItemView.init", item.name)
-    //    self._item = .init(wrappedValue: item)
-    //    self.onSave = onSave
-    //    self.onCancel = onCancel
-    //  }
     
     var body: some View {
         Form {
             TextField("Name", text: self.$item.name)
+                .onChange(of: self.item.name) { newName in
+                    //TODO: Validation Logic
+                    Task { @MainActor in
+                        
+                    }
+                    await Task.sleep(NSEC_PER_MSEC * 300)
+                }
             
             Picker(selection: self.$item.color, label: Text("Color")) {
                 Text("None")

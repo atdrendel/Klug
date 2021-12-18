@@ -8,11 +8,9 @@ class ItemRowViewModel: Identifiable, ObservableObject {
     @Published var item: Item
     //    @Published var itemToEdit: Item?
     //    @Published var itemToDuplicate: Item?
-    
     var onDelete: () -> Void = { }
     var onDuplicate: (Item) -> Void = { _ in }
     @Published var isSaving = false
-    
     @Published var route: Route?
     
     enum Route {
@@ -37,7 +35,7 @@ class ItemRowViewModel: Identifiable, ObservableObject {
       self.isSaving = true
 
       Task { @MainActor in
-        await Task.sleep(NSEC_PER_SEC)
+          try await Task.sleep(nanoseconds: NSEC_PER_SEC)
 
         self.isSaving = false
         self.item = item
