@@ -1,30 +1,65 @@
 import SwiftUI
 import CasePaths
 
+struct ColorPickerView: View {
+  @Binding var color: Item.Color?
+
+  var body: some View {
+      Form {
+        Button(action: { self.color = nil }) {
+          HStack {
+            Text("None")
+            Spacer()
+            if self.color == nil {
+              Image(systemName: "checkmark")
+            }
+          }
+        }
+
+        Section(header: Text("Default colors")) {
+          ForEach(Item.Color.defaults, id: \.name) { color in
+            Button(action: { self.color = color }) {
+              HStack {
+                Text(color.name)
+                Spacer()
+                if self.color == color {
+                  Image(systemName: "checkmark")
+                }
+              }
+            }
+          }
+        }
+      }
+  }
+}
+
 struct ItemView: View {
     //2-way communication
     @Binding var item: Item
-    
+    @State var nameIsDuplicate = false
     
     var body: some View {
         Form {
             TextField("Name", text: self.$item.name)
+                .background(self.nameIsDuplicate ? .red.opacity(0.1) : .clear)
                 .onChange(of: self.item.name) { newName in
                     //TODO: Validation Logic
                     Task { @MainActor in
-                        
+                        await Task.sleep(NSEC_PER_MSEC * 300)
+                        self.nameIsDuplicate = newName == "Keyboard"
                     }
-                    await Task.sleep(NSEC_PER_MSEC * 300)
+                   
                 }
             
-            Picker(selection: self.$item.color, label: Text("Color")) {
-                Text("None")
-                    .tag(Item.Color?.none)
-                
-                ForEach(Item.Color.defaults, id: \.name) { color in
-                    Text(color.name)
-                        .tag(Optional(color))
-                }
+            NavigationLink(
+              destination: ColorPickerView(color: self.$item.color)
+            ) {
+              HStack {
+                Text("Color")
+                Spacer()
+                Text(self.item.color?.name ?? "None")
+                  .foregroundColor(.gray)
+              }
             }
             
             IfCaseLet(self.$item.status, pattern: /Item.Status.inStock) { $quantity in
