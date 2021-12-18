@@ -10,7 +10,7 @@ struct SwiftUINavigationApp: App {
     editedKeyboard.status = .inStock(quantity: 1000)
 
     return WindowGroup {
-      ContentView(
+        NavigationContentView(
         viewModel: .init(
           inventoryViewModel: .init(
             inventory: [

@@ -104,7 +104,6 @@ struct ItemRowView: View {
 //    ) {
 //      Text("Delete")
 //    }
-
     NavigationLink(
       unwrap: self.$viewModel.route,
       case: /ItemRowViewModel.Route.edit,
@@ -163,7 +162,6 @@ struct ItemRowView: View {
         //        Image(systemName: "pencil")
         //      }
         //      .padding(.leading)
-
         Button(action: { self.viewModel.deleteButtonTapped() }) {
           Image(systemName: "trash.fill")
         }
