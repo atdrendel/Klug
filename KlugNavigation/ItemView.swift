@@ -22,7 +22,7 @@ struct ColorPickerView: View {
             }
 
             Section(header: Text("Default colors")) {
-                ForEach(self.newColors, id: \.name) { color in
+                ForEach(Item.Color.defaults, id: \.name) { color in
                     Button(action: {
                         self.color = color
                         self.dismiss()
