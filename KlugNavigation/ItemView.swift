@@ -3,6 +3,8 @@ import CasePaths
 
 struct ColorPickerView: View {
   @Binding var color: Item.Color?
+  @Environment(\.dismiss) var dismiss
+  @State var newColors: [Item.Color] = []
 
   var body: some View {
       Form {
@@ -18,7 +20,10 @@ struct ColorPickerView: View {
 
         Section(header: Text("Default colors")) {
           ForEach(Item.Color.defaults, id: \.name) { color in
-            Button(action: { self.color = color }) {
+            Button(action: {
+                self.color = color
+                self.dismiss()
+            }) {
               HStack {
                 Text(color.name)
                 Spacer()
@@ -28,6 +33,12 @@ struct ColorPickerView: View {
               }
             }
           }
+        }
+        .task {
+          await Task.sleep(NSEC_PER_MSEC * 500)
+          self.newColors = [
+            .init(name: "Pink", red: 1, green: 0.7, blue: 0.7)
+          ]
         }
       }
   }
@@ -57,6 +68,12 @@ struct ItemView: View {
               HStack {
                 Text("Color")
                 Spacer()
+                if let color = self.item.color {
+                  Rectangle()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(color.swiftUIColor)
+                    .border(Color.black, width: 1)
+                }
                 Text(self.item.color?.name ?? "None")
                   .foregroundColor(.gray)
               }
