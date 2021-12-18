@@ -13,10 +13,23 @@ class ItemRowViewModel: Identifiable, ObservableObject {
     @Published var isSaving = false
     @Published var route: Route?
     
-    enum Route {
-        case deleteAlert
-        case duplicate(Item)
-        case edit(Item)
+    enum Route: Equatable {
+      case deleteAlert
+      case duplicate(ItemViewModel)
+      case edit(ItemViewModel)
+
+      static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.deleteAlert, .deleteAlert):
+          return false
+        case let (.duplicate(lhs), .duplicate(rhs)):
+          return lhs === rhs
+        case let (.edit(lhs), .edit(rhs)):
+          return lhs === rhs
+        case (.deleteAlert, _), (.duplicate, _), (.edit, _):
+          return false
+        }
+      }
     }
     
     init(

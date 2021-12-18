@@ -66,9 +66,10 @@ struct ColorPickerView: View {
     }
 }
 
-class ItemViewModel: ObservableObject {
+class ItemViewModel: Identifiable, ObservableObject {
     @Published var item: Item
 
+    var id: Item.ID { self.item.id }
     init(item: Item) {
         self.item = item
     }
@@ -76,14 +77,14 @@ class ItemViewModel: ObservableObject {
 
 struct ItemView: View {
     // 2-way communication
-    @Binding var item: Item
+    @ObservedObject var viewModel: ItemViewModel
     @State var nameIsDuplicate = false
 
     var body: some View {
         Form {
-            TextField("Name", text: self.$item.name)
+            TextField("Name", text: self.viewModel.$item.name)
                 .background(self.nameIsDuplicate ? .red.opacity(0.1) : .clear)
-                .onChange(of: self.item.name) { newName in
+                .onChange(of: self.viewModel.item.name) { newName in
                     // TODO: Validation Logic
                     Task { @MainActor in
                         await Task.sleep(NSEC_PER_MSEC * 300)
@@ -92,36 +93,36 @@ struct ItemView: View {
                 }
 
             NavigationLink(
-                destination: ColorPickerView(color: self.$item.color)
+                destination: ColorPickerView(color: self.viewModel.$item.color)
             ) {
                 HStack {
                     Text("Color")
                     Spacer()
-                    if let color = self.item.color {
+                    if let color = self.viewModel.item.color {
                         Rectangle()
                             .frame(width: 30, height: 30)
                             .foregroundColor(color.swiftUIColor)
                             .border(Color.black, width: 1)
                     }
-                    Text(self.item.color?.name ?? "None")
+                    Text(self.viewModel.item.color?.name ?? "None")
                         .foregroundColor(.gray)
                 }
             }
 
-            IfCaseLet(self.$item.status, pattern: /Item.Status.inStock) { $quantity in
+            IfCaseLet(self.viewModel.$item.status, pattern: /Item.Status.inStock) { $quantity in
                 Section(header: Text("In stock")) {
                     Stepper("Quantity: \(quantity)", value: $quantity)
                     Button("Mark as sold out") {
-                        self.item.status = .outOfStock(isOnBackOrder: false)
+                        self.viewModel.item.status = .outOfStock(isOnBackOrder: false)
                     }
                 }
             }
 
-            IfCaseLet(self.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
+            IfCaseLet(self.viewModel.$item.status, pattern: /Item.Status.outOfStock) { $isOnBackOrder in
                 Section(header: Text("Out of stock")) {
                     Toggle("Is on back order?", isOn: $isOnBackOrder)
                     Button("Is back in stock!") {
-                        self.item.status = .inStock(quantity: 1)
+                        self.viewModel.item.status = .inStock(quantity: 1)
                     }
                 }
             }
@@ -142,12 +143,9 @@ struct ItemView: View {
 }
 
 struct ItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ItemView(item: .init(
-                projectedValue: .constant(.init(name: "", color: .red, status: .inStock(quantity: 2)))
-            )
-            )
-        }
+  static var previews: some View {
+    NavigationView {
+      ItemView(viewModel: .init(item: .init(name: "", color: nil, status: .inStock(quantity: 1))))
     }
+  }
 }
