@@ -252,6 +252,17 @@ extension NavigationLink {
   }
 }
 
+struct ToSwiftUI: UIViewControllerRepresentable {
+  let viewController: () -> UIViewController
+  
+  func makeUIViewController(context: Context) -> UIViewController {
+    self.viewController()
+  }
+  
+  func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+  }
+}
+
 
 // .sheet:         (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
 // .popover:       (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
