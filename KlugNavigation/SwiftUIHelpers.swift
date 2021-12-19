@@ -262,11 +262,3 @@ struct ToSwiftUI: UIViewControllerRepresentable {
   func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
   }
 }
-
-
-// .sheet:         (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
-// .popover:       (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
-// .alert:         (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
-// .dialog:        (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> some View
-// NavLink.init:   (Binding<E?>, CasePath<E, C>, (Binding<C>) -> some View) -> NavLink
-// IfCaseLet.init: (Binding<E>,  CasePath<E, C>, (Binding<C>) -> some View) -> IfCaseLet

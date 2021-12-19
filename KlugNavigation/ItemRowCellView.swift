@@ -20,12 +20,24 @@ class ItemRowCellView: UICollectionViewListCell {
       }
       .store(in: &self.cancellables)
     
+    var presentedViewController: UIViewController?
+    
     viewModel.$route
       .removeDuplicates()
       .sink { [unowned self] route in
         switch route {
         case .none:
-          break
+          guard let vc = presentedViewController
+          else { return }
+          
+          if context.navigationController?.viewControllers.contains(vc) == true {
+            context.navigationController?.popToViewController(vc, animated: true)
+            context.navigationController?.popViewController(animated: true)
+          } else {
+            vc.dismiss(animated: true)
+          }
+          presentedViewController = nil
+          
         case .deleteAlert:
           let alert = UIAlertController(
             title: viewModel.item.name,
@@ -39,6 +51,7 @@ class ItemRowCellView: UICollectionViewListCell {
             viewModel.deleteConfirmationButtonTapped()
           }))
           context.present(alert, animated: true)
+          presentedViewController = alert
 
         case let .duplicate(itemViewModel):
           let vc = ItemViewController(viewModel: itemViewModel)
@@ -59,6 +72,7 @@ class ItemRowCellView: UICollectionViewListCell {
           nav.modalPresentationStyle = .popover
           nav.popoverPresentationController?.sourceView = self
           context.present(nav, animated: true)
+          presentedViewController = nav
 
         case let .edit(itemViewModel):
           let vc = ItemViewController(viewModel: itemViewModel)
@@ -76,6 +90,7 @@ class ItemRowCellView: UICollectionViewListCell {
             }
           )
           context.show(vc, sender: nil)
+          presentedViewController = vc
         }
       }
       .store(in: &self.cancellables)

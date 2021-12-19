@@ -79,6 +79,8 @@ class InventoryViewModel: ObservableObject {
   }
 
   private func bind(itemRowViewModel: ItemRowViewModel) {
+    print("bind id", itemRowViewModel.id)
+
     itemRowViewModel.onDelete = { [weak self, item = itemRowViewModel.item] in
       withAnimation {
         self?.delete(item: item)
@@ -171,16 +173,6 @@ struct InventoryView: View {
             }
           }
       }
-    }
-  }
-}
-
-struct TestView: View {
-  @State var collection = [1, 2, 3]
-
-  var body: some View {
-    ForEach(self.$collection, id: \.self) { $element in
-
     }
   }
 }
