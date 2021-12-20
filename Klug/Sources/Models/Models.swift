@@ -1,46 +1,68 @@
 import Foundation
 import SwiftUI
 
-struct Item: Equatable, Identifiable {
-  let id = UUID()
-  var name: String
-  var color: Color?
-  var status: Status
+public struct Item: Equatable, Identifiable {
+    public let id = UUID()
+    public var name: String
+    public var color: Color?
+    public var status: Status
 
-  enum Status: Equatable {
-    case inStock(quantity: Int)
-    case outOfStock(isOnBackOrder: Bool)
-
-    var isInStock: Bool {
-      guard case .inStock = self else { return false }
-      return true
+    public init(
+        name: String,
+        color: Item.Color? = nil,
+        status: Item.Status)
+    {
+        self.name = name
+        self.color = color
+        self.status = status
     }
-  }
 
-  struct Color: Equatable, Hashable {
-    var name: String
-    var red: CGFloat = 0
-    var green: CGFloat = 0
-    var blue: CGFloat = 0
+    public enum Status: Equatable {
+        case inStock(quantity: Int)
+        case outOfStock(isOnBackOrder: Bool)
 
-    static var defaults: [Self] = [
-      .red,
-      .green,
-      .blue,
-      .black,
-      .yellow,
-      .white,
-    ]
-
-    static let red = Self(name: "Red", red: 1)
-    static let green = Self(name: "Green", green: 1)
-    static let blue = Self(name: "Blue", blue: 1)
-    static let black = Self(name: "Black")
-    static let yellow = Self(name: "Yellow", red: 1, green: 1)
-    static let white = Self(name: "White", red: 1, green: 1, blue: 1)
-
-    var swiftUIColor: SwiftUI.Color {
-      .init(red: self.red, green: self.green, blue: self.blue)
+        public var isInStock: Bool {
+            guard case .inStock = self else { return false }
+            return true
+        }
     }
-  }
+
+    public struct Color: Equatable, Hashable {
+        public var name: String
+        public var red: CGFloat = 0
+        public var green: CGFloat = 0
+        public var blue: CGFloat = 0
+
+        public init(
+            name: String,
+            red: CGFloat = 0,
+            green: CGFloat = 0,
+            blue: CGFloat = 0)
+        {
+            self.name = name
+            self.red = red
+            self.green = green
+            self.blue = blue
+        }
+
+        public static var defaults: [Self] = [
+            .red,
+            .green,
+            .blue,
+            .black,
+            .yellow,
+            .white,
+        ]
+
+        public static let red = Self(name: "Red", red: 1)
+        public static let green = Self(name: "Green", green: 1)
+        public static let blue = Self(name: "Blue", blue: 1)
+        public static let black = Self(name: "Black")
+        public static let yellow = Self(name: "Yellow", red: 1, green: 1)
+        public static let white = Self(name: "White", red: 1, green: 1, blue: 1)
+
+        public var swiftUIColor: SwiftUI.Color {
+            .init(red: self.red, green: self.green, blue: self.blue)
+        }
+    }
 }

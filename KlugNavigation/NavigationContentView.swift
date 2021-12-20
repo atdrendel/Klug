@@ -1,5 +1,6 @@
 import Parsing
 import SwiftUI
+import Models
 
 struct DeepLinkRequest {
   var pathComponents: ArraySlice<Substring>

@@ -1,5 +1,6 @@
 import CasePaths
 import SwiftUI
+import Models
 
 struct ColorPickerView: View {
   @ObservedObject var viewModel: ItemViewModel

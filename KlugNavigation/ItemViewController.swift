@@ -2,6 +2,7 @@ import CasePaths
 import Combine
 import SwiftUI
 import UIKit
+import Models
 
 class ItemViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   let viewModel: ItemViewModel

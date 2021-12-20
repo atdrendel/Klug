@@ -1,5 +1,6 @@
 import CasePaths
 import SwiftUI
+import Models
 
 class ItemRowViewModel: Hashable, Identifiable, ObservableObject {
   @Published var item: Item
@@ -83,7 +84,7 @@ class ItemRowViewModel: Hashable, Identifiable, ObservableObject {
   }
 }
 
-extension Item {
+public extension Item {
   func duplicate() -> Self {
     .init(name: self.name, color: self.color, status: self.status)
   }

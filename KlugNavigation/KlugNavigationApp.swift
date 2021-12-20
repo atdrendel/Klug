@@ -1,4 +1,5 @@
 import SwiftUI
+import Models
 
 @main
 struct SwiftUINavigationApp: App {

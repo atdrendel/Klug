@@ -1,7 +1,7 @@
 import CasePaths
 import IdentifiedCollections
 import SwiftUI
-
+import Models
 
 
 class InventoryViewModel: ObservableObject {
