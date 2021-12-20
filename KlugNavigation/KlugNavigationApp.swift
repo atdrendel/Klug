@@ -1,5 +1,6 @@
 import SwiftUI
 import Models
+import SwiftUIHelpers
 
 @main
 struct SwiftUINavigationApp: App {

@@ -1,5 +1,6 @@
 import Combine
 import UIKit
+import SwiftUIHelpers
 
 class InventoryViewController: UIViewController, UICollectionViewDelegate {
   let viewModel: InventoryViewModel
