@@ -10,8 +10,9 @@ let package = Package(
         .library(name: "Models", targets: ["Models"]),
         .library(name: "ParsingHelpers", targets: ["ParsingHelpers"]),
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
-        .library(name: "ItemFeature", targets: ["ItemFeature"])
-        
+        .library(name: "ItemFeature", targets: ["ItemFeature"]),
+        .library(name: "ItemRowFeature", targets: ["ItemRowFeature"])
+
     ],
     dependencies: [
         //   .package(name: "Relative", path: "../../Relative")
@@ -23,6 +24,13 @@ let package = Package(
         .target(name: "Models"),
         .target(name: "ItemFeature",
                 dependencies: [
+                    "Models",
+                    "SwiftUIHelpers",
+                    .product(name: "CasePaths", package: "swift-case-paths")
+                ]),
+        .target(name: "ItemRowFeature",
+                dependencies: [
+                    "ItemFeature",
                     "Models",
                     "SwiftUIHelpers",
                     .product(name: "CasePaths", package: "swift-case-paths")

@@ -2,8 +2,8 @@ import Combine
 import UIKit
 import SwiftUIHelpers
 import ItemFeature
-
-
+import ItemRowFeature
+import SwiftUI
 
 class InventoryViewController: UIViewController, UICollectionViewDelegate {
   let viewModel: InventoryViewModel
