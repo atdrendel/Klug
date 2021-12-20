@@ -1,6 +1,7 @@
 import CasePaths
 import SwiftUI
 import Models
+import ItemFeature
 
 class ItemRowViewModel: Hashable, Identifiable, ObservableObject {
   @Published var item: Item

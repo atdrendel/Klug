@@ -1,5 +1,6 @@
 import Combine
 import UIKit
+import ItemFeature
 
 class ItemRowCellView: UICollectionViewListCell {
   var cancellables: Set<AnyCancellable> = []

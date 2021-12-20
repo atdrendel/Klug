@@ -2,6 +2,7 @@ import CasePaths
 import IdentifiedCollections
 import SwiftUI
 import Models
+import ItemFeature
 
 
 class InventoryViewModel: ObservableObject {
