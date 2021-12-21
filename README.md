@@ -31,16 +31,15 @@
 <hr/>
 
 <div style="display: block">
-  <div>
     <h3>Code approaches and ideas</h3>
     <p>
     I try to use the type system to create restricited buttons and textfields that can be customised via set up or that are freely usable using SwiftUI directionly. 
     </p>
-    <img src="Images/sgeet.png" alt="" width="20%">
-  <div>
+    <img src="Images/screen.png" alt=code "image∑" width="60%">
 </div>
 
-
+<br/>    
+<hr/>
 
 ## 🚨 License
 
