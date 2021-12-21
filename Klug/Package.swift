@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "Klug",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v15),.macOS(.v12)],
     products: [
         .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
@@ -17,6 +17,7 @@ let package = Package(
     ],
     dependencies: [
         //   .package(name: "Relative", path: "../../Relative")
+//        .package(url: "https://github.com/codebendr-product-designer/Relative", from: "develop")
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "0.7.0"),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", from: "0.3.2"),
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
