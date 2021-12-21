@@ -35,10 +35,17 @@ struct AccountView: View {
                 .background(
                     Image(systemName: "hexagon")
                         .symbolVariant(.fill)
-                    
                         .foregroundStyle(.blue)
                         .font(.system(size: 200))
                         .offset(x: -50, y: -100)
+                )
+                .background(
+                    Image(systemName: "hexagon")
+                        .symbolVariant(.fill)
+                    
+                        .foregroundStyle(.orange)
+                        .font(.system(size: 200))
+                        .offset(x: 170, y: 170)
                 )
             
             Text("codebendr")

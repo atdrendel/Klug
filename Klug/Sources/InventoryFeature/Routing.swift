@@ -4,16 +4,9 @@ import ItemRowFeature
 import ParsingHelpers
 import Foundation
 
-
 public enum InventoryRoute {
     case add(Item, ItemRoute? = nil)
-    case row(Item.ID, RowRoute)
-
-    public enum RowRoute {
-        case delete
-        case duplicate
-        case edit
-    }
+    case row(Item.ID, ItemRowRoute )
 }
 
 public enum ItemRoute {
@@ -43,15 +36,8 @@ public let inventoryDeepLinker = PathEnd()
     )
     .orElse(
         PathComponent(UUID.parser())
-            .skip(PathComponent("edit"))
-            .skip(PathEnd())
-            .map { id in .row(id, .edit) }
-    )
-    .orElse(
-        PathComponent(UUID.parser())
-            .skip(PathComponent("delete"))
-            .skip(PathEnd())
-            .map { id in .row(id, .delete) }
+            .take(itemRowDeepLinker)
+            .map(InventoryRoute.row)
     )
 
 extension InventoryViewModel {
@@ -74,15 +60,4 @@ extension InventoryViewModel {
     }
 }
 
-extension ItemRowViewModel {
-    func navigate(to route: InventoryRoute.RowRoute) {
-        switch route {
-        case .delete:
-            self.route = .deleteAlert
-        case .duplicate:
-            self.route = .duplicate(.init(item: self.item))
-        case .edit:
-            self.route = .edit(.init(item: self.item))
-        }
-    }
-}
+

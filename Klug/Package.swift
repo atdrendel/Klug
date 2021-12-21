@@ -53,7 +53,9 @@ let package = Package(
                     "ItemFeature",
                     "Models",
                     "SwiftUIHelpers",
-                    .product(name: "CasePaths", package: "swift-case-paths")
+                    "ParsingHelpers",
+                    .product(name: "CasePaths", package: "swift-case-paths"),
+                    .product(name: "Parsing", package: "swift-parsing")
                 ]),
         .target(name: "SwiftUIHelpers",
                 dependencies: [
