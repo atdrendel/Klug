@@ -55,7 +55,7 @@ public class ItemRowViewModel: Hashable, Identifiable, ObservableObject {
         self.route = nil
     }
 
-    func setEditNavigation(isActive: Bool) {
+    public func setEditNavigation(isActive: Bool) {
         self.route = isActive ? .edit(.init(item: self.item)) : nil
     }
 

@@ -3,6 +3,7 @@ import IdentifiedCollections
 import SwiftUI
 import Models
 import ItemFeature
+import ItemRowFeature
 
 
 class InventoryViewModel: ObservableObject {
