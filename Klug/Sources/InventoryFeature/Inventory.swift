@@ -6,9 +6,9 @@ import Models
 import SwiftUI
 
 public class InventoryViewModel: ObservableObject {
-    @Published var inventory: IdentifiedArrayOf<ItemRowViewModel>
-    @Published var route: Route?
-
+    @Published public var inventory: IdentifiedArrayOf<ItemRowViewModel>
+    @Published public var route: Route?
+ 
     public enum Route: Equatable {
         case add(ItemViewModel)
         case row(id: ItemRowViewModel.ID, route: ItemRowViewModel.Route)
@@ -105,6 +105,12 @@ public class InventoryViewModel: ObservableObject {
 
 public struct InventoryView: View {
     @ObservedObject var viewModel: InventoryViewModel
+    
+    public init(
+        viewModel: InventoryViewModel
+    ) {
+        self.viewModel = viewModel
+    }
 
     public var body: some View {
         List {

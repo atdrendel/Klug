@@ -1,6 +1,9 @@
 import SwiftUI
 import Models
 import SwiftUIHelpers
+import InventoryFeature
+import AppFeature
+
 
 @main
 struct SwiftUINavigationApp: App {

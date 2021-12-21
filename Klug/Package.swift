@@ -6,6 +6,7 @@ let package = Package(
     name: "Klug",
     platforms: [.iOS(.v15)],
     products: [
+        .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
         .library(name: "ItemFeature", targets: ["ItemFeature"]),
         .library(name: "ItemRowFeature", targets: ["ItemRowFeature"]),
@@ -23,6 +24,13 @@ let package = Package(
     targets: [
         .target(name: "Klug"),
         .target(name: "Models"),
+        .target(name: "AppFeature",
+                dependencies: [
+                    "InventoryFeature",
+                    "Models",
+                    "ParsingHelpers",
+                    .product(name: "Parsing", package: "swift-parsing")
+                ]),
         .target(name: "InventoryFeature",
                 dependencies: [
                     "ItemRowFeature",
