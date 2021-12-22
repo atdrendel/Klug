@@ -16,14 +16,14 @@
 
 ## Exploring Design Systems in SwiftUI 🎨
 <div  style="display: block;">
- <p> I have been experimenting how to build design systems using SwiftUI to help ease designer to developer handoffs. my goal is to design an API that is very close to SwiftUI completely elementing a learning curve.</p>
+ <p> I have been experimenting with how to build design systems using SwiftUI to help ease designer to developer handoffs. My goal is to design an API that is very close to SwiftUI completely eliminating a learning curve.</p>
 
  ### This project aims to solve :
 <ol>
-<li>unneeded documentation when handing off designs.</li>
-<li>easy access to design tokens from Figma to Xcode.</li>
-<li>experimenting with native component extensions and developing API's close to Apple design guidelines to take advantage of system wide user experience and accessibility.</li>
-<li>working is a super modularised swift package manager toolset to take advantage of running features in isolation and building micro apps for faster iterations.</li>
+<li>Unneeded documentation when handing off designs.</li>
+<li>Easy access to design tokens from Figma to Xcode.</li>
+<li>Experimenting with native component extensions and developing API's close to Apple design guidelines to take advantage of system wide user experience and accessibility.</li>
+<li>Working with is a super modularised swift package manager toolset to take advantage of running features in isolation and building micro apps for faster iterations.</li>
 </ol>
 </div>
 
@@ -31,11 +31,11 @@
 <hr/>
 
 <div style="display: block">
-    <h3>Code approaches and ideas</h3>
+    <h3>Code Approaches and Ideas</h3>
     <p>
-    I try to use the type system to create restricited buttons and textfields that can be customised via set up or that are freely usable using SwiftUI directionly. 
+    I try to use the type system to create restricted buttons and textfields that can be customised via setup or that are freely usable using SwiftUI directly. SwiftUI is super flexible, smart and powerful. With that said, a design system is meant to create rules around this flexibility so users of the system follow visual cues that are intentionally designed for them. 
     </p>
-    <img src="Images/screen.png" alt=code "image∑" width="60%">
+    <img src="Images/screen.png" alt=code "image∑" width="100%">
 </div>
 
 <br/>    
