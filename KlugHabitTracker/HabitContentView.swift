@@ -1,3 +1,4 @@
+import HabitTrackerButtons
 import Klug
 import SwiftUI
 
@@ -82,6 +83,7 @@ struct NewHabitView: View {
     var body: some View {
         VStack {
             HStack {
+                
                 Button {} habit: {
                     Image(systemName: "leaf")
                     Text(
@@ -90,7 +92,7 @@ struct NewHabitView: View {
                     )
                 }
                 .buttonStyle(.primary)
-                
+
                 Button {} habit: {
                     Image(systemName: "plus")
                     Text(habit: "New Area")
