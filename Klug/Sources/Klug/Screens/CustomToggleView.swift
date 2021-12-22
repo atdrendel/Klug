@@ -1,7 +1,11 @@
 import SwiftUI
-import Klug
 
-struct ContentView: View {
+public extension Image {
+    static let illustrationLight = Image("illustrationLight",bundle: .module)
+    static let illustrationDark = Image("illustrationDark",bundle: .module)
+}
+
+struct CustomToggleView: View {
     
     @State var toggleOn = false
     
@@ -20,13 +24,13 @@ struct ContentView: View {
                     .fontWeight(.bold)
                 
                 ZStack{
-                    Image("illustrationLight")
+                    Image.illustrationLight
                         .opacity(toggleOn ? 1 : 0)
                         .rotation3DEffect(
                             .degrees(toggleOn ? 0 : -180),
                             axis: (x: 0.0, y: 1.0, z: 0.0)
                         )
-                    Image("illustrationDark")
+                    Image.illustrationDark
                         .opacity(toggleOn ? 0 : 1)
                         .rotation3DEffect(
                             .degrees(toggleOn ? 180 : 0),
@@ -42,7 +46,7 @@ struct ContentView: View {
                 ZStack {
                     Capsule()
                         .frame(width: 80, height: 44)
-                        .foregroundColor(.init("capsule"))
+                        .foregroundColor(toggleOn ? .white : .black)
                     ZStack {
                         Circle()
                             .frame(width: 40, height: 44)
@@ -85,14 +89,11 @@ struct ContentView: View {
                 
             }
         }
-        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ContentView()
-        }
+        CustomToggleView()
     }
 }
