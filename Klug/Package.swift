@@ -6,14 +6,19 @@ let package = Package(
     name: "Klug",
     platforms: [.iOS(.v15),.macOS(.v12)],
     products: [
+        
+        .library(name: "Klug", targets: ["Klug"]),
+        .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
+        
+        //Point Free Inspiration
         .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
         .library(name: "ItemFeature", targets: ["ItemFeature"]),
         .library(name: "ItemRowFeature", targets: ["ItemRowFeature"]),
-        .library(name: "Klug", targets: ["Klug"]),
         .library(name: "Models", targets: ["Models"]),
         .library(name: "ParsingHelpers", targets: ["ParsingHelpers"]),
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
+        //Point Free Inspiration
     ],
     dependencies: [
         //   .package(name: "Relative", path: "../../Relative")
@@ -24,6 +29,13 @@ let package = Package(
     ],
     targets: [
         .target(name: "Klug"),
+        .target(name: "HabitTrackerButtons",
+               dependencies: [
+                "Klug"
+               ]),
+        
+        
+        //Point Free Inspiration
         .target(name: "Models"),
         .target(name: "AppFeature",
                 dependencies: [
@@ -65,5 +77,7 @@ let package = Package(
                 dependencies: [
                     .product(name: "Parsing", package: "swift-parsing")
                 ])
+        //Point Free Inspiration
+        
     ]
 )
