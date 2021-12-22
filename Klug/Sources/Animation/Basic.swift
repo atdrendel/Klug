@@ -1,26 +1,22 @@
-//
-//  Basic.swift
-//  Basic
-//
-//  Created by Evans Domina Attafuah on 28/07/2021.
-//
-
 import SwiftUI
 
-class BasicViewModel: ObservableObject {
-    @Published var circleCenter = CGPoint.zero
-    @Published var isCircleScaled = false
-    @Published var circleColor: Color = .black
+public class BasicViewModel: ObservableObject {
+    
+    @Published public var circleCenter = CGPoint.zero
+    @Published public var isCircleScaled = false
+    @Published public var circleColor: Color = .black
+    
+    public init(){}
 }
 
-struct BasicView: View {
+public struct BasicView: View {
     @ObservedObject var basicViewModel: BasicViewModel
     
-    init(_ basicViewModel: BasicViewModel = .init()) {
+    public init(_ basicViewModel: BasicViewModel = .init()) {
         self.basicViewModel = basicViewModel
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Circle()
                 .fill(basicViewModel.circleColor)

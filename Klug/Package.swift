@@ -9,6 +9,7 @@ let package = Package(
         
         .library(name: "Klug", targets: ["Klug"]),
         .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
+        .library(name: "Animation", targets: ["Animation"]),
         
         //Point Free Inspiration
         .library(name: "AppFeature", targets: ["AppFeature"]),
@@ -33,7 +34,10 @@ let package = Package(
                dependencies: [
                 "Klug"
                ]),
-        
+        .target(name: "Animation",
+               dependencies: [
+                "Klug"
+               ]),
         
         //Point Free Inspiration
         .target(name: "Models"),
