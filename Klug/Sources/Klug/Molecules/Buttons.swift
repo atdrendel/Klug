@@ -43,7 +43,7 @@ public extension Klug {
                     .frame(width: 200, height: 40)
                     .accentColor(.green)
                     .padding()
-                    .background(type == .google ? Color(UIColor.valencia) : Color(UIColor.vulcan))
+                    .background(type == .google ? .red : .black)
                     .foregroundColor(.white)
             }
         }

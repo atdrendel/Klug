@@ -1,10 +1,11 @@
 import SwiftUI
+import Klug
 
 public struct HabitButtonStyle: ButtonStyle {
     var strokeColor: Color
     var fillColor: Color
     var fontColor: Color
-    
+
     public func makeBody(configuration: Self.Configuration)
         -> some View
     {
@@ -26,42 +27,42 @@ public struct HabitButtonStyle: ButtonStyle {
     }
 }
 
-extension ButtonStyle where Self == HabitButtonStyle {
-    public static var primary: Self {
+public extension ButtonStyle where Self == HabitButtonStyle {
+    static var primary: Self {
         .init(
             strokeColor: .clear,
-            fillColor: .init("lightBlue"),
-            fontColor: .init("blue")
+            fillColor: .habitLightBlue,
+            fontColor: .habitBlue
         )
     }
-    
-    public static var secondary: Self {
+
+    static var secondary: Self {
         .init(
             strokeColor: .white,
-            fillColor: .init("seaBlue"),
-            fontColor: .init("blue")
+            fillColor: .habitSeaBlue,
+            fontColor: .habitBlue
         )
     }
-    
-    public static var accent: Self {
+
+    static var accent: Self {
         .init(
             strokeColor: .clear,
-            fillColor: .init("lightGreen"),
-            fontColor: .init("blue")
+            fillColor: .habitLightGreen,
+            fontColor: .habitBlue
         )
     }
-    
-    public static var alt: Self {
+
+    static var alt: Self {
         .init(
-            strokeColor: .init("green"),
-            fillColor: .init("lightGreen"),
-            fontColor: .init("green")
+            strokeColor: .habitGreen,
+            fillColor: .habitLightGreen,
+            fontColor: .habitGreen
         )
     }
 }
 
-extension Text {
-    public init(habit: String, count: Binding<Int> = .constant(0)) {
+public extension Text {
+    init(habit: String, count: Binding<Int> = .constant(0)) {
         let _count = count.wrappedValue > 0 ? "\(count.wrappedValue)" : ""
         self.init("\(habit)   \(_count)")
     }
@@ -70,19 +71,17 @@ extension Text {
 public typealias HabitButtonTupleView = TupleView<(Image, Text)>
 public typealias HabitButton = HStack<HabitButtonTupleView>
 
-extension Button where Label == HabitButton {
-     public init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButtonTupleView) {
+public extension Button where Label == HabitButton {
+    init(action: @escaping () -> Void, @ViewBuilder habit: () -> HabitButtonTupleView) {
         self.init(action: action) {
             HStack(content: habit)
         }
     }
 }
 
-
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            
             Button {} habit: {
                 Image(systemName: "leaf")
                 Text(
@@ -91,19 +90,19 @@ struct Button_Previews: PreviewProvider {
                 )
             }
             .buttonStyle(.primary)
-            
+
             Button {} habit: {
                 Image(systemName: "plus")
                 Text(habit: "New Area")
             }
             .buttonStyle(.secondary)
-            
+
             Button {} habit: {
                 Image(systemName: "mail.stack")
                 Text(habit: "All Habits", count: .constant(2))
             }
             .buttonStyle(.accent)
-            
+
             Button {} habit: {
                 Image(systemName: "list.dash")
                 Text(habit: "Set a To-do List")
