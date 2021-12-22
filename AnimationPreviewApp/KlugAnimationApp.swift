@@ -1,11 +1,5 @@
-//
-//  KlugAnimationApp.swift
-//  KlugAnimation
-//
-//  Created by Evans Domina Attafuah on 13/10/2021.
-//
-
 import SwiftUI
+import Animation
 
 @main
 struct KlugAnimationApp: App {
