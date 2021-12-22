@@ -94,14 +94,6 @@ struct Buttons_Preview: PreviewProvider {
             }
             .buttonStyle(.social(.apple))
             
-            Button(action: {
-                
-            }, label: {
-                Text("All Habits")
-                    .font(.caption)
-            })
-            .buttonStyle(.outline)
-            
         }
         .previewLayout(.sizeThatFits)
     }
