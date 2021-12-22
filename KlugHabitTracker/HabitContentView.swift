@@ -199,7 +199,6 @@ struct MainTabView: View {
                 NewHabitEmptyState()
                 AddHabitView()
                 
-                
                 ZStack {
                     Color("seaBlue")
                 }
