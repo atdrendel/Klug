@@ -4,22 +4,22 @@ import PackageDescription
 
 let package = Package(
     name: "Klug",
-    platforms: [.iOS(.v15),.macOS(.v12)],
+    platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
-        
         .library(name: "Klug", targets: ["Klug"]),
         .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
         .library(name: "Animation", targets: ["Animation"]),
+        .library(name: "Accessibility", targets: ["Accessibility"]),
         
-        //Point Free Inspiration
-        .library(name: "AppFeature", targets: ["AppFeature"]),
+            // Point Free Inspiration
+            .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
         .library(name: "ItemFeature", targets: ["ItemFeature"]),
         .library(name: "ItemRowFeature", targets: ["ItemRowFeature"]),
         .library(name: "Models", targets: ["Models"]),
         .library(name: "ParsingHelpers", targets: ["ParsingHelpers"]),
-        .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
-        //Point Free Inspiration
+        .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"])
+        // Point Free Inspiration
     ],
     dependencies: [
         //   .package(name: "Relative", path: "../../Relative")
@@ -29,17 +29,22 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
     ],
     targets: [
-        .target(name: "Klug"),
+        .target(name: "Accessibility"),
+        .target(name: "Klug", dependencies: [
+            "Accessibility"
+        ]),
+
+
         .target(name: "HabitTrackerButtons",
-               dependencies: [
-                "Klug"
-               ]),
+                dependencies: [
+                    "Klug"
+                ]),
         .target(name: "Animation",
-               dependencies: [
-                "Klug"
-               ]),
+                dependencies: [
+                    "Klug"
+                ]),
         
-        //Point Free Inspiration
+        // Point Free Inspiration
         .target(name: "Models"),
         .target(name: "AppFeature",
                 dependencies: [
@@ -80,8 +85,14 @@ let package = Package(
         .target(name: "ParsingHelpers",
                 dependencies: [
                     .product(name: "Parsing", package: "swift-parsing")
-                ])
-        //Point Free Inspiration
-        
+                ]),
+        .testTarget(name: "NavigationTests",
+                    dependencies: [
+                       "InventoryFeature",
+                       "ItemRowFeature",
+                       "Models"
+                    ]
+                   )
+        // Point Free Inspiration
     ]
 )
