@@ -1,10 +1,3 @@
-//
-//  CustomViews.swift
-//  KlugViewDimension
-//
-//  Created by Evans Domina Attafuah on 08/11/2021.
-//
-
 import SwiftUI
 
 struct CustomViews: View {

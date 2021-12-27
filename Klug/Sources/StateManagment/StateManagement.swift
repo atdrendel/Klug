@@ -2,7 +2,6 @@ public let wolframAlphaApiKey = "6H69Q3-828TKQJ4EP"
 
 import SwiftUI
 
-
 struct WolframAlphaResult: Decodable {
   let queryresult: QueryResult
 
@@ -245,15 +244,6 @@ struct FavoritePrimesView: View {
       .navigationBarTitle(Text("Favorite Primes"))
   }
 }
-
-
-import PlaygroundSupport
-
-PlaygroundPage.current.liveView = UIHostingController(
-  rootView: ContentView(state: AppState())
-//  rootView: CounterView()
-)
-
 
 struct preview: PreviewProvider {
     static var previews: some View {
