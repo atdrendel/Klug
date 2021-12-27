@@ -24,7 +24,8 @@ struct HexagonView: View {
                 in: .init(x: 0, y: 0, width: size.width, height: size.height)
             )
         }
-        .frame(width: 200, height: 220)
+        .frame(width: 200, height: 212)
+        .foregroundStyle(.linearGradient(colors: [.pink, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }
 

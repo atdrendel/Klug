@@ -26,19 +26,15 @@ struct AccountView: View {
                 .padding()
                 .background(Circle().fill(.ultraThinMaterial))
                 .background(
-                    Image(systemName: "hexagon")
-                        .symbolVariant(.fill)
-                        .foregroundStyle(.blue)
-                        .font(.system(size: 200))
+                    HexagonView()
                         .offset(x: -50, y: -100)
                 )
                 .background(
-                    Image(systemName: "hexagon")
-                        .symbolVariant(.fill)
-                    
-                        .foregroundStyle(.orange)
-                        .font(.system(size: 200))
-                        .offset(x: 170, y: 170)
+                    //Image(systemName: "hexagon")
+//                        .symbolVariant(.fill)
+//                        .foregroundStyle(.orange)
+//                        .font(.system(size: 200))
+//                        .offset(x: 170, y: 170)
                 )
             
             Text("codebendr")
