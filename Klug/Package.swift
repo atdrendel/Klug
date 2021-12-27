@@ -10,6 +10,7 @@ let package = Package(
         .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
         .library(name: "Animation", targets: ["Animation"]),
         .library(name: "Accessibility", targets: ["Accessibility"]),
+        .library(name: "StateManagment", targets: ["StateManagment"]),
         
             // Point Free Inspiration
             .library(name: "AppFeature", targets: ["AppFeature"]),
@@ -29,6 +30,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
     ],
     targets: [
+        .target(name: "StateManagment"),
         .target(name: "Accessibility"),
         .target(name: "Klug", dependencies: [
             "Accessibility"
