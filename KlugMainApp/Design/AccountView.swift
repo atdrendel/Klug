@@ -31,10 +31,10 @@ struct AccountView: View {
                 )
                 .background(
                     //Image(systemName: "hexagon")
-//                        .symbolVariant(.fill)
-//                        .foregroundStyle(.orange)
-//                        .font(.system(size: 200))
-//                        .offset(x: 170, y: 170)
+                    //                        .symbolVariant(.fill)
+                    //                        .foregroundStyle(.orange)
+                    //                        .font(.system(size: 200))
+                    //                        .offset(x: 170, y: 170)
                 )
             
             Text("codebendr")
@@ -57,19 +57,19 @@ struct AccountView: View {
             } label: {
                 Label("Settings", systemImage: "gear")
             }
-
+            
             NavigationLink {
                 DesignContentView()
             } label: {
                 Label("Billing", systemImage: "creditcard")
             }
-
+            
             NavigationLink {
                 DesignContentView()
             } label: {
                 Label("Settings", systemImage: "gear")
             }
-
+            
             Image(systemName: "person.3.sequence")
                 .symbolVariant(.fill)
                 .symbolRenderingMode(.palette)
@@ -92,7 +92,7 @@ struct AccountView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-         
+                
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
                         isDeleted.toggle()
@@ -125,8 +125,8 @@ struct AccountView: View {
             isPinned.toggle()
         } label: {
             isPinned ?
-                Label("Unpin", systemImage: "pin.slash") :
-                Label("Pin", systemImage: "pin")
+            Label("Unpin", systemImage: "pin.slash") :
+            Label("Pin", systemImage: "pin")
         }
         .tint(isPinned ? .gray : .yellow)
     }
