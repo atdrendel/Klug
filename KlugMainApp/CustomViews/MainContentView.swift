@@ -12,7 +12,7 @@ public extension String {
     }
 }
 
-struct ExampleContentView: View {
+struct MainContentView: View {
     
     @State private var isSecureText = false
     @State private var password: String = .empty
@@ -67,9 +67,9 @@ struct ExampleContentView: View {
     }
 }
 
-struct ExampleContentView_Previews: PreviewProvider {
+struct MainContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ExampleContentView()
+        MainContentView()
     }
 }
 

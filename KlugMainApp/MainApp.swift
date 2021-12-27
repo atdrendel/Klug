@@ -1,10 +1,10 @@
 import SwiftUI
 
 @main
-struct ExampleApp: App {
+struct MainApp: App {
     var body: some Scene {
         WindowGroup {
-            ExampleContentView()
+            AccountView()
         }
     }
 }

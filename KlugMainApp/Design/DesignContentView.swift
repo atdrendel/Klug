@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct DesignContentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Spacer()
@@ -63,8 +63,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
-            ContentView()
+            DesignContentView()
+            DesignContentView()
                 .preferredColorScheme(.dark)
         }
     }
