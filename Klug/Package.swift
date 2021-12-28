@@ -11,9 +11,11 @@ let package = Package(
         .library(name: "Animation", targets: ["Animation"]),
         .library(name: "Accessibility", targets: ["Accessibility"]),
         .library(name: "StateManagment", targets: ["StateManagment"]),
+        .library(name: "Nett", targets: ["Nett"]),
+        .library(name: "Relative", targets: ["Relative"]),
         
             // Point Free Inspiration
-            .library(name: "AppFeature", targets: ["AppFeature"]),
+        .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
         .library(name: "ItemFeature", targets: ["ItemFeature"]),
         .library(name: "ItemRowFeature", targets: ["ItemRowFeature"]),
@@ -30,6 +32,10 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
     ],
     targets: [
+        .target(name: "Nett", dependencies: [
+            "Relative"
+        ]),
+        .target(name: "Relative"),
         .target(name: "StateManagment"),
         .target(name: "Accessibility"),
         .target(name: "Klug", dependencies: [
