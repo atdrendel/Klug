@@ -6,6 +6,7 @@ let package = Package(
     name: "Klug",
     platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
+        
         .library(name: "Klug", targets: ["Klug"]),
         .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
         .library(name: "Animation", targets: ["Animation"]),
