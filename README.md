@@ -23,7 +23,7 @@
 <li>Unneeded documentation when handing off designs.</li>
 <li>Easy access to design tokens from Figma to Xcode.</li>
 <li>Experimenting with native component extensions and developing API's close to Apple design guidelines to take advantage of system wide user experience and accessibility.</li>
-<li>Working with is a super modularised swift package manager toolset to take advantage of running features in isolation and building micro apps for faster iterations.</li>
+<li>Working with a super modularised swift package manager toolset to take advantage of running features in isolation and building micro apps for faster iterations.</li>
 </ol>
 </div>
 
