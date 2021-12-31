@@ -1,19 +1,35 @@
-//
-//  WeatherView.swift
-//  WeatherPreviewApp
-//
-//  Created by Evans Domina Attafuah on 31/12/2021.
-//
-
 import SwiftUI
+
+extension Date {
+    static var today: String {
+        "\(Date().formatted(.dateTime.month().day().hour().month()))"
+    }
+}
 
 struct WeatherView: View {
     var weather: ResponseBody
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .leading) {
+            VStack {
+                VStack (alignment: .leading, spacing: 5){
+                    Text(weather.name)
+                        .font(.title.bold())
+                    
+                    Text("Today \(Date.today)")
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
+        .preferredColorScheme(.dark)
     }
 }
+
 
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
