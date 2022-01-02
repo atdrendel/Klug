@@ -9,27 +9,28 @@ struct TabBar: View {
             
             HStack {
                 Spacer()
-                VStack {
-                        Image(systemName: "house")
-                        .symbolVariant(.fill)
-                        .font(.body.bold())
-                        Text("Learn Now")
-                        .font(.caption2)
-                }
-                
-                VStack {
-                        Image(systemName: "magnifyingglass")
-                        .symbolVariant(.fill)
-                        .font(.body.bold())
-                        Text("Explore")
-                        .font(.caption2)
+                ForEach(tabItems) { item in
+                   
+                    VStack(spacing: 0) {
+                        Image(systemName: item.icon)
+                            .symbolVariant(.fill)
+                            .font(.body.bold())
+                            .frame(width: 44, height: 29)
+                        Text(item.text)
+                            .font(.caption2)
+                            .lineLimit(1)
+                    }
+                    .frame(maxWidth: .infinity)
                 }
                 Spacer()
             }
+            .padding(.horizontal, 8)
             .padding(.top, 14)
             .frame(height: 88, alignment: .top)
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 34, style: .continuous))
-            .strokeStyle()
+            .strokeStyle(cornerRadius: 34)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .ignoresSafeArea()
             
         }
     }
@@ -38,5 +39,6 @@ struct TabBar: View {
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
         TabBar()
+            .preferredColorScheme(.dark)
     }
 }
