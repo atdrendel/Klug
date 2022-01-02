@@ -39,7 +39,7 @@ public extension View {
     }
     
     @ViewBuilder func `else`<Content: View>(_ condition: Bool, _ transform: (Self) -> Content) -> some View {
-        if condition {
+        if !condition {
             transform(self)
         } else {
             self
