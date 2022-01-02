@@ -11,7 +11,7 @@ public struct TitleFirstLabelStyle: LabelStyle {
         }
         .padding(.top, 10)
         .padding(.bottom, 10)
-        .font(.title3.bold())
+        .font(.body.bold())
         .foregroundColor(Color("blue"))
     }
 }
@@ -23,7 +23,10 @@ public extension LabelStyle where Self == TitleFirstLabelStyle {
 
 struct PopularHabitView: View {
     var body: some View {
-        VStack {
+        VStack (alignment: .leading){
+            
+            Text("Most Popular Habits")
+            
             HStack {
                 
                 Button {} label: {
@@ -48,19 +51,44 @@ struct PopularHabitView: View {
                
 
             }
+            
             VStack {
                 
                 Button {} label: {
                     Label {
-                        Text("Read Books")
+                        Text("Set a To-do List")
                     } icon: {
-                        Image(systemName: "book")
+                        Image(systemName: "list.star")
                     }
                   
                 }
                 .tint(Color("lightBlue"))
             }
-            HStack {}
+            
+            HStack {
+                
+                Button {} label: {
+                    Label {
+                        Text("Drink Water")
+                    } icon: {
+                        Image(systemName: "drop")
+                    }
+                  
+                }
+                .tint(Color("purple"))
+                
+                Button {} label: {
+                    Label {
+                        Text("Running")
+                    } icon: {
+                        Image(systemName: "heart")
+                    }
+                  
+                }
+                .tint(Color("pink"))
+               
+
+            }
         }
         .labelStyle(.titleFirst)
         .buttonStyle(.borderedProminent)

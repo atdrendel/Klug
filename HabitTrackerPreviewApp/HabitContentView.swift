@@ -48,7 +48,7 @@ struct HabitContentView: View {
         }
         .sheet(isPresented: $isPresented, onDismiss: {}) {
             NavigationView {
-                NewHabitEmptyState()
+                PopularHabitView()
                     .navigationTitle("New Habit")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
