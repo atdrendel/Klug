@@ -5,18 +5,25 @@ public struct HabitButtonStyle: ButtonStyle {
     var strokeColor: Color
     var fillColor: Color
     var fontColor: Color
+    var isMaxWidth = false
 
     public func makeBody(configuration: Self.Configuration)
         -> some View
     {
         configuration.label
             .font(.caption2)
-            .frame(height: 0)
+            .if(isMaxWidth) {
+                $0.frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .else(!isMaxWidth) {
+                $0.frame(height: 0)
+            }
             .padding()
             .foregroundColor(fontColor)
             .background(
                 Capsule()
                     .fill(configuration.isPressed ? fillColor.opacity(0.3) : fillColor.opacity(1))
+                    .controlSize(.large)
                     .overlay(
                         Capsule()
                             .stroke(configuration.isPressed ? strokeColor.opacity(0.3) : strokeColor.opacity(1))
@@ -24,6 +31,25 @@ public struct HabitButtonStyle: ButtonStyle {
             )
             .scaleEffect(.init(configuration.isPressed ? 0.8 : 1))
             .animation(.easeOut, value: configuration.isPressed)
+    }
+}
+
+public enum SecondaryButtonStyle {
+    case one, two
+    
+    func style() -> HabitButtonStyle {
+        switch self {
+        case .one : return .init(
+            strokeColor: .white,
+            fillColor: .habitSeaBlue,
+            fontColor: .habitBlue
+        )
+        case .two : return .init(
+            strokeColor: .clear,
+            fillColor: .habitBlue,
+            fontColor: .white
+        )
+        }
     }
 }
 
@@ -35,14 +61,8 @@ public extension ButtonStyle where Self == HabitButtonStyle {
             fontColor: .habitBlue
         )
     }
-
-    static var secondary: Self {
-        .init(
-            strokeColor: .white,
-            fillColor: .habitSeaBlue,
-            fontColor: .habitBlue
-        )
-    }
+    
+    static func secondary(_ type: SecondaryButtonStyle = .one) -> Self {  type.style() }
 
     static var accent: Self {
         .init(
@@ -91,11 +111,19 @@ struct Button_Previews: PreviewProvider {
             }
             .buttonStyle(.primary)
 
+            HStack {
+                Button {} habit: {
+                    Image(systemName: "plus")
+                    Text(habit: "New Area")
+                }
+                .buttonStyle(.secondary())
+            }
+            
             Button {} habit: {
                 Image(systemName: "plus")
                 Text(habit: "New Area")
             }
-            .buttonStyle(.secondary)
+            .buttonStyle(.secondary(.two))
 
             Button {} habit: {
                 Image(systemName: "mail.stack")
