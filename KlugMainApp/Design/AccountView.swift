@@ -25,11 +25,14 @@ struct AccountView: View {
                 .foregroundStyle(.blue, .blue.opacity(0.3))
                 .padding()
                 .background(Circle().fill(.ultraThinMaterial))
+//                .background(
+//                    HexagonView()
+//                        .offset(x: -50, y: -100)
+//                )
                 .background(
-                    HexagonView()
-                        .offset(x: -50, y: -100)
-                )
-                .background(
+                    BlobView()
+                        .offset(x: 120, y: 0)
+                        .scaleEffect(1.3)
                     //Image(systemName: "hexagon")
                     //                        .symbolVariant(.fill)
                     //                        .foregroundStyle(.orange)

@@ -5,6 +5,7 @@ struct BlobView: View {
 
     var body: some View {
         TimelineView(.animation) { timeline in
+            
             let now = timeline.date.timeIntervalSinceReferenceDate
             let angle = Angle.degrees(now.remainder(dividingBy: 3)*60)
             let x = cos(angle.radians)
