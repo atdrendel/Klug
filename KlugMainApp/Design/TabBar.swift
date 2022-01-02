@@ -19,26 +19,47 @@ enum Tab: String {
 }
 
 struct TabBar: View {
+    @State var selectedTab = Tab.home
     var body: some View {
         ZStack(alignment: .bottom) {
-  
+            Group {
+                switch selectedTab {
+                case .home:
+                    AccountView()
+                case .explore:
+                    DesignContentView()
+                case .notifications:
+                    AccountView()
+                case .library:
+                    AccountView()
+                }
+            }
+
             AccountView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
             HStack {
                 Spacer()
                 ForEach(tabItems) { item in
-                   
-                    VStack(spacing: 0) {
-                        Image(systemName: item.icon)
-                            .symbolVariant(.fill)
-                            .font(.body.bold())
-                            .frame(width: 44, height: 29)
-                        Text(item.text)
-                            .font(.caption2)
-                            .lineLimit(1)
+                    Button {
+                        selectedTab = item.tab
+                    } label: {
+                        VStack(spacing: 0) {
+                            Image(systemName: item.icon)
+                                .symbolVariant(.fill)
+                                .font(.body.bold())
+                                .frame(width: 44, height: 29)
+                            Text(item.text)
+                                .font(.caption2)
+                                .lineLimit(1)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
+                    .foregroundColor(
+                        selectedTab == item.tab ?
+                            .secondary :
+                            .primary
+                    )
                 }
                 Spacer()
             }
@@ -49,7 +70,6 @@ struct TabBar: View {
             .strokeStyle(cornerRadius: 34)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .ignoresSafeArea()
-            
         }
     }
 }
