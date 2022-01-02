@@ -1,5 +1,23 @@
 import SwiftUI
 
+struct TabItem: Identifiable {
+    var id = UUID()
+    var text: String
+    var icon: String
+    var tab: Tab
+}
+
+var tabItems: [TabItem] = [
+    .init(text: "Learn Now", icon: "house", tab: .home),
+    .init(text: "Explore", icon: "magnifyingglass", tab: .explore),
+    .init(text: "Notifications", icon: "bell", tab: .notifications),
+    .init(text: "Library", icon: "rectangle.stack", tab: .library)
+]
+
+enum Tab: String {
+    case home, explore, notifications, library
+}
+
 struct TabBar: View {
     var body: some View {
         ZStack(alignment: .bottom) {
