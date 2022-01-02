@@ -67,6 +67,14 @@ struct TabBar: View {
             .padding(.top, 14)
             .frame(height: 88, alignment: .top)
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 34, style: .continuous))
+            .background(
+                HStack {
+                    Circle().fill(.pink).frame(width: 80)
+                    Spacer()
+                    Spacer()
+                }
+                .padding(.horizontal, 8)
+            )
             .strokeStyle(cornerRadius: 34)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .ignoresSafeArea()
