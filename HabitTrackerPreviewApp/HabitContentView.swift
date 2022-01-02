@@ -27,19 +27,23 @@ struct HabitContentView: View {
                 .navigationTitle("Today")
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
-                            Image(systemName: "graduationcap.circle.fill")
+                        Button(action:  {
+                            isPresented.toggle()
+                        }, label: {
+                            Image(systemName: "graduationcap.circle")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
                                 .foregroundColor(Color("blue"))
+                                .symbolVariant(.fill)
                             
                         })
                         
                         Button(action: {}, label: {
-                            Image(systemName: "calendar.circle.fill")
+                            Image(systemName: "calendar.circle")
                                 .resizable()
                                 .frame(width: 30, height: 30, alignment: .leading)
                                 .foregroundColor(Color("blue"))
+                                .symbolVariant(.fill)
                             
                         })
                     }
@@ -72,12 +76,7 @@ struct HabitContentView: View {
     }
 }
 
-struct HabitContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HabitContentView()
-            .ignoresSafeArea()
-    }
-}
+
 
 struct NewHabitView: View {
     var body: some View {
@@ -231,5 +230,14 @@ struct MainTabView: View {
         }
         
         .accentColor(Color("yellow"))
+    }
+}
+
+
+struct HabitContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        HabitContentView()
+            .ignoresSafeArea()
+            .preferredColorScheme(.dark)
     }
 }

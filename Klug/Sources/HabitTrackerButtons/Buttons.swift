@@ -6,18 +6,20 @@ public struct HabitButtonStyle: ButtonStyle {
     var fillColor: Color
     var fontColor: Color
     var isMaxWidth = false
+    var font: Font = .caption2
 
     public func makeBody(configuration: Self.Configuration)
         -> some View
     {
         configuration.label
-            .font(.caption2)
+            .font(font)
             .if(isMaxWidth) {
-                $0.frame(minWidth: 0, maxWidth: .infinity)
+                $0.frame(minWidth: 0, idealWidth: 20, maxWidth: .infinity, minHeight: 16, idealHeight: 0, maxHeight: 0, alignment: .center)
             }
-            .else(!isMaxWidth) {
+            .else(isMaxWidth) {
                 $0.frame(height: 0)
             }
+            .controlSize(.large)
             .padding()
             .foregroundColor(fontColor)
             .background(
@@ -47,7 +49,9 @@ public enum SecondaryButtonStyle {
         case .two : return .init(
             strokeColor: .clear,
             fillColor: .habitBlue,
-            fontColor: .white
+            fontColor: .white,
+            isMaxWidth: true,
+            font: .subheadline.bold()
         )
         }
     }
