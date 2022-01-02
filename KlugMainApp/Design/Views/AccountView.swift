@@ -8,7 +8,9 @@ struct AccountView: View {
         NavigationView {
             List {
                 profile
+                
                 menu
+                
                 links
             }
             .listStyle(.insetGrouped)
@@ -17,7 +19,7 @@ struct AccountView: View {
     }
     
     var profile: some View {
-        VStack {
+        VStack(spacing: 8) {
             Image(systemName: "person.crop.circle.fill.badge.checkmark")
                 .symbolVariant(.circle.fill)
                 .font(.system(size: 32))
@@ -25,21 +27,14 @@ struct AccountView: View {
                 .foregroundStyle(.blue, .blue.opacity(0.3))
                 .padding()
                 .background(Circle().fill(.ultraThinMaterial))
-//                .background(
-//                    HexagonView()
-//                        .offset(x: -50, y: -100)
-//                )
                 .background(
-                    BlobView()
-                        .offset(x: 120, y: 0)
-                        .scaleEffect(1.3)
-                    //Image(systemName: "hexagon")
-                    //                        .symbolVariant(.fill)
-                    //                        .foregroundStyle(.orange)
-                    //                        .font(.system(size: 200))
-                    //                        .offset(x: 170, y: 170)
+                    HexagonView()
+                        .offset(x: -50, y: -100)
                 )
-            
+                .background(
+                    .offset(x: 120, y: 0)
+                    .scaleEffect(1.3)
+                )
             Text("codebendr")
                 .font(.title.weight(.semibold))
             HStack {
@@ -48,6 +43,7 @@ struct AccountView: View {
                 Text("Ghana")
                     .foregroundColor(.secondary)
             }
+            }
         }
         .frame(maxWidth: .infinity)
         .padding()
@@ -55,22 +51,14 @@ struct AccountView: View {
     
     var menu: some View {
         Section {
-            NavigationLink {
-                DesignContentView()
-            } label: {
+            NavigationLink(destination: HomeView()) {
                 Label("Settings", systemImage: "gear")
             }
-            
-            NavigationLink {
-                DesignContentView()
-            } label: {
+            NavigationLink { Text("Billing") } label: {
                 Label("Billing", systemImage: "creditcard")
             }
-            
-            NavigationLink {
-                DesignContentView()
-            } label: {
-                Label("Settings", systemImage: "gear")
+            NavigationLink { HomeView() } label: {
+                Label("Help", systemImage: "questionmark")
             }
             
             Image(systemName: "person.3.sequence")
@@ -87,7 +75,7 @@ struct AccountView: View {
     var links: some View {
         Section {
             if !isDeleted {
-                Link(destination: .init(string: "https://apple.com")!) {
+                Link(destination: URL(string: "https://apple.com")!) {
                     HStack {
                         Label("Website", systemImage: "house")
                         Spacer()
@@ -95,22 +83,17 @@ struct AccountView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                    Button {
-                        isDeleted.toggle()
-                    } label: {
+                    Button(action: { isDeleted = true }) {
                         Label("Delete", systemImage: "trash")
                     }
                     .tint(.red)
-                }
-                .swipeActions {
                     pinButton
                 }
             }
-            Link(destination: .init(string: "https://youtube.com")!) {
+            Link(destination: URL(string: "https://youtube.com")!) {
                 HStack {
-                    Label("Youtube", systemImage: "tv")
+                    Label("YouTube", systemImage: "tv")
                     Spacer()
                     Image(systemName: "link")
                         .foregroundColor(.secondary)
@@ -121,15 +104,16 @@ struct AccountView: View {
             }
         }
         .accentColor(.primary)
+        .listRowSeparator(.hidden)
     }
     
     var pinButton: some View {
-        Button {
-            isPinned.toggle()
-        } label: {
-            isPinned ?
-            Label("Unpin", systemImage: "pin.slash") :
-            Label("Pin", systemImage: "pin")
+        Button { isPinned.toggle() } label: {
+            if isPinned {
+                Label("Unpin", systemImage: "pin.slash")
+            } else {
+                Label("Pin", systemImage: "pin")
+            }
         }
         .tint(isPinned ? .gray : .yellow)
     }
@@ -137,10 +121,6 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            AccountView()
-            AccountView()
-                .preferredColorScheme(.dark)
-        }
+        AccountView()
     }
 }

@@ -1,6 +1,13 @@
+//
+//  FeaturedItem.swift
+//  DesignCodeiOS15
+//
+//  Created by Meng To on 2021-11-16.
+//
+
 import SwiftUI
 
-struct DesignContentView: View {
+struct FeaturedItem: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Spacer()
@@ -8,24 +15,21 @@ struct DesignContentView: View {
                 .resizable(resizingMode: .stretch)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 26.0, height: 26.0)
-                .cornerRadius(10.0)
+                .cornerRadius(10)
                 .padding(9)
-                .background(.ultraThinMaterial, in: RoundedRectangle(
-                    cornerRadius: 16,
-                    style: .continuous
-                ))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .strokeStyle(cornerRadius: 16)
-
             Text("SwiftUI for iOS 15")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundStyle(.linearGradient(colors: [.red, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
-
+                .foregroundStyle(.linearGradient(colors: [.primary, .primary.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .lineLimit(1)
             Text("20 sections - 3 hours".uppercased())
                 .font(.footnote)
                 .fontWeight(.semibold)
-                .foregroundColor(.secondary)
-            Text(/*@START_MENU_TOKEN@*/"Build an iOS app for iOS 15 with custom layouts, animations and ..."/*@END_MENU_TOKEN@*/)
+                .foregroundStyle(.secondary)
+            Text("Build an iOS app for iOS 15 with custom layouts, animations and ...")
+                .font(.footnote)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -34,16 +38,10 @@ struct DesignContentView: View {
         .padding(.all, 20.0)
         .padding(.vertical, 20)
         .frame(height: 350.0)
-        .background(.ultraThinMaterial,
-                    in: RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30, style: .continuous))
 //        .cornerRadius(30.0)
-//        .mask(
-//            RoundedRectangle(
-        //                cornerRadius: 30,
-//                style: .continuous
-//            )
-//        )
-        .shadow(color: .init("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+//        .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
         .strokeStyle()
         .padding(.horizontal, 20)
         .background(
@@ -55,17 +53,13 @@ struct DesignContentView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 230)
-                .offset(x: 32, y: -90)
+                .offset(x: 32, y: -80)
         )
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct FeaturedItem_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            DesignContentView()
-            DesignContentView()
-                .preferredColorScheme(.dark)
-        }
+        FeaturedItem()
     }
 }
