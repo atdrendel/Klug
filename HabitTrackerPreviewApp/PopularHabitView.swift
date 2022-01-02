@@ -9,8 +9,7 @@ public struct TitleFirstLabelStyle: LabelStyle {
             Spacer()
             configuration.icon
         }
-        .padding(.top, 10)
-        .padding(.bottom, 10)
+        .padding(.vertical, 10)
         .font(.body.bold())
         .foregroundColor(Color("blue"))
     }
@@ -23,19 +22,18 @@ public extension LabelStyle where Self == TitleFirstLabelStyle {
 
 struct PopularHabitView: View {
     var body: some View {
-        VStack (alignment: .leading){
-            
+        VStack(alignment: .leading) {
             Text("Most Popular Habits")
-            
+                .font(.title3.weight(.semibold))
+                .padding(.vertical)
+               
             HStack {
-                
                 Button {} label: {
                     Label {
                         Text("Meditation")
                     } icon: {
                         Image(systemName: "aqi.medium")
                     }
-                  
                 }
                 .tint(Color("seaBlue"))
                 
@@ -45,35 +43,28 @@ struct PopularHabitView: View {
                     } icon: {
                         Image(systemName: "book")
                     }
-                  
                 }
                 .tint(Color("yellow").opacity(0.7))
-               
-
             }
             
             VStack {
-                
                 Button {} label: {
                     Label {
                         Text("Set a To-do List")
                     } icon: {
                         Image(systemName: "list.star")
                     }
-                  
                 }
                 .tint(Color("lightBlue"))
             }
             
             HStack {
-                
                 Button {} label: {
                     Label {
                         Text("Drink Water")
                     } icon: {
                         Image(systemName: "drop")
                     }
-                  
                 }
                 .tint(Color("purple"))
                 
@@ -83,11 +74,19 @@ struct PopularHabitView: View {
                     } icon: {
                         Image(systemName: "heart")
                     }
-                  
                 }
                 .tint(Color("pink"))
-               
-
+            }
+            
+            Spacer()
+            
+            HStack {
+                Button {} label: {
+                    Label("Create your own", systemImage: "plus.circle")
+                        .padding()
+                        .labelStyle(.titleAndIcon)
+                }
+                .buttonStyle(.secondary(.two))
             }
         }
         .labelStyle(.titleFirst)

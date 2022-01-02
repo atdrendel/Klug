@@ -97,7 +97,7 @@ struct NewHabitView: View {
                     Image(systemName: "plus")
                     Text(habit: "New Area")
                 }
-                .buttonStyle(.secondary)
+                .buttonStyle(.secondary())
                 
                 Spacer()
             }
