@@ -15,14 +15,12 @@ public struct TitleFirstLabelStyle: LabelStyle {
     }
 }
 
-// func labelStyle<S>(_ style: S) -> some View where S : LabelStyle
 public extension LabelStyle where Self == TitleFirstLabelStyle {
     static var titleFirst: Self { .init() }
 }
 
 struct PopularHabitView: View {
     var body: some View {
-        NavigationView {
             VStack(alignment: .leading) {
                 Text("Most Popular Habits")
                     .font(.title3.weight(.semibold))
@@ -93,26 +91,7 @@ struct PopularHabitView: View {
             .labelStyle(.titleFirst)
             .buttonStyle(.borderedProminent)
             .padding()
-//        .navigationBarHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {} label: {
-                        Text("Close")
-                            .bold()
-                            .foregroundColor(.habitBlue)
-                    }
-                    .buttonStyle(.plain)
-                }
-                ToolbarItem() {
-                    Button {} label: {
-                        Text("Save")
-                            .bold()
-                            .foregroundColor(.habitBlue)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
+        
     }
 }
 
