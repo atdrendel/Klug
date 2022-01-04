@@ -1,6 +1,35 @@
 import SwiftUI
 
+public struct TextFieldHabitStyle: TextFieldStyle {
+    public init() {}
+    public func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .font(.body.bold())
+    }
+}
 
+public struct HabitListItemLabelStyle: LabelStyle {
+    public init() {}
+
+    public func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.title
+            Spacer()
+            configuration.icon
+        }
+        .padding(.vertical, 10)
+        .font(.body.bold())
+        .foregroundColor(Color("blue"))
+    }
+}
+
+public extension LabelStyle where Self == HabitListItemLabelStyle {
+    static var habitListItem: Self { .init() }
+}
+
+public extension TextFieldStyle where Self == TextFieldHabitStyle {
+    static var bold: Self { .init() }
+}
 
 struct CreateHabit: View {
     var body: some View {
