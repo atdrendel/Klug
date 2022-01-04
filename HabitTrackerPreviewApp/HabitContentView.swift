@@ -238,6 +238,6 @@ struct HabitContentView_Previews: PreviewProvider {
     static var previews: some View {
         HabitContentView()
             .ignoresSafeArea()
-            .preferredColorScheme(.dark)
+            //.preferredColorScheme(.dark)
     }
 }

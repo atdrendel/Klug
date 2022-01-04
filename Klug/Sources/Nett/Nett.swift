@@ -1,16 +1,14 @@
 import UIKit
 
-public struct Nett<View>{
-    public let render: (UIView) -> View
+public struct Nett {
+    @resultBuilder struct Builder {
+        static func buildBlock(_ views: UIView...) -> [UIView] { views }
+    }
 }
 
-extension Nett where View == UIButton {
-    public static let button = Self { view in
-        let b = UIButton()
-        b.setTitle("some button", for: .normal)
-        b.configuration = .bordered()
-        return b
-    }
+protocol Nett {
+    associatedtype Render: Nett
+    var render: Render { get }
 }
 
 /*The idea is to compose views in a declarative way using UIKit
@@ -23,45 +21,21 @@ extension Nett where View == UIButton {
  1. contract a typical UIKit view
  2. try and convert it into a projected solution
  
- 
- Nett<UIButton>
- Nett<UIView>
- Nett<UILabel>
- 
- Render(
- Nett.render(
-  .label("some text"),
-  .button("label", style:, action),
-  .button(&customButton)
-  )
- )
+
  
  Nett {
    stack(.horizantal) {
-    button()
-     label()
+    button(action:{
+ 
+ }, label: {
+ 
+ })
+    label()
+ 
    }
  }
  
- Render {
- Nett.render(
-  .label("some text"),
-  .button("label", style:, action),
-  .button(&customButton)
-  )
- }
  
- Nett.render(
-  .stack(
-     .horizontal,
-     .render(
-     .label("some text")
-       .button(button, action: {
- 
- })
-     )
-   )
- )
  
  */
 
