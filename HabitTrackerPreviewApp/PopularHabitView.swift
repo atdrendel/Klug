@@ -22,76 +22,97 @@ public extension LabelStyle where Self == TitleFirstLabelStyle {
 
 struct PopularHabitView: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Most Popular Habits")
-                .font(.title3.weight(.semibold))
-                .padding(.vertical)
-               
-            HStack {
-                Button {} label: {
-                    Label {
-                        Text("Meditation")
-                    } icon: {
-                        Image(systemName: "aqi.medium")
+        NavigationView {
+            VStack(alignment: .leading) {
+                Text("Most Popular Habits")
+                    .font(.title3.weight(.semibold))
+                    .padding(.vertical)
+                   
+                HStack {
+                    Button {} label: {
+                        Label {
+                            Text("Meditation")
+                        } icon: {
+                            Image(systemName: "aqi.medium")
+                        }
                     }
+                    .tint(Color("seaBlue"))
+                    
+                    Button {} label: {
+                        Label {
+                            Text("Read Books")
+                        } icon: {
+                            Image(systemName: "book")
+                        }
+                    }
+                    .tint(Color("yellow").opacity(0.7))
                 }
-                .tint(Color("seaBlue"))
                 
-                Button {} label: {
-                    Label {
-                        Text("Read Books")
-                    } icon: {
-                        Image(systemName: "book")
+                VStack {
+                    Button {} label: {
+                        Label {
+                            Text("Set a To-do List")
+                        } icon: {
+                            Image(systemName: "list.star")
+                        }
                     }
+                    .tint(Color("lightBlue"))
                 }
-                .tint(Color("yellow").opacity(0.7))
-            }
-            
-            VStack {
-                Button {} label: {
-                    Label {
-                        Text("Set a To-do List")
-                    } icon: {
-                        Image(systemName: "list.star")
-                    }
-                }
-                .tint(Color("lightBlue"))
-            }
-            
-            HStack {
-                Button {} label: {
-                    Label {
-                        Text("Drink Water")
-                    } icon: {
-                        Image(systemName: "drop")
-                    }
-                }
-                .tint(Color("purple"))
                 
-                Button {} label: {
-                    Label {
-                        Text("Running")
-                    } icon: {
-                        Image(systemName: "heart")
+                HStack {
+                    Button {} label: {
+                        Label {
+                            Text("Drink Water")
+                        } icon: {
+                            Image(systemName: "drop")
+                        }
                     }
+                    .tint(Color("purple"))
+                    
+                    Button {} label: {
+                        Label {
+                            Text("Running")
+                        } icon: {
+                            Image(systemName: "heart")
+                        }
+                    }
+                    .tint(Color("pink"))
                 }
-                .tint(Color("pink"))
+                
+                Spacer()
+                
+                HStack {
+                    Button {} label: {
+                        Label("Create your own", systemImage: "plus.circle")
+                            .padding()
+                            .labelStyle(.titleAndIcon)
+                    }
+                    .buttonStyle(.secondary(.two))
+                }
             }
-            
-            Spacer()
-            
-            HStack {
-                Button {} label: {
-                    Label("Create your own", systemImage: "plus.circle")
-                        .padding()
-                        .labelStyle(.titleAndIcon)
+            .labelStyle(.titleFirst)
+            .buttonStyle(.borderedProminent)
+            .padding()
+//        .navigationBarHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {} label: {
+                        Text("Close")
+                            .bold()
+                            .foregroundColor(.habitBlue)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.secondary(.two))
+                ToolbarItem() {
+                    Button {} label: {
+                        Text("Save")
+                            .bold()
+                            .foregroundColor(.habitBlue)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
-        .labelStyle(.titleFirst)
-        .buttonStyle(.borderedProminent)
-        .padding()
     }
 }
 
