@@ -3,28 +3,49 @@ import SwiftUI
 public struct TextFieldHabitStyle: TextFieldStyle {
     public init() {}
     public func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .font(.body.bold())
+        configuration.font(.body.bold())
     }
 }
 
 public struct HabitListItemLabelStyle: LabelStyle {
-    public init() {}
+    private let backgroundColor: Color
+    private let color: Color
+    private let subtitle: String
+
+    public init(
+        background: Color = Color("green"),
+        color: Color = Color("green"),
+        subtitle: String = "")
+    {
+        self.backgroundColor = background
+        self.color = color
+        self.subtitle = subtitle
+    }
 
     public func makeBody(configuration: Configuration) -> some View {
         HStack {
-            configuration.title
-            Spacer()
             configuration.icon
+                .foregroundColor(.white)
+                .frame(width: 40, height: 40)
+                .background(RoundedRectangle(cornerSize: .init(width: 12, height: 12)))
+
+            VStack(alignment: .leading) {
+                Text("subtitle")
+                    .font(.callout.weight(.light))
+                configuration.title
+            }
         }
         .padding(.vertical, 10)
         .font(.body.bold())
+
         .foregroundColor(Color("blue"))
     }
 }
 
 public extension LabelStyle where Self == HabitListItemLabelStyle {
-    static var habitListItem: Self { .init() }
+    static func habitListItem(background: Color = Color("green"),
+                              color: Color = Color("green"),
+                              subtitle: String = "") -> Self { .init(background: background, color: color, subtitle: subtitle) }
 }
 
 public extension TextFieldStyle where Self == TextFieldHabitStyle {
@@ -50,7 +71,7 @@ struct CreateHabit: View {
                             } icon: {
                                 Image(systemName: "swift")
                             }
-                            .labelStyle(.habitListItem)
+                            .labelStyle(.habitListItem(background: .pink, color: .green, subtitle: "some text"))
                         }
                     }
                 }
