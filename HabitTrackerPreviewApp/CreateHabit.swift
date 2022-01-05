@@ -7,8 +7,6 @@ public struct TextFieldHabitStyle: TextFieldStyle {
     }
 }
 
-
-
 public extension TextFieldStyle where Self == TextFieldHabitStyle {
     static var bold: Self { .init() }
 }
@@ -66,7 +64,45 @@ struct CreateHabit: View {
                     .buttonStyle(.plain)
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
+    }
+}
+
+struct HabitListView: View {
+    let icon: String
+    let title: String
+    let subtitle: String
+    var color: Color = .teal
+    
+    var body: some View {
+        NavigationLink {
+            Text("")
+        } label: {
+            HStack {
+                Image(systemName: icon)
+                    .foregroundColor(color)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        RoundedRectangle(
+                            cornerSize: .init(width: 12, height: 12)
+                        )
+                            .fill(color.opacity(0.3))
+                    )
+                    .font(.title2)
+
+                VStack(alignment: .leading) {
+                    Text(subtitle)
+                        .font(.caption.weight(.light))
+                        .foregroundColor(.secondary)
+                    Text(title)
+                        .foregroundColor(Color("blue"))
+                }
+            }
+            .padding(.vertical, 10)
+            .font(.body.bold())
+        }
+
     }
 }
 
