@@ -22,6 +22,8 @@ public extension LabelStyle where Self == TitleFirstLabelStyle {
 
 
 struct PopularHabitView: View {
+    @State var isPresented = false
+    
     var body: some View {
             VStack(alignment: .leading) {
                 Text("Most Popular Habits")
@@ -49,7 +51,9 @@ struct PopularHabitView: View {
                 }
                 
                 VStack {
-                    Button {} label: {
+                    Button {
+                        
+                    } label: {
                         Label {
                             Text("Set a To-do List")
                         } icon: {
@@ -82,7 +86,9 @@ struct PopularHabitView: View {
                 Spacer()
                 
                 HStack {
-                    Button {} label: {
+                    Button {
+                        isPresented = true 
+                    } label: {
                         Label("Create your own", systemImage: "plus.circle")
                             .padding()
                             .labelStyle(.titleAndIcon)
@@ -93,6 +99,12 @@ struct PopularHabitView: View {
             .labelStyle(.titleFirst)
             .buttonStyle(.borderedProminent)
             .padding()
+            .sheet(isPresented: $isPresented) {
+                isPresented = false
+            } content: {
+                CreateHabit()
+            }
+
         
     }
 }

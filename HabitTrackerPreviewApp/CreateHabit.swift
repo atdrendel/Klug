@@ -12,43 +12,49 @@ public extension TextFieldStyle where Self == TextFieldHabitStyle {
 }
 
 struct CreateHabit: View {
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
+        
         NavigationView {
             Form {
+                
                 Section {
+                    
+//                    TextField("Name of Habit", value: .constant(0.0), format: .currency(code: "USD"))
+//                        .textFieldStyle(.bold)
+                    
                     TextField("Name of Habit", text: .constant(""))
                         .textFieldStyle(.bold)
                 }
 
                 Section {
-                    List(0 ..< 5) { _ in
-                        NavigationLink {
-                            Text("")
-                        } label: {
-                            HStack {
-                                Image(systemName: "swift")
-                                    .foregroundColor(.white)
-                                    .frame(width: 40, height: 40)
-                                    .background(RoundedRectangle(cornerSize: .init(width: 12, height: 12)))
-
-                                VStack(alignment: .leading) {
-                                    Text("Swift")
-                                    Text("subtitle")
-                                        .font(.callout.weight(.light))
-                                }
-                            }
-                            .padding(.vertical, 10)
-                            .font(.body.bold())
-                            .foregroundColor(Color("blue"))
-                        
-                        }
-                    }
+                    
+                    HabitListView(icon: "arrow.2.squarepath", title: "Everyday", subtitle: "Repeat")
+                    
+                    HabitListView(icon: "lasso.and.sparkles", title: "Meditation", subtitle: "Goal")
+                    
+                    HabitListView(icon: "sun.min", title: "Any Time", subtitle: "Time of Day")
+                }
+                
+                Section {
+                    
+                    HabitListView(icon: "bell", title: "9:30 PM", subtitle: "Repeat", color: .blue)
+                    
+                }
+                
+                Section {
+                    
+                    HabitListView(icon: "calendar", title: "Today", subtitle: "Start Date", color: .yellow)
+                    
                 }
             }
             //        .navigationBarHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {} label: {
+                    Button {
+                        dismiss()
+                    } label: {
                         Text("Close")
                             .bold()
                             .foregroundColor(.habitBlue)
@@ -56,7 +62,9 @@ struct CreateHabit: View {
                     .buttonStyle(.plain)
                 }
                 ToolbarItem {
-                    Button {} label: {
+                    Button {
+                        dismiss()
+                    } label: {
                         Text("Save")
                             .bold()
                             .foregroundColor(.habitBlue)
@@ -108,6 +116,6 @@ struct HabitListView: View {
 
 struct CreateHabit_Previews: PreviewProvider {
     static var previews: some View {
-        CreateHabit()
+        PopularHabitView()
     }
 }
