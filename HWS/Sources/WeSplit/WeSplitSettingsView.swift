@@ -34,7 +34,8 @@ struct WeSplitSettingsView: View {
                     }
                     .padding(.all, 8)
                     .background(Circle().fill(.regularMaterial))
-                    .background(Circle().fill(.blue.opacity(0.3)))
+                    .background(Circle().fill(.linearGradient(.init(colors: [.blue, .black.opacity(0.4)]), startPoint: .top, endPoint: .bottom)))
+                    .background(Circle().stroke(.black.opacity(0.1),lineWidth: 4))
                 
 
                 VStack(alignment: .leading, spacing: 5) {
