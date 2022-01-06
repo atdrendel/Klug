@@ -34,7 +34,7 @@ struct BellAnimation_Previews: PreviewProvider {
     }
 }
 
-extension View {
+public extension View {
     func debug() -> Self {
         print(Mirror(reflecting: self).subjectType)
         return self

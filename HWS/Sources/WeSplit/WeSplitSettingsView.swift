@@ -11,8 +11,29 @@ struct WeSplitSettingsView: View {
                 Section {
                     profile
                 }
+
+                Section {
+                    List {}
+                }
             }
             .navigationTitle("Settings")
+        }
+    }
+
+    func settings(icon: String, title: String, content: AnyView) -> some View {
+        HStack {
+            NavigationLink {
+                Text("")
+            } label: {
+                VStack {
+                    Label {
+                        Text(title)
+                    } icon: {
+                        Image(systemName: icon)
+                    }
+                    content
+                }
+            }
         }
     }
 
@@ -21,7 +42,6 @@ struct WeSplitSettingsView: View {
             NavigationLink {
                 Text("some destination")
             } label: {
-                
                 Image(systemName: "person.crop.circle.badge.checkmark")
                     .symbolVariant(.circle.fill)
                     .font(.largeTitle)
@@ -35,8 +55,7 @@ struct WeSplitSettingsView: View {
                     .padding(.all, 8)
                     .background(Circle().fill(.regularMaterial))
                     .background(Circle().fill(.linearGradient(.init(colors: [.blue, .black.opacity(0.4)]), startPoint: .top, endPoint: .bottom)))
-                    .background(Circle().stroke(.black.opacity(0.1),lineWidth: 4))
-                
+                    .background(Circle().stroke(.gray.opacity(0.1), lineWidth: 4))
 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Evans Domina Attafuah")
