@@ -23,6 +23,7 @@ struct CreateHabit: View {
                     
 //                    TextField("Name of Habit", value: .constant(0.0), format: .currency(code: "USD"))
 //                        .textFieldStyle(.bold)
+//                        .keyboardType(.decimalPad)
                     
                     TextField("Name of Habit", text: .constant(""))
                         .textFieldStyle(.bold)
