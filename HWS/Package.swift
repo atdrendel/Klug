@@ -15,9 +15,10 @@ let package = Package(
             targets: ["WeSplit"]),
     ],
     dependencies: [
+        .package(name: "Klug", path: "Klug")
     ],
     targets: [
         .target(name: "HWS"),
-        .target(name: "WeSplit")
+        .target(name: "WeSplit", dependencies: ["Klug"])
     ]
 )
