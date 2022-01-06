@@ -13,7 +13,26 @@ struct WeSplitSettingsView: View {
     }
     
     var profile: some View {
-        Text("Some VIew")
+        HStack {
+            NavigationLink {
+                Text("some destination")
+            } label: {
+                Image(systemName: "person.crop.circle.fill.badge.checkmark")
+                    .symbolVariant(.circle.fill)
+                    .font(.system(size: 32))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.blue, .blue.opacity(0.3))
+                    .padding()
+                    .background(Circle().fill(.ultraThinMaterial))
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Evans Domina Attafuah")
+                    Text("Apple ID, iCloud, iTunes & App Store")
+                        .font(.caption2)
+                }
+            }
+
+        }
     }
 }
 
