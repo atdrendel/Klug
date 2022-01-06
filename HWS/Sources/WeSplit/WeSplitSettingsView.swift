@@ -1,6 +1,47 @@
 import Klug
 import SwiftUI
 
+public struct _SettingsImageModifier: ViewModifier {
+    private let color: Color
+
+    public init(_ color: Color) {
+        self.color = color
+    }
+
+    public func body(content: Content) -> some View {
+        content
+            .foregroundColor(color)
+            .frame(width: 40, height: 40)
+            .background(
+                RoundedRectangle(
+                    cornerSize: .init(width: 12, height: 12)
+                )
+                .fill(color.opacity(0.3))
+            )
+            .font(.title2)
+    }
+}
+
+public typealias SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
+
+typealias SettingsNagivationLinkView = NavigationLink<HStack<TupleView<(Label<Text, Image>, Spacer, Text)>>, Text>
+typealias SettingsView = HStack<SettingsNagivationLinkView>
+
+public extension HStack where Content == SettingsToggleView {
+    init(
+        _ icon: String,
+        _ color: Color,
+        _ toggle: Toggle<Text>
+    ) {
+        self.init {
+            Image(systemName: icon)
+                .modifier(_SettingsImageModifier(color))
+            Spacer()
+            toggle
+        }
+    }
+}
+
 struct WeSplitSettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
