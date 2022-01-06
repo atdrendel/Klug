@@ -1,28 +1,19 @@
 import Klug
-import SwiftUI
 import PlaygroundSupport
-
-typealias SettingsToggleView = VStack<TupleView<(Label<Text, Image>, Toggle<Text>)>>
-typealias SettingsNagivationLinkView = NavigationLink<VStack<TupleView<(Label<Text, Image>, AnyView)>>, Text>
-typealias SettingsView = HStack<SettingsNagivationLinkView>
-
+import SwiftUI
 
 struct Preview: View {
     var body: some View {
         preview
-        .frame(width: 320)
+            .frame(width: 320)
     }
-    
+
     var preview: some View {
         HStack {
-            Label {
-                Text("title")
-            } icon: {
-                Image(systemName: "swift")
-            }
-          //  .labelStyle(.iconOnly)
+            Image(systemName: "swift")
+                .modifier(_SettingsImageModifier())
             Spacer()
-            Toggle("some text", isOn: .constant(false))
+            Toggle("some text", isOn: .constant(true))
         }
     }
 }
