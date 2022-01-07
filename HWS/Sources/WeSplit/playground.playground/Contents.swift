@@ -9,11 +9,15 @@ struct Preview: View {
     }
 
     var preview: some View {
-        HStack {
-            Image(systemName: "swift")
-                .modifier(_SettingsImageModifier())
-            Spacer()
-            Toggle("some text", isOn: .constant(true))
+        NavigationLink {
+            Text("Any Text")
+        } label: {
+            HStack {
+                Image(systemName: "swift")
+                Text("WiFi")
+                Spacer()
+                Text("On")
+            }
         }
     }
 }
