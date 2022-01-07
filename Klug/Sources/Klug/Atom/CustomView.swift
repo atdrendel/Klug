@@ -25,6 +25,24 @@ public extension Klug {
     }
 }
 
+struct Validation<Value>: ViewModifier {
+    var value: Value
+    var validator: (Value) -> Bool
+
+    func body(content: Content) -> some View {
+        // Here we use Group to perform type erasure, to give our
+        // method a single return type, as applying the 'border'
+        // modifier causes a different type to be returned:
+        Group {
+            if validator(value) {
+                content.border(Color.green)
+            } else {
+                content
+            }
+        }
+    }
+}
+
 public extension Klug {
     
     struct _TextFieldImageModifier: ViewModifier {
