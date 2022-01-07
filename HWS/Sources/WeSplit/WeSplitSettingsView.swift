@@ -36,14 +36,14 @@ public extension NavigationLink where Label == _SettingsNagivationLinkViewText {
         _ color: Color,
         _ title: String,
         _ subtitle: String,
-        @ViewBuilder destination: @escaping () -> Destination,
+        @ViewBuilder destination: @escaping () -> Destination
     ) {
         self.init(
             destination: destination,
             label: {
                 HStack {
                     Image(systemName: icon)
-                        .modifier(_SettingsImageModifier(.yellow))
+                        .modifier(_SettingsImageModifier(color))
                     Text(title)
                     Spacer()
                     Text(subtitle)
@@ -65,7 +65,7 @@ public extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty 
             label: {
                 HStack {
                     Image(systemName: icon)
-                        .modifier(_SettingsImageModifier(.yellow))
+                        .modifier(_SettingsImageModifier(color))
                     Text(title)
                     Spacer()
                     EmptyView()
@@ -111,10 +111,39 @@ struct WeSplitSettingsView: View {
                         Text("some text")
                     }
                     
-                    NavigationLink("wifi", .green, "Mobile Data", "Home-5G") {
-                        Text("some text")
+                    NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
+                        Text("Any Text")
                     }
+                    
+                    NavigationLink("wifi", .green, "Personal Hotspot", "Off") {
+                        Text("Any Text")
+                    }
+                    
                 }
+                
+                Section {
+                  
+                    
+                    NavigationLink("wifi.square", .red, "Notifications") {
+                        Text("Any Text")
+                    }
+                    
+                    NavigationLink("wifi.square", .pink, "Sounds & Haptics") {
+                        Text("Any Text")
+                    }
+
+                    
+                    NavigationLink("wifi", .indigo, "Do Not Disturb") {
+                        Text("Any Text")
+                    }
+                    
+                    NavigationLink("wifi", .indigo, "Screen Time") {
+                        Text("Any Text")
+                    }
+                   
+                }
+
+                
             }
             .navigationTitle("Settings")
         }
