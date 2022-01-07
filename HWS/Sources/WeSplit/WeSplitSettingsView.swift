@@ -1,14 +1,14 @@
 import Klug
 import SwiftUI
 
-public struct _SettingsImageModifier: ViewModifier {
+struct _SettingsImageModifier: ViewModifier {
     private let color: Color
 
-    public init(_ color: Color) {
+     init(_ color: Color) {
         self.color = color
     }
 
-    public func body(content: Content) -> some View {
+     func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
             .frame(width: 35, height: 35)
@@ -22,14 +22,14 @@ public struct _SettingsImageModifier: ViewModifier {
     }
 }
 
-public typealias _SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
+ typealias _SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
 
-public typealias t = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, Text)>
-public typealias _SettingsNagivationLinkViewText = HStack<t>
-public typealias c = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, EmptyView)>
-public typealias _SettingsNagivationLinkViewEmpty = HStack<c>
+ typealias _SettingsNagivationLinkViewTextTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, Text)>
+ typealias _SettingsNagivationLinkViewText = HStack<_SettingsNagivationLinkViewTextTupleView>
+ typealias _SettingsNagivationLinkViewEmptyTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, EmptyView)>
+ typealias _SettingsNagivationLinkViewEmpty = HStack<_SettingsNagivationLinkViewEmptyTupleView>
 
-public extension NavigationLink where Label == _SettingsNagivationLinkViewText {
+ extension NavigationLink where Label == _SettingsNagivationLinkViewText {
     init(
         _ icon: String,
         _ color: Color,
@@ -52,7 +52,7 @@ public extension NavigationLink where Label == _SettingsNagivationLinkViewText {
     }
 }
 
-public extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty {
+ extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty {
     init(
         _ icon: String,
         _ color: Color,
@@ -74,7 +74,8 @@ public extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty 
     }
 }
 
-public extension HStack where Content == _SettingsToggleView {
+
+ extension HStack where Content == _SettingsToggleView {
     init(
         _ icon: String,
         _ color: Color,
@@ -93,6 +94,7 @@ public extension HStack where Content == _SettingsToggleView {
 }
 
 struct WeSplitSettingsView: View {
+    
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
 
@@ -147,6 +149,7 @@ struct WeSplitSettingsView: View {
                     }
                     
                 }
+                
 
             }
             .navigationTitle("Settings")
