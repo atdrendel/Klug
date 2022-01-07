@@ -10,7 +10,6 @@ public struct _SettingsImageModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .symbolVariant(.fill)
             .foregroundColor(.white)
             .frame(width: 35, height: 35)
             .background(
@@ -111,39 +110,44 @@ struct WeSplitSettingsView: View {
                         Text("some text")
                     }
                     
+                    NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
+                        Text("some text")
+                    }
+                    
                     NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
                         Text("Any Text")
                     }
                     
-                    NavigationLink("wifi", .green, "Personal Hotspot", "Off") {
+                    NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
+                        Text("Any Text")
+                    }
+                    
+                    NavigationLink("network", .blue, "VPN", "Off") {
                         Text("Any Text")
                     }
                     
                 }
                 
                 Section {
-                  
                     
-                    NavigationLink("wifi.square", .red, "Notifications") {
+                    NavigationLink("bell.badge.fill", .red, "Notifications") {
                         Text("Any Text")
                     }
                     
-                    NavigationLink("wifi.square", .pink, "Sounds & Haptics") {
+                    NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
                         Text("Any Text")
                     }
 
+                    NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
+                        Text("Any Text")
+                    }  
                     
-                    NavigationLink("wifi", .indigo, "Do Not Disturb") {
+                    NavigationLink("hourglass", .indigo, "Screen Time") {
                         Text("Any Text")
                     }
                     
-                    NavigationLink("wifi", .indigo, "Screen Time") {
-                        Text("Any Text")
-                    }
-                   
                 }
 
-                
             }
             .navigationTitle("Settings")
         }
