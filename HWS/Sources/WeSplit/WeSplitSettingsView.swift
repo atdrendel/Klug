@@ -19,20 +19,47 @@ public struct _SettingsImageModifier: ViewModifier {
                 )
                 .fill(color)
             )
-            .font(.title2)
+            .font(.title3)
     }
 }
 
-public typealias SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
+public typealias _SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
 
-typealias SettingsNagivationLinkView = NavigationLink<HStack<TupleView<(Label<Text, Image>, Spacer, Text)>>, Text>
-typealias SettingsView = HStack<SettingsNagivationLinkView>
+public typealias _SettingsNagivationLinkViewText = HStack<TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, Text)>>
+typealias SettingsNagivationLinkViewEmptyView = NavigationLink<HStack<TupleView<(Label<Text, ModifiedContent<Image, _SettingsImageModifier>>, Spacer, Text)>>, EmptyView>
+// typealias SettingsView = HStack<SettingsNagivationLinkView>
 
-public extension HStack where Content == SettingsToggleView {
+
+
+public extension NavigationLink where Label == _SettingsNagivationLinkViewText {
     init(
         _ icon: String,
         _ color: Color,
-        _ toggle: Toggle<Text>
+        _ title: String,
+        _ subtitle: String,
+        @ViewBuilder destination: @escaping () -> Destination
+    ) {
+        self.init(
+            destination: destination,
+            label: {
+                HStack {
+                    Image(systemName: icon)
+                        .modifier(_SettingsImageModifier(.yellow))
+                    Text(title)
+                    Spacer()
+                    Text(subtitle)
+                    
+                }
+            }
+        )
+    }
+}
+
+public extension HStack where Content == _SettingsToggleView {
+    init(
+        _ icon: String,
+        _ color: Color,
+        _ toggle: (label: String, isOn: Binding<Bool>)
     ) {
         self.init {
             Image(systemName: icon)
@@ -58,7 +85,12 @@ struct WeSplitSettingsView: View {
                 }
 
                 Section {
-                    List {}
+                    HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
+                    
+                    NavigationLink("airplane", .pink, "jhgjh", "jhgjh") {
+                        Text("some text")
+                    }
+                    
                 }
             }
             .navigationTitle("Settings")
