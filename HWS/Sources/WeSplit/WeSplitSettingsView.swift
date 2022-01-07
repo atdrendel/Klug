@@ -10,13 +10,14 @@ public struct _SettingsImageModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .foregroundColor(color)
-            .frame(width: 40, height: 40)
+            .symbolVariant(.fill)
+            .foregroundColor(.white)
+            .frame(width: 35, height: 35)
             .background(
                 RoundedRectangle(
-                    cornerSize: .init(width: 12, height: 12)
+                    cornerSize: .init(width: 8, height: 8)
                 )
-                .fill(color.opacity(0.3))
+                .fill(color)
             )
             .font(.title2)
     }
@@ -37,7 +38,10 @@ public extension HStack where Content == SettingsToggleView {
             Image(systemName: icon)
                 .modifier(_SettingsImageModifier(color))
             Spacer()
-            toggle
+            Toggle(isOn: toggle.isOn) {
+                Text(toggle.label)
+                    .font(.body)
+            }
         }
     }
 }
@@ -81,7 +85,7 @@ struct WeSplitSettingsView: View {
     var profile: some View {
         HStack {
             NavigationLink {
-                Text("some destination")
+                Text("Any Destination")
             } label: {
                 Image(systemName: "person.crop.circle.badge.checkmark")
                     .symbolVariant(.circle.fill)
@@ -99,7 +103,7 @@ struct WeSplitSettingsView: View {
                     .background(Circle().stroke(.gray.opacity(0.1), lineWidth: 4))
 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Evans Domina Attafuah")
+                    Text("Codebendr")
                     Text("Apple ID, iCloud, iTunes & App Store")
                         .font(.caption2)
                 }
@@ -113,5 +117,20 @@ struct WeSplitSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         WeSplitSettingsView().preferredColorScheme(.dark)
         WeSplitSettingsView()
+        Form {
+            HStack {
+                Label {
+                    Text("Any Text")
+                } icon: {
+                    Image(systemName: "swift")
+                        .modifier(_SettingsImageModifier(.yellow))
+                }
+
+                Spacer()
+                Text("Any Text")
+                    .foregroundColor(.secondary)
+                
+            }
+        }
     }
 }
