@@ -31,20 +31,7 @@ struct Preview: View {
     }
 
     var preview: some View {
-        HStack {
-            Label {
-                Text("Any Text")
-            } icon: {
-                Image(systemName: "swift")
-                    .modifier(_SettingsImageModifier(.yellow))
-            }
-
-            Spacer()
-            Text("Any Text")
-                .foregroundColor(.secondary)
-            
-        }
-        
+        Image(systemName: "swift").symbolVariant(.fill)
     }
 }
 

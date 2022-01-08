@@ -9,42 +9,41 @@ public enum SettingsType {
 
 struct Setting: Identifiable {
     let id = UUID().uuidString
-    let icon: Icons
+    let icon: Symbol
     let title: String
     var subtitle = ""
 }
 
 extension Setting {
     
-    enum Icons {
+     enum Symbol: String, CaseIterable {
+        case airplane = "airplane"
+        case wifi = "wifi"
+        case bluetooth = "dot.radiowaves.right"
+        case mobileData = "antenna.radiowaves.left.and.right"
+        case personalHotspot = "personalhotspot"
+        case vpn = "network"
+        case notifications = "bell.badge"
+         case soundsAndHaptic = "speaker.wave.3"
+         
+        struct _SymbolVariantsModifier: ViewModifier {
+             private let variant: SymbolVariants
+
+              init(_ variant: SymbolVariants) {
+                 self.variant = variant
+             }
+
+              func body(content: Content) -> some View {
+                 content.symbolVariant(variant)
+             }
+         }
         
+        func variant(_ variant: SymbolVariants = .none) -> ModifiedContent<Image, _SymbolVariantsModifier> {
+             Image(systemName: self.rawValue).modifier(_SymbolVariantsModifier(variant))
+         }
     }
     
-//    Section {
-//        HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
-//
-//        NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
-//            Text("some text")
-//        }
-//
-//        NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
-//            Text("some text")
-//        }
-//
-//        NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
-//            Text("Any Text")
-//        }
-//
-//        NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
-//            Text("Any Text")
-//        }
-//
-//        NavigationLink("network", .blue, "VPN", "Off") {
-//            Text("Any Text")
-//        }
-//
-//    }
-//
+
 //    Section {
 //
 //        NavigationLink("bell.badge.fill", .red, "Notifications") {
@@ -91,7 +90,7 @@ enum SettingArrayBuilder {
 extension Setting {
     @SettingArrayBuilder
     static var all: [Setting] {
-        Setting(icon: <#T##String#>, title: <#T##String#>)
+        Setting(icon: .airplane, title: "Airplane Mode")
     }
 }
 
