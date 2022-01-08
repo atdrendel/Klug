@@ -1,6 +1,100 @@
 import Klug
 import SwiftUI
 
+public enum SettingsType {
+    case profile
+    case toggle
+    case text
+}
+
+struct Setting: Identifiable {
+    let id = UUID().uuidString
+    let icon: Icons
+    let title: String
+    var subtitle = ""
+}
+
+extension Setting {
+    
+    enum Icons {
+        
+    }
+    
+//    Section {
+//        HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
+//
+//        NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
+//            Text("some text")
+//        }
+//
+//        NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
+//            Text("some text")
+//        }
+//
+//        NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
+//            Text("Any Text")
+//        }
+//
+//        NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
+//            Text("Any Text")
+//        }
+//
+//        NavigationLink("network", .blue, "VPN", "Off") {
+//            Text("Any Text")
+//        }
+//
+//    }
+//
+//    Section {
+//
+//        NavigationLink("bell.badge.fill", .red, "Notifications") {
+//            Text("Any Text")
+//        }
+//
+//        NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
+//            Text("Any Text")
+//        }
+//
+//        NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
+//            Text("Any Text")
+//        }
+//
+//        NavigationLink("hourglass", .indigo, "Screen Time") {
+//            Text("Any Text")
+//        }
+//
+//    }
+    
+}
+
+@resultBuilder
+enum SettingBuilder {
+    static func buildBlock(_ setting: Setting...) -> [Setting] { setting  }
+}
+
+@resultBuilder
+enum SettingArrayBuilder {
+    static func buildEither(first settings: [Setting]) -> [Setting] { settings }
+
+    static func buildEither(second component: [Setting]) -> [Setting] { component }
+
+    static func buildOptional(_ component: [Setting]?) -> [Setting] { component ?? [] }
+
+    static func buildExpression(_ expression: Setting) -> [Setting] { [expression] }
+
+    static func buildExpression(_ expression: ()) -> [Setting] { [] }
+
+    static func buildBlock(_ settings: [Setting]...) -> [Setting] { settings.flatMap { $0 } }
+}
+
+// MARK: - Smoothie List
+extension Setting {
+    @SettingArrayBuilder
+    static var all: [Setting] {
+        Setting(icon: <#T##String#>, title: <#T##String#>)
+    }
+}
+
 struct _SettingsImageModifier: ViewModifier {
     private let color: Color
 
@@ -153,6 +247,7 @@ struct WeSplitSettingsView: View {
 
             }
             .navigationTitle("Settings")
+            .navigationViewStyle(.stack)
         }
         
     }
@@ -207,7 +302,7 @@ struct WeSplitSettingsView: View {
 
 struct WeSplitSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeSplitSettingsView().preferredColorScheme(.dark)
+        WeSplitSettingsView().preferredColorScheme(.dark).previewInterfaceOrientation(.portraitUpsideDown)
         WeSplitSettingsView()
      
     }
