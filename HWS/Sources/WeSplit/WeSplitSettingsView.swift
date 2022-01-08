@@ -15,60 +15,42 @@ struct Setting: Identifiable {
 }
 
 extension Setting {
-    
-     enum Symbol: String, CaseIterable {
-        case airplane = "airplane"
-        case wifi = "wifi"
+    struct _SymbolVariantsModifier: ViewModifier {
+        private let variant: SymbolVariants
+
+        init(_ variant: SymbolVariants = .none) {
+            self.variant = variant
+        }
+
+        func body(content: Content) -> some View {
+            content.symbolVariant(variant)
+        }
+    }
+
+    typealias _SettingVariantView = ModifiedContent<Image, _SymbolVariantsModifier>
+
+
+    enum Symbol: String, CaseIterable {
+        case airplane
+        case wifi
         case bluetooth = "dot.radiowaves.right"
         case mobileData = "antenna.radiowaves.left.and.right"
         case personalHotspot = "personalhotspot"
         case vpn = "network"
         case notifications = "bell.badge"
-         case soundsAndHaptic = "speaker.wave.3"
-         
-        struct _SymbolVariantsModifier: ViewModifier {
-             private let variant: SymbolVariants
+        case soundsAndHaptic = "speaker.wave.3"
+        case doNotDisturb = "moon"
+        case hourglass = "hourglass"
 
-              init(_ variant: SymbolVariants) {
-                 self.variant = variant
-             }
-
-              func body(content: Content) -> some View {
-                 content.symbolVariant(variant)
-             }
-         }
-        
-        func variant(_ variant: SymbolVariants = .none) -> ModifiedContent<Image, _SymbolVariantsModifier> {
-             Image(systemName: self.rawValue).modifier(_SymbolVariantsModifier(variant))
-         }
+        func variant(_ variant: SymbolVariants = .none) -> _SettingVariantView {
+            Image(systemName: rawValue).modifier(_SymbolVariantsModifier(variant))
+        }
     }
-    
-
-//    Section {
-//
-//        NavigationLink("bell.badge.fill", .red, "Notifications") {
-//            Text("Any Text")
-//        }
-//
-//        NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
-//            Text("Any Text")
-//        }
-//
-//        NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
-//            Text("Any Text")
-//        }
-//
-//        NavigationLink("hourglass", .indigo, "Screen Time") {
-//            Text("Any Text")
-//        }
-//
-//    }
-    
 }
 
 @resultBuilder
 enum SettingBuilder {
-    static func buildBlock(_ setting: Setting...) -> [Setting] { setting  }
+    static func buildBlock(_ setting: Setting...) -> [Setting] { setting }
 }
 
 @resultBuilder
@@ -87,6 +69,7 @@ enum SettingArrayBuilder {
 }
 
 // MARK: - Smoothie List
+
 extension Setting {
     @SettingArrayBuilder
     static var all: [Setting] {
@@ -97,11 +80,11 @@ extension Setting {
 struct _SettingsImageModifier: ViewModifier {
     private let color: Color
 
-     init(_ color: Color) {
+    init(_ color: Color) {
         self.color = color
     }
 
-     func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
             .frame(width: 35, height: 35)
@@ -115,14 +98,14 @@ struct _SettingsImageModifier: ViewModifier {
     }
 }
 
- typealias _SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
+typealias _SettingsToggleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Spacer, Toggle<Text>)>
 
- typealias _SettingsNagivationLinkViewTextTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, Text)>
- typealias _SettingsNagivationLinkViewText = HStack<_SettingsNagivationLinkViewTextTupleView>
- typealias _SettingsNagivationLinkViewEmptyTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, EmptyView)>
- typealias _SettingsNagivationLinkViewEmpty = HStack<_SettingsNagivationLinkViewEmptyTupleView>
+typealias _SettingsNagivationLinkViewTextTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, Text)>
+typealias _SettingsNagivationLinkViewText = HStack<_SettingsNagivationLinkViewTextTupleView>
+typealias _SettingsNagivationLinkViewEmptyTupleView = TupleView<(ModifiedContent<Image, _SettingsImageModifier>, Text, Spacer, EmptyView)>
+typealias _SettingsNagivationLinkViewEmpty = HStack<_SettingsNagivationLinkViewEmptyTupleView>
 
- extension NavigationLink where Label == _SettingsNagivationLinkViewText {
+extension NavigationLink where Label == _SettingsNagivationLinkViewText {
     init(
         _ icon: String,
         _ color: Color,
@@ -145,7 +128,7 @@ struct _SettingsImageModifier: ViewModifier {
     }
 }
 
- extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty {
+extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty {
     init(
         _ icon: String,
         _ color: Color,
@@ -167,8 +150,7 @@ struct _SettingsImageModifier: ViewModifier {
     }
 }
 
-
- extension HStack where Content == _SettingsToggleView {
+extension HStack where Content == _SettingsToggleView {
     init(
         _ icon: String,
         _ color: Color,
@@ -187,7 +169,6 @@ struct _SettingsImageModifier: ViewModifier {
 }
 
 struct WeSplitSettingsView: View {
-    
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
 
@@ -204,51 +185,45 @@ struct WeSplitSettingsView: View {
                     NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
                         Text("some text")
                     }
-                    
+
                     NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
                         Text("some text")
                     }
-                    
+
                     NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
                         Text("Any Text")
                     }
-                    
+
                     NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
                         Text("Any Text")
                     }
-                    
+
                     NavigationLink("network", .blue, "VPN", "Off") {
                         Text("Any Text")
                     }
-                    
                 }
-                
+
                 Section {
-                    
                     NavigationLink("bell.badge.fill", .red, "Notifications") {
                         Text("Any Text")
                     }
-                    
+
                     NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
                         Text("Any Text")
                     }
 
                     NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
                         Text("Any Text")
-                    }  
-                    
+                    }
+
                     NavigationLink("hourglass", .indigo, "Screen Time") {
                         Text("Any Text")
                     }
-                    
                 }
-                
-
             }
             .navigationTitle("Settings")
             .navigationViewStyle(.stack)
         }
-        
     }
 
     func settings(icon: String, title: String, content: AnyView) -> some View {
@@ -303,6 +278,5 @@ struct WeSplitSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         WeSplitSettingsView().preferredColorScheme(.dark).previewInterfaceOrientation(.portraitUpsideDown)
         WeSplitSettingsView()
-     
     }
 }

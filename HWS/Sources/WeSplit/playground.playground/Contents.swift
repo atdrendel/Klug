@@ -2,36 +2,26 @@ import Klug
 import PlaygroundSupport
 import SwiftUI
 
-public struct _SettingsImageModifier: ViewModifier {
-    private let color: Color
+struct _SymbolVariantsModifier: ViewModifier {
+    private let variant: SymbolVariants
 
-    public init(_ color: Color) {
-        self.color = color
+    init(_ variant: SymbolVariants) {
+        self.variant = variant
     }
 
-    public func body(content: Content) -> some View {
-        content
-            .symbolVariant(.fill)
-            .foregroundColor(.white)
-            .frame(width: 35, height: 35)
-            .background(
-                RoundedRectangle(
-                    cornerSize: .init(width: 8, height: 8)
-                )
-                .fill(color)
-            )
-            .font(.title3)
+    func body(content: Content) -> some View {
+        content.symbolVariant(variant)
     }
 }
 
 struct Preview: View {
     var body: some View {
         preview
-            .frame(width: 320)
+           // .frame(width: 320)
     }
 
     var preview: some View {
-        Image(systemName: "swift").symbolVariant(.fill)
+        Image(systemName: "swift").modifier(_SymbolVariantsModifier(.none))
     }
 }
 
