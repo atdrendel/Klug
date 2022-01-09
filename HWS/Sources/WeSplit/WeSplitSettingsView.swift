@@ -3,12 +3,21 @@ import SwiftUI
 
 public struct Setting: Identifiable {
     public let id = UUID().uuidString
-    var type: ViewType = .toggle
+    var type: ViewType = .text
     var color: Color
     let title: String
     var subtitle = ""
     var symbol: Setting.Symbol
     var variant: SymbolVariants = .none
+
+    static func make(@SettingsBuilder _ content: () -> [Setting]) -> [Setting] {
+        content()
+    }
+}
+
+struct SettingsCategory {
+    var category: Category
+    @SettingsBuilder var settings: () -> [Setting]
 }
 
 extension Setting {
@@ -25,9 +34,10 @@ extension Setting {
 
 extension Setting {
     struct Profile {
-        let first: String = "Codebendr"
-        let middle: String
-        let last: String
+        let first = "Codebendr"
+        let middle = "Swift"
+        let last = "SwiftUI"
+        var email = "codebendr@icloud.com"
     }
 }
 
@@ -78,7 +88,8 @@ public extension Setting {
 }
 
 @resultBuilder
-enum SettingBuilder {
+enum SettingsBuilder {
+    static func buildBlock() -> [Setting] { [] }
     static func buildBlock(_ setting: Setting...) -> [Setting] { setting }
 }
 
@@ -108,7 +119,6 @@ extension Setting {
         )
 
         Setting(
-            type: .textWithSubText,
             color: .blue,
             title: "Wifi",
             subtitle: "Home-5G",
@@ -116,7 +126,6 @@ extension Setting {
         )
 
         Setting(
-            type: .textWithSubText,
             color: .blue,
             title: "Bluetooth",
             subtitle: "On",
@@ -194,15 +203,14 @@ extension NavigationLink where Label == _SettingsNagivationLinkViewText {
 
 extension HStack where Content == _SettingsToggleView {
     init(
-        icon: (symbol: Setting.Symbol, variant: SymbolVariants),
-        color: Color,
+        setting: Setting,
         toggle: (label: String, isOn: Binding<Bool>)
     ) {
         self.init {
-            Image(icon.symbol.description)
+            Image(systemName: setting.symbol.description)
                 .setting(
-                    color: color,
-                    variant: icon.variant
+                    color: setting.color,
+                    variant: setting.variant
                 )
             Spacer()
             Toggle(isOn: toggle.isOn) {
@@ -234,21 +242,11 @@ struct WeSplitSettingsView: View {
                             case .toggle:
 //                                HStack(
 //                                    icon: setting., color: .orange, toggle: (label: setting.title, isOn: .constant(false)))
-                                HStack(icon: (symbol: setting.symbol, variant: setting.variant),
-                                       color: .orange,
+                                HStack(setting: setting,
                                        toggle: (label: setting.title, isOn: .constant(false)))
                             case .text:
                                 NavigationLink(
                                     setting: setting
-                                ) {
-                                    Text("Any Text")
-                                }
-                            case .textWithSubText:
-                                NavigationLink(
-                                    icon: (setting.symbol, variant: setting.variant),
-                                    color: .blue,
-                                    title: setting.title,
-                                    subtitle: setting.subtitle
                                 ) {
                                     Text("Any Text")
                                 }
