@@ -1,20 +1,26 @@
 import Klug
 import SwiftUI
 
-public enum SettingsType {
-    case profile
-    case toggle
-    case text
-}
-
-struct Setting: Identifiable {
-    let id = UUID().uuidString
-    let icon: Symbol
+public struct Setting: Identifiable {
+    public let id = UUID().uuidString
+    var type: ViewType = .toggle
+    var color: Color
     let title: String
     var subtitle = ""
+    var symbol: Setting.Symbol
+    var variant: SymbolVariants = .none
 }
 
 extension Setting {
+    enum ViewType {
+        case profile
+        case toggle
+        case text
+        case textWithSubText
+    }
+}
+
+public extension Setting {
     struct _SymbolVariantsModifier: ViewModifier {
         private let variant: SymbolVariants
 
