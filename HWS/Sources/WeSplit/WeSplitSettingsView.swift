@@ -172,6 +172,7 @@ struct WeSplitSettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
 
+    @ViewBuilder
     var body: some View {
         NavigationView {
             Form {
@@ -180,96 +181,121 @@ struct WeSplitSettingsView: View {
                 }
 
                 Section {
-                    HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
-
-                    NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
-                        Text("some text")
+                    List(Setting.all) { setting in
+                        Group {
+                            switch setting.type {
+                            case .profile:
+                                Text("")
+                            case .toggle:
+//                                HStack(
+//                                    icon: setting., color: .orange, toggle: (label: setting.title, isOn: .constant(false)))
+                                HStack(icon: (symbol: setting.symbol, variant: setting.variant),
+                                       color: .orange,
+                                       toggle: (label: setting.title, isOn: .constant(false)))
+                            case .text:
+                                NavigationLink(setting.symbol, .green, setting.title) {
+                                    Text("Any Text")
+                                }
+                            case .textWithSubText:
+                                NavigationLink(setting.symbol, .blue, setting.title, setting.subtitle) {
+                                    Text("some text")
+                                }
+                            }
+                        }
                     }
 
-                    NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
-                        Text("some text")
+                    Section {
+                        HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
+
+                        NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
+                            Text("some text")
+                        }
+
+                        NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
+                            Text("some text")
+                        }
+
+                        NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
+                            Text("Any Text")
+                        }
+
+                        NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
+                            Text("Any Text")
+                        }
+
+                        NavigationLink("network", .blue, "VPN", "Off") {
+                            Text("Any Text")
+                        }
                     }
 
-                    NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
-                        Text("Any Text")
-                    }
+                    Section {
+                        NavigationLink("bell.badge.fill", .red, "Notifications") {
+                            Text("Any Text")
+                        }
 
-                    NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
-                        Text("Any Text")
-                    }
+                        NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
+                            Text("Any Text")
+                        }
 
-                    NavigationLink("network", .blue, "VPN", "Off") {
-                        Text("Any Text")
+                        NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
+                            Text("Any Text")
+                        }
+
+                        NavigationLink("hourglass", .indigo, "Screen Time") {
+                            Text("Any Text")
+                        }
                     }
                 }
-
-                Section {
-                    NavigationLink("bell.badge.fill", .red, "Notifications") {
-                        Text("Any Text")
-                    }
-
-                    NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
-                        Text("Any Text")
-                    }
-
-                    NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
-                        Text("Any Text")
-                    }
-
-                    NavigationLink("hourglass", .indigo, "Screen Time") {
-                        Text("Any Text")
-                    }
-                }
+                .navigationTitle("Settings")
+                .navigationViewStyle(.stack)
             }
-            .navigationTitle("Settings")
-            .navigationViewStyle(.stack)
         }
-    }
 
-    func settings(icon: String, title: String, content: AnyView) -> some View {
-        HStack {
-            NavigationLink {
-                Text("")
-            } label: {
-                VStack {
-                    Label {
-                        Text(title)
-                    } icon: {
-                        Image(systemName: icon)
+//        func settings(icon: String, title: String, content: AnyView) -> some View {
+//            HStack {
+//                NavigationLink {
+//                    Text("")
+//                } label: {
+//                    VStack {
+//                        Label {
+//                            Text(title)
+//                        } icon: {
+//                            Image(systemName: icon)
+//                        }
+//                        content
+//                    }
+//                }
+//            }
+//        }
+
+        var profile: some View {
+            HStack {
+                NavigationLink {
+                    Text("Any Destination")
+                } label: {
+                    Image(systemName: "person.crop.circle.badge.checkmark")
+                        .symbolVariant(.circle.fill)
+                        .font(.largeTitle)
+                        .symbolRenderingMode(.palette)
+                        .if(isDarkMode) {
+                            $0.foregroundStyle(.green.opacity(0.6), .green)
+                        }
+                        .else(isDarkMode) {
+                            $0.foregroundStyle(.blue.opacity(0.6), .blue)
+                        }
+                        .padding(.all, 8)
+                        .background(Circle().fill(.regularMaterial))
+                        .background(Circle().fill(.linearGradient(.init(colors: [.blue, .black.opacity(0.4)]), startPoint: .top, endPoint: .bottom)))
+                        .background(Circle().stroke(.gray.opacity(0.1), lineWidth: 4))
+
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Codebendr")
+                        Text("Apple ID, iCloud, iTunes & App Store")
+                            .font(.caption2)
                     }
-                    content
                 }
+                .padding(.vertical, 4)
             }
-        }
-    }
-
-    var profile: some View {
-        HStack {
-            NavigationLink {
-                Text("Any Destination")
-            } label: {
-                Image(systemName: "person.crop.circle.badge.checkmark")
-                    .symbolVariant(.circle.fill)
-                    .font(.largeTitle)
-                    .symbolRenderingMode(.palette)
-                    .if(isDarkMode) {
-                        $0.foregroundStyle(.green.opacity(0.6), .green)
-                    }
-                    .else(isDarkMode) {
-                        $0.foregroundStyle(.blue.opacity(0.6), .blue)
-                    }
-                    .padding(.all, 8)
-                    .background(Circle().fill(.regularMaterial))
-                    .background(Circle().fill(.linearGradient(.init(colors: [.blue, .black.opacity(0.4)]), startPoint: .top, endPoint: .bottom)))
-                    .background(Circle().stroke(.gray.opacity(0.1), lineWidth: 4))
-
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Codebendr")
-                    Text("Apple ID, iCloud, iTunes & App Store")
-                        .font(.caption2)
-                }
-            }
-            .padding(.vertical, 4)
         }
     }
 }
