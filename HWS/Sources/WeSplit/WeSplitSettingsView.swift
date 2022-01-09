@@ -16,7 +16,18 @@ extension Setting {
         case profile
         case toggle
         case text
-        case textWithSubText
+    }
+
+    enum Category {
+        case profile
+    }
+}
+
+extension Setting {
+    struct Profile {
+        let first: String = "Codebendr"
+        let middle: String
+        let last: String
     }
 }
 
@@ -50,16 +61,16 @@ public extension Setting {
 
         public var description: String {
             switch self {
-            case .airplane: return .init(reflecting: self)
-            case .wifi: return .init(reflecting: self)
+            case .airplane: return "airplane"
+            case .wifi: return "wifi"
             case .bluetooth: return "dot.radiowaves.right"
             case .mobileData: return "antenna.radiowaves.left.and.right"
             case .personalHotspot: return "personalhotspot"
             case .vpn: return "network"
             case .notifications: return "bell.badge"
-            case .soundsAndHaptic: return ""
+            case .soundsAndHaptic: return "slider.vertical.3"
             case .doNotDisturb: return "moon"
-            case .hourglass: return .init(reflecting: self)
+            case .hourglass: return "hourglass"
             case .custom(let string): return string
             }
         }
@@ -160,24 +171,21 @@ typealias _SettingsNagivationLinkViewText = HStack<_SettingsNagivationLinkViewTe
 
 extension NavigationLink where Label == _SettingsNagivationLinkViewText {
     init(
-        icon: (symbol: Setting.Symbol, variant: SymbolVariants),
-        color: Color,
-        title: String,
-        subtitle: String = "",
+        setting: Setting,
         @ViewBuilder destination: @escaping () -> Destination
     ) {
         self.init(
             destination: destination,
             label: {
                 HStack {
-                    Image(icon.symbol.description)
+                    Image(setting.symbol.description)
                         .setting(
-                            color: color,
-                            variant: icon.variant
+                            color: setting.color,
+                            variant: setting.variant
                         )
-                    Text(title)
+                    Text(setting.title)
                     Spacer()
-                    Text(subtitle)
+                    Text(setting.subtitle)
                 }
             }
         )
@@ -231,59 +239,20 @@ struct WeSplitSettingsView: View {
                                        toggle: (label: setting.title, isOn: .constant(false)))
                             case .text:
                                 NavigationLink(
-                                    icon: (setting.symbol, variant: setting.variant),
-                                    color: .blue,
-                                    title: setting.title
+                                    setting: setting
                                 ) {
                                     Text("Any Text")
                                 }
                             case .textWithSubText:
-                                NavigationLink(setting.symbol, .blue, setting.title, setting.subtitle) {
-                                    Text("some text")
+                                NavigationLink(
+                                    icon: (setting.symbol, variant: setting.variant),
+                                    color: .blue,
+                                    title: setting.title,
+                                    subtitle: setting.subtitle
+                                ) {
+                                    Text("Any Text")
                                 }
                             }
-                        }
-                    }
-
-                    Section {
-                        HStack("airplane", .orange, (label: "Airplane Mode", isOn: .constant(false)))
-
-                        NavigationLink("wifi", .blue, "Wi-Fi", "Home-5G") {
-                            Text("some text")
-                        }
-
-                        NavigationLink("dot.radiowaves.right", .blue, "Bluetooth", "On") {
-                            Text("some text")
-                        }
-
-                        NavigationLink("antenna.radiowaves.left.and.right", .green, "Mobile Data") {
-                            Text("Any Text")
-                        }
-
-                        NavigationLink("personalhotspot", .green, "Personal Hotspot", "Off") {
-                            Text("Any Text")
-                        }
-
-                        NavigationLink("network", .blue, "VPN", "Off") {
-                            Text("Any Text")
-                        }
-                    }
-
-                    Section {
-                        NavigationLink("bell.badge.fill", .red, "Notifications") {
-                            Text("Any Text")
-                        }
-
-                        NavigationLink("speaker.wave.3.fill", .pink, "Sounds & Haptics") {
-                            Text("Any Text")
-                        }
-
-                        NavigationLink("moon.fill", .indigo, "Do Not Disturb") {
-                            Text("Any Text")
-                        }
-
-                        NavigationLink("hourglass", .indigo, "Screen Time") {
-                            Text("Any Text")
                         }
                     }
 
@@ -385,7 +354,8 @@ struct WeSplitSettingsView: View {
 
 struct WeSplitSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        WeSplitSettingsView().preferredColorScheme(.dark).previewInterfaceOrientation(.portraitUpsideDown)
+        WeSplitSettingsView().preferredColorScheme(.dark)
+
         WeSplitSettingsView()
     }
 }

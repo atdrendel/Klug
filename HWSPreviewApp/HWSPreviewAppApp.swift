@@ -9,3 +9,9 @@ struct HWSPreviewAppApp: App {
         }
     }
 }
+
+struct P_Previews: PreviewProvider {
+    static var previews: some View {
+        WeSplitMainApp()
+    }
+}
