@@ -22,28 +22,40 @@ extension Setting {
             self.variant = variant
         }
 
-        func body(content: Content) -> some View {
+        public func body(content: Content) -> some View {
             content.symbolVariant(variant)
         }
     }
 
     typealias _SettingVariantView = ModifiedContent<Image, _SymbolVariantsModifier>
 
-
-    enum Symbol: String, CaseIterable {
+    enum Symbol: CustomStringConvertible {
         case airplane
         case wifi
-        case bluetooth = "dot.radiowaves.right"
-        case mobileData = "antenna.radiowaves.left.and.right"
-        case personalHotspot = "personalhotspot"
-        case vpn = "network"
-        case notifications = "bell.badge"
-        case soundsAndHaptic = "speaker.wave.3"
-        case doNotDisturb = "moon"
-        case hourglass = "hourglass"
+        case bluetooth
+        case mobileData
+        case personalHotspot
+        case vpn
+        case notifications
+        case soundsAndHaptic
+        case doNotDisturb
+        case hourglass
+        case custom(String)
 
-        func variant(_ variant: SymbolVariants = .none) -> _SettingVariantView {
-            Image(systemName: rawValue).modifier(_SymbolVariantsModifier(variant))
+        public var description: String {
+            switch self {
+            case .airplane: return .init(reflecting: self)
+            case .wifi: return .init(reflecting: self)
+            case .bluetooth: return "dot.radiowaves.right"
+            case .mobileData: return "antenna.radiowaves.left.and.right"
+            case .personalHotspot: return "personalhotspot"
+            case .vpn: return "network"
+            case .notifications: return "bell.badge"
+            case .soundsAndHaptic: return ""
+            case .doNotDisturb: return "moon"
+            case .hourglass: return .init(reflecting: self)
+            case .custom(let string): return string
+            }
         }
     }
 }
@@ -68,24 +80,58 @@ enum SettingArrayBuilder {
     static func buildBlock(_ settings: [Setting]...) -> [Setting] { settings.flatMap { $0 } }
 }
 
-// MARK: - Smoothie List
-
 extension Setting {
     @SettingArrayBuilder
-    static var all: [Setting] {
-        Setting(icon: .airplane, title: "Airplane Mode")
+    static var all: [Self] {
+        
+        
+        Setting(
+            type: .toggle,
+            color: .orange,
+            title: "Airplane Mode"
+        ) {
+            ($0.description, $1.none)
+        }
+
+        Setting(
+            type: .textWithSubText,
+            color: .blue,
+            title: "Wifi",
+            subtitle: "Home-5G"
+        )
+
+        Setting(
+            type: .textWithSubText,
+            color: .blue,
+            title: "Bluetooth",
+            subtitle: "On"
+        )
+
+        Setting(
+            type: .text,
+            color: .green,
+            title: "Mobile Data"
+        )
+    }
+}
+
+extension Image {
+    func setting(color: Color, variant: SymbolVariants = .none) -> ModifiedContent<Image, _SettingsImageModifier> {
+        modifier(_SettingsImageModifier(color, variant: variant))
     }
 }
 
 struct _SettingsImageModifier: ViewModifier {
     private let color: Color
+    private let variant: SymbolVariants
 
-    init(_ color: Color) {
+    init(_ color: Color, variant: SymbolVariants = .none) {
         self.color = color
     }
 
     func body(content: Content) -> some View {
         content
+            .symbolVariant(variant)
             .foregroundColor(.white)
             .frame(width: 35, height: 35)
             .background(
@@ -152,13 +198,12 @@ extension NavigationLink where Label == _SettingsNagivationLinkViewEmpty {
 
 extension HStack where Content == _SettingsToggleView {
     init(
-        _ icon: String,
-        _ color: Color,
-        _ toggle: (label: String, isOn: Binding<Bool>)
+        icon: (symbol: Setting.Symbol, variant: SymbolVariants),
+        color: Color,
+        toggle: (label: String, isOn: Binding<Bool>)
     ) {
         self.init {
-            Image(systemName: icon)
-                .modifier(_SettingsImageModifier(color))
+            Image(icon.symbol.description).setting(color: color, variant: icon.variant)
             Spacer()
             Toggle(isOn: toggle.isOn) {
                 Text(toggle.label)
