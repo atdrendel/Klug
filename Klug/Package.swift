@@ -37,10 +37,14 @@ let package = Package(
             "Relative"
         ]),
         .target(name: "Relative"),
+        
         .target(name: "StateManagment"),
+        
         .target(name: "Accessibility"),
+        
         .target(name: "Klug", dependencies: [
-            "Accessibility"
+            "Accessibility",
+            "KlugHelpers"
         ]),
         
         .target(name: "KlugHelpers"),
