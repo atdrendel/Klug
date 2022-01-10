@@ -51,11 +51,7 @@ let package = Package(
         
         .target(name: "HabitTrackerButtons"),
         
-        .target(name: "Animation",
-                dependencies: [
-                    "Klug",
-                    "KlugHelpers"
-                ]),
+        .target(name: "Animation"),
         
         // Point Free Inspiration
         .target(name: "Models"),
