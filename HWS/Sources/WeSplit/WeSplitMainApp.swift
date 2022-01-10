@@ -5,7 +5,7 @@ public struct WeSplitMainApp: View {
     public init(){}
     
     public var body: some View {
-        WeSplitSettingsView()
+        Text("We Split")
     }
 }
 

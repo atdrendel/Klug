@@ -6,8 +6,8 @@ let package = Package(
     name: "Klug",
     platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
-        
         .library(name: "Klug", targets: ["Klug"]),
+        .library(name: "KlugHelpers", targets: ["KlugHelpers"]),
         .library(name: "HabitTrackerButtons", targets: ["HabitTrackerButtons"]),
         .library(name: "Animation", targets: ["Animation"]),
         .library(name: "Accessibility", targets: ["Accessibility"]),
@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "Nett", targets: ["Nett"]),
         .library(name: "Relative", targets: ["Relative"]),
         
-            // Point Free Inspiration
+        // Point Free Inspiration
         .library(name: "AppFeature", targets: ["AppFeature"]),
         .library(name: "InventoryFeature", targets: ["InventoryFeature"]),
         .library(name: "ItemFeature", targets: ["ItemFeature"]),
@@ -33,7 +33,6 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
     ],
     targets: [
-        
         .target(name: "Nett", dependencies: [
             "Relative"
         ]),
@@ -43,15 +42,19 @@ let package = Package(
         .target(name: "Klug", dependencies: [
             "Accessibility"
         ]),
-
-
+        
+        .target(name: "KlugHelpers"),
+        
         .target(name: "HabitTrackerButtons",
                 dependencies: [
-                    "Klug"
+                    "Klug",
+                    "KlugHelpers"
                 ]),
+        
         .target(name: "Animation",
                 dependencies: [
-                    "Klug"
+                    "Klug",
+                    "KlugHelpers"
                 ]),
         
         // Point Free Inspiration
@@ -98,11 +101,10 @@ let package = Package(
                 ]),
         .testTarget(name: "NavigationTests",
                     dependencies: [
-                       "InventoryFeature",
-                       "ItemRowFeature",
-                       "Models"
-                    ]
-                   )
+                        "InventoryFeature",
+                        "ItemRowFeature",
+                        "Models"
+                    ])
         // Point Free Inspiration
     ]
 )

@@ -22,28 +22,12 @@ public extension View {
     }
 }
 
-public enum Direction {
-    case horizontal, vertical
-}
-
 public extension View {
-    // center view horizontally
-    func center(direction: Direction = .horizontal) -> some View {
-        Group {
-            switch direction {
-            case .horizontal:
-                HStack {
-                    Spacer()
-                    self
-                    Spacer()
-                }
-            case .vertical:
-                VStack {
-                    Spacer()
-                    self
-                    Spacer()
-                }
-            }
+    func center() -> some View {
+        HStack {
+            Spacer()
+            self
+            Spacer()
         }
     }
 }
@@ -54,10 +38,12 @@ public extension View {
     }
 }
 
-// usage
-// VStack {
-//
-// }.embedInNavigationView()
+public extension View {
+    func debug() -> Self {
+        print(Mirror(reflecting: self).subjectType)
+        return self
+    }
+}
 
 // AngularGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.2274509804, green: 0.4, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0.2156862745, green: 1, blue: 0.6235294118, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.9176470588, blue: 0.1960784314, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.2039215686, blue: 0.2745098039, alpha: 1))]), center: .center)
 //    .mask(Image(systemName: "circle.fill").resizable().font(.system(size: 66)))
