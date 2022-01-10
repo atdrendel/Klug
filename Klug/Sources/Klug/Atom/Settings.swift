@@ -1,10 +1,9 @@
-import UIKit
 import SwiftUI
 
-public enum KlugView {
-    case logo
-    case button(top: UIView, constant: CGFloat = 32)
-}
+//public enum KlugView {
+//    case logo
+//    case button(top: UIView, constant: CGFloat = 32)
+//}
 
 public extension Image {
     static let apple = Image("Social/apple", bundle: .module)
