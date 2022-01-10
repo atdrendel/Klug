@@ -1,5 +1,5 @@
-import SwiftUI
 import Foundation
+import SwiftUI
 
 public struct _MeasureBehavior<Content: View>: View {
     @State private var width: CGFloat = 100
