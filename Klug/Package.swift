@@ -49,11 +49,7 @@ let package = Package(
         
         .target(name: "KlugHelpers"),
         
-        .target(name: "HabitTrackerButtons",
-                dependencies: [
-                    "Klug",
-                    "KlugHelpers"
-                ]),
+        .target(name: "HabitTrackerButtons"),
         
         .target(name: "Animation",
                 dependencies: [
