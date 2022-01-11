@@ -1,4 +1,5 @@
 import SwiftUI
+import KlugHelpers
 import Klug
 
 public struct HabitButtonStyle: ButtonStyle {
