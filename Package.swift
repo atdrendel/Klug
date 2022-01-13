@@ -26,8 +26,6 @@ let package = Package(
         // Point Free Inspiration
     ],
     dependencies: [
-        //   .package(name: "Relative", path: "../../Relative")
-//        .package(url: "https://github.com/codebendr-product-designer/Relative", from: "develop")
         .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "0.7.0"),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", from: "0.3.2"),
         .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.4.0")
