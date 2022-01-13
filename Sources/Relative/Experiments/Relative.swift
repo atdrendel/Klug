@@ -8,6 +8,7 @@ protocol Relative {
 typealias RenderingContext = CGContext
 typealias ProposedSize = CGSize
 
+// we avount calling body on every RelativeView
 extension Relative where Body == Never {
     var body: Never { fatalError("This should never be called.") }
 }
@@ -24,11 +25,14 @@ extension Never: Relative {
 protocol RelativeShape {
     func path(in: CGRect) -> CGPath
 }
+
 struct RelativeShapeView<S: RelativeShape>: RelativeView, Relative {
     var shape: S
     func render(context: RenderingContext, size: ProposedSize) {
         context.saveGState()
         context.setFillColor(UIColor.red.cgColor)
+        context.addPath(shape.path(in: .init(origin: .zero, size: size)))
+        context.fillPath()
         context.restoreGState()
     }
 }
