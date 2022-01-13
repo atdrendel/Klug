@@ -1,34 +1,37 @@
 import UIKit
 
-protocol Relative {
+public protocol Relative {
     associatedtype Body: Relative
     var body: Body { get }
 }
 
-typealias RenderingContext = CGContext
-typealias ProposedSize = CGSize
+public typealias RenderingContext = CGContext
+public typealias ProposedSize = CGSize
 
 // we avount calling body on every RelativeView
 extension Relative where Body == Never {
-    var body: Never { fatalError("This should never be called.") }
+    public var body: Never { fatalError("This should never be called.") }
 }
 
-protocol RelativeView {
+public protocol RelativeView {
     func render(context: RenderingContext, size: ProposedSize)
-    typealias Body = Never
+     typealias Body = Never
 }
 
 extension Never: Relative {
-    typealias Body = Never
+    public typealias Body = Never
 }
 
-protocol RelativeShape {
-    func path(in: CGRect) -> CGPath
+public protocol RelativeShape {
+    func path(in rect: CGRect) -> CGPath
 }
 
-struct RelativeShapeView<S: RelativeShape>: RelativeView, Relative {
+public struct RelativeShapeView<S: RelativeShape>: RelativeView, Relative {
     var shape: S
-    func render(context: RenderingContext, size: ProposedSize) {
+    public init(shape: S) {
+        self.shape = shape
+    }
+    public func render(context: RenderingContext, size: ProposedSize) {
         context.saveGState()
         context.setFillColor(UIColor.red.cgColor)
         context.addPath(shape.path(in: .init(origin: .zero, size: size)))
@@ -37,7 +40,14 @@ struct RelativeShapeView<S: RelativeShape>: RelativeView, Relative {
     }
 }
 
-extension Relative {
+public class RelativeRectangle: RelativeShape {
+    public init(){}
+    public func path(in rect: CGRect) -> CGPath {
+        .init(rect: rect, transform: nil)
+    }
+}
+
+public extension Relative {
     func _render(
         context: RenderingContext,
         size: ProposedSize
