@@ -8,11 +8,40 @@ protocol Relative {
 typealias RenderingContext = CGContext
 typealias ProposedSize = CGSize
 
+extension Relative where Body == Never {
+    var body: Never { fatalError("This should never be called.") }
+}
+
+protocol RelativeView {
+    func render(context: RenderingContext, size: ProposedSize)
+    typealias Body = Never
+}
+
+extension Never: Relative {
+    typealias Body = Never
+}
+
+protocol RelativeShape {
+    func path(in: CGRect) -> CGPath
+}
+struct RelativeShapeView<S: RelativeShape>: RelativeView, Relative {
+    var shape: S
+    func render(context: RenderingContext, size: ProposedSize) {
+        context.saveGState()
+        context.setFillColor(UIColor.red.cgColor)
+        context.restoreGState()
+    }
+}
+
 extension Relative {
     func _render(
-        context: RenderingContext
+        context: RenderingContext,
         size: ProposedSize
     ) {
-        body._render(context: context, size: size)
+        if let builtin = self as? RelativeView {
+            builtin.render(context: context, size: size)
+        } else {
+            body._render(context: context, size: size)
+        }
     }
 }
