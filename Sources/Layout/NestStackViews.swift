@@ -1,27 +1,43 @@
 import SwiftUI
 
-struct ScrollViewReaderView: View {
+struct NestStackViews: View {
   @State private var selectedGenre = Genre.list.first
 
   var body: some View {
     NavigationView {
       ScrollView {
         ScrollViewReader { proxy in
-          LazyVStack {
+          let horizontalPadding: CGFloat = 40
+
+          LazyVStack(alignment: .leading) {
             ForEach(Genre.list) { genre in
-              genre.subgenres.randomElement()!.view
+              Text(genre.name)
+                .fontWeight(.heavy)
+                .padding(.leading, horizontalPadding)
                 .id(genre)
+
+              ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 20) {
+                  ForEach(genre.subgenres, content: \.view)
+                }
+                .padding(.leading, horizontalPadding)
+              }
+
+              Divider()
+                .padding(.horizontal, horizontalPadding)
+                .padding(.top)
             }
           }
           .onChange(of: selectedGenre) { genre in
-            selectedGenre = nil
-
             withAnimation {
-              proxy.scrollTo(genre)
+              proxy.scrollTo(genre, anchor: .top)
             }
+
+            selectedGenre = nil
           }
         }
       }
+      .padding(.top)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem {
@@ -70,8 +86,8 @@ private extension Genre.Subgenre {
   }
 }
 
-struct ScrollViewReader_Previews: PreviewProvider {
+struct NestStackViews_Previews: PreviewProvider {
   static var previews: some View {
-      ScrollViewReaderView()
+      NestStackViews()
   }
 }

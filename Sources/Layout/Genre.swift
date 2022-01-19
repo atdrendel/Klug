@@ -1,6 +1,6 @@
 import struct SwiftUI.Image
 
-struct Genre {
+public struct Genre {
   struct Subgenre {
     let genreName: String
     let name: String
@@ -917,7 +917,7 @@ extension Genre {
 
 // MARK: - Hashable, Identifiable
 extension Genre: Hashable, Identifiable {
-  var id: some Hashable { name }
+    public var id: some Hashable { name }
 }
 
 extension Genre.Subgenre: Hashable, Identifiable {
