@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1310"
+   LastUpgradeVersion = "1320"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9FC620FE270E61F800942638"
-               BuildableName = "NavigationPreviewApp.app"
-               BlueprintName = "NavigationPreviewApp"
-               ReferencedContainer = "container:KlugMainApp.xcodeproj">
+               BlueprintIdentifier = "Layout"
+               BuildableName = "Layout"
+               BlueprintName = "Layout"
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
    </TestAction>
@@ -51,10 +50,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9FC620FE270E61F800942638"
-            BuildableName = "NavigationPreviewApp.app"
-            BlueprintName = "NavigationPreviewApp"
-            ReferencedContainer = "container:KlugMainApp.xcodeproj">
+            BlueprintIdentifier = "Layout"
+            BuildableName = "Layout"
+            BlueprintName = "Layout"
+            ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
