@@ -19,7 +19,7 @@ struct CoordinateSpaceView: View {
             }
             .frame(height: 0)
 
-            ForEach(0 ..< 5000) { _ in
+            ForEach(0 ..< 500) { _ in
                 Text("Any View")
             }
         }
@@ -30,6 +30,7 @@ struct CoordinateSpaceView: View {
         }
         .overlay(
             Text("\(float)")
+                .offset(x: -100, y: -float)
         )
     }
 }
