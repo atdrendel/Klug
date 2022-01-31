@@ -15,10 +15,3 @@ public extension Style where Self: AnyObject {
 
 
 
-public extension PreviewLayout {
-    static func canvas() -> PreviewLayout {
-        .fixed(width: 320, height: 307)
-    }
-}
-
-

@@ -4,7 +4,7 @@ import SwiftUI
 struct KlugHabitTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            CreateHabit()
+            HabitContentView()
         }
     }
 }

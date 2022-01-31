@@ -1,15 +1,15 @@
 import UIKit
 
-public struct Nett {
-    @resultBuilder struct Builder {
-        static func buildBlock(_ views: UIView...) -> [UIView] { views }
-    }
-}
-
-protocol Nett {
-    associatedtype Render: Nett
-    var render: Render { get }
-}
+//public struct Nett {
+//    @resultBuilder struct Builder {
+//        static func buildBlock(_ views: UIView...) -> [UIView] { views }
+//    }
+//}
+//
+//protocol Nett {
+//    associatedtype Render: Nett
+//    var render: Render { get }
+//}
 
 /*The idea is to compose views in a declarative way using UIKit
  Use Autolayout behind the seens to compose elements as
