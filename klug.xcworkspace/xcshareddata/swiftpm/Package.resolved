@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "Klug",
-        "repositoryURL": "https://github.com/codebendr-product-designer/Klug",
-        "state": {
-          "branch": "develop",
-          "revision": "d35893fc0865aade513e98e8c9829dca4e2f2858",
-          "version": null
-        }
-      },
-      {
         "package": "swift-case-paths",
         "repositoryURL": "https://github.com/pointfreeco/swift-case-paths",
         "state": {
