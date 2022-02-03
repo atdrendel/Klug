@@ -16,6 +16,7 @@
 		9F24943327A912EE00F944C1 /* NettTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F24943227A912EE00F944C1 /* NettTabbar.swift */; };
 		9F24943527A912EF00F944C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24943427A912EF00F944C1 /* Assets.xcassets */; };
 		9F24943827A912EF00F944C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24943727A912EF00F944C1 /* Preview Assets.xcassets */; };
+		9F24943E27A98E6F00F944C1 /* Nett in Frameworks */ = {isa = PBXBuildFile; productRef = 9F24943D27A98E6F00F944C1 /* Nett */; };
 		9F2F872227A2BC4500D2C8BB /* Nett in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2F872127A2BC4500D2C8BB /* Nett */; };
 		9F5115EE2725C5CA00995600 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5115ED2725C5CA00995600 /* MainView.swift */; };
 		9F750DEA26E1442F0096D27F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F750DE926E1442F0096D27F /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		9F24943227A912EE00F944C1 /* NettTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NettTabbar.swift; sourceTree = "<group>"; };
 		9F24943427A912EF00F944C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F24943727A912EF00F944C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9F24943C27A98E6700F944C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9F5115ED2725C5CA00995600 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9F750DE726E1442F0096D27F /* NettButtons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NettButtons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F750DE926E1442F0096D27F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F24943E27A98E6F00F944C1 /* Nett in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +157,7 @@
 		9F24942F27A912EE00F944C1 /* NettCompositionalLayout */ = {
 			isa = PBXGroup;
 			children = (
+				9F24943C27A98E6700F944C1 /* Info.plist */,
 				9F24943027A912EE00F944C1 /* NettCompositionalLayoutApp.swift */,
 				9F24943227A912EE00F944C1 /* NettTabbar.swift */,
 				9F24943427A912EF00F944C1 /* Assets.xcassets */,
@@ -260,6 +264,9 @@
 			dependencies = (
 			);
 			name = NettCompositionalLayout;
+			packageProductDependencies = (
+				9F24943D27A98E6F00F944C1 /* Nett */,
+			);
 			productName = NettCompositionalLayout;
 			productReference = 9F24942E27A912EE00F944C1 /* NettCompositionalLayout.app */;
 			productType = "com.apple.product-type.application";
@@ -647,6 +654,7 @@
 				DEVELOPMENT_TEAM = CLCZFAVBGV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NettCompositionalLayout/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -677,6 +685,7 @@
 				DEVELOPMENT_TEAM = CLCZFAVBGV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NettCompositionalLayout/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -868,6 +877,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9F24943D27A98E6F00F944C1 /* Nett */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Nett;
+		};
 		9F2F872127A2BC4500D2C8BB /* Nett */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9F2F872027A2BC4500D2C8BB /* XCRemoteSwiftPackageReference "Klug" */;

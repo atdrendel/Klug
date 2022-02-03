@@ -4,7 +4,7 @@ import SwiftUI
 struct NettCompositionalLayoutApp: App {
     var body: some Scene {
         WindowGroup {
-            NettTabbarPreview()
+            NettTabbarView()
         }
     }
 }
