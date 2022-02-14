@@ -26,6 +26,7 @@ struct Category: Identifiable {
 
 extension Category {
     static var categories: [Category] {[
+        
         .init(under: .trending, [
             "Movies",
             "TV Shows"

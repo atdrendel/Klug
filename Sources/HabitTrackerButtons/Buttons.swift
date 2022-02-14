@@ -6,11 +6,11 @@ public struct HabitButtonStyle: ButtonStyle {
     var strokeColor: Color
     var fillColor: Color
     var fontColor: Color
-    var isMaxWidth = false
+    @State var isMaxWidth = false
     var font: Font = .caption2
-
+    
     public func makeBody(configuration: Self.Configuration)
-        -> some View
+    -> some View
     {
         configuration.label
             .font(font)
@@ -20,13 +20,11 @@ public struct HabitButtonStyle: ButtonStyle {
             .else(isMaxWidth) {
                 $0.frame(height: 0)
             }
-            .controlSize(.large)
             .padding()
             .foregroundColor(fontColor)
             .background(
                 Capsule()
                     .fill(configuration.isPressed ? fillColor.opacity(0.3) : fillColor.opacity(1))
-                    .controlSize(.large)
                     .overlay(
                         Capsule()
                             .stroke(configuration.isPressed ? strokeColor.opacity(0.3) : strokeColor.opacity(1))
@@ -68,7 +66,7 @@ public extension ButtonStyle where Self == HabitButtonStyle {
     }
     
     static func secondary(_ type: SecondaryButtonStyle = .one) -> Self {  type.style() }
-
+    
     static var accent: Self {
         .init(
             strokeColor: .clear,
@@ -76,7 +74,7 @@ public extension ButtonStyle where Self == HabitButtonStyle {
             fontColor: .habitBlue
         )
     }
-
+    
     static var alt: Self {
         .init(
             strokeColor: .habitGreen,
@@ -107,6 +105,7 @@ public extension Button where Label == HabitButton {
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
+            
             Button {} habit: {
                 Image(systemName: "leaf")
                 Text(
@@ -115,7 +114,7 @@ struct Button_Previews: PreviewProvider {
                 )
             }
             .buttonStyle(.primary)
-
+            
             HStack {
                 Button {} habit: {
                     Image(systemName: "plus")
@@ -129,18 +128,27 @@ struct Button_Previews: PreviewProvider {
                 Text(habit: "New Area")
             }
             .buttonStyle(.secondary(.two))
-
+            .tint(.red)
+            
             Button {} habit: {
                 Image(systemName: "mail.stack")
                 Text(habit: "All Habits", count: .constant(2))
             }
             .buttonStyle(.accent)
-
+            
             Button {} habit: {
                 Image(systemName: "list.dash")
                 Text(habit: "Set a To-do List")
             }
             .buttonStyle(.alt)
+            
+            Button {} habit: {
+                Image(systemName: "list.dash")
+                Text(habit: "To-do's")
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.mint)
+            .controlSize(.small)
         }
         .padding()
         .background(Color("seaBlue"))
